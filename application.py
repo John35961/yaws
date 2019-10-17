@@ -10,17 +10,14 @@ from requests import get
 import os
 import time
 
-app = Flask(__name__)
+application = Flask(__name__)
 cache = SimpleCache(default_timeout=180)
 
-app.secret_key="dev_env"
+application.secret_key="dev_env"
 OPWM_API_KEY = os.environ["OPWM_API_KEY"]
 TIMEZONEDB_API_KEY = os.environ["TIMEZONEDB_API_KEY"]
 
-
-
-
-@app.route("/", methods=["GET", "POST"])
+@application.route("/", methods=["GET", "POST"])
 def home():
     city_form = CityForm(request.form)
 
@@ -80,22 +77,22 @@ def home():
                             cache = cache,
                             city_form=city_form)
 
-@app.route("/about")
+@application.route("/about")
 def about():
     city_form = CityForm(request.form)
     return render_template("about.html", city_form=city_form)
 
 
-@app.errorhandler(404)
+@application.errorhandler(404)
 def not_found(e):
     return render_template("404.html"), 404
 
 
-@app.errorhandler(500)
+@application.errorhandler(500)
 def not_found(e):
     return render_template("500.html", 
                            user_query_location=cache.get("user_query_location")), 500
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    application.run(debug=True)
