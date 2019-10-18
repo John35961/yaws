@@ -4,53 +4,49 @@
 {% endblock %}
 {% block content %}
     <!-- HEADER -->
-    <div class="container pt-4 w-75">
-        <div class="row">
-            <div class="col-md-9 mb-3">
-                <a class="links text-lowercase home-title" href="{{ url_for('home') }}">yaws</a>
-            </div>
-            <div class="col-md-3">
-                <form action="{{ url_for('home') }}" method="POST">
-                    <div class="input-group mb-3">
-                        {{ city_form.location(class_="form-control form-control", placeholder="Enter a location") }}
-                        <div class="input-group-append">
-                            {{ city_form.submit(class_="btn btn-sm btn-outline-primary float-right") }}
-                        </div>
+    <div class="row mb-5">
+        <div class="col-md-9 mb-3">
+            <a class="links text-lowercase home-title" href="{{ url_for('home') }}">yaws</a>
+        </div>
+        <div class="col-md-3">
+            <form action="{{ url_for('home') }}" method="POST">
+                <div class="input-group mb-3">
+                    {{ city_form.location(class_="form-control form-control", placeholder="Enter a location") }}
+                    <div class="input-group-append">
+                        {{ city_form.submit(class_="btn btn-sm btn-outline-primary float-right") }}
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
     <!-- END HEADER -->
     <!-- ABOUT SECTION -->
-    <div class="container mt-5 w-75">
-        <div class="row">
-            <div class="col-md-12">
-                <h4 class="section-title pr-2">About</h4>
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="section-title pr-2">About</h4>
         </div>
-        <hr>
-        <div class="row pb-3 pt-4">
-            <div class="secondary col-md-12 pb-3">
-                <p>This website is a simple web application meant to provide you with live accurate weather data for a given location entered by the user.</p>
-                <p>The data is pulled from:</p>
-                <ul>
-                    <li><a href="https://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">OpenStreetMap Nominatim API</a> to geocode user's input</li>
-                    <li><a href="https://timezonedb.com/" target="_blank">TimeZoneDB API</a> to get location's local time</li>
-                    <li><a href="https://openweathermap.org" target="_blank">OpenWeatherMap API</a> for weather conditions and forecasts</li>
-                </ul>
-                <p>This website is powered by:</p>
-                <ul>
-                    <li><b>Python 3.6</b> for the language</li>
-                    <li><b>Flask</b> for the webframework running the application</li>
-                    <li><b>Bootstrap 4</b> for the frontend UI</li>
-                    <li><b>ChartJS</b> to build beautiful weather data charts</li>
-                    <li><b>AWS Elastic BeanStalk</b> provides the platform on which the application is running</li>
-                    <li><b>AWS CodePipeline</b> handles deploys</li>
-                </ul>
-                <p>Thanks for using yaws ! Please feel free to contact us </p>
-            </div>
+    </div>
+    <hr>
+    <div class="row pb-3 pt-4">
+        <div class="secondary col-md-12 pb-3">
+            <p>This website is a simple web application meant to provide you with live accurate weather data for a given location entered by the user.</p>
+            <p>The data is pulled from:</p>
+            <ul>
+                <li><a href="https://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">OpenStreetMap Nominatim API</a> to geocode user's input</li>
+                <li><a href="https://timezonedb.com/" target="_blank">TimeZoneDB API</a> to get location's local time</li>
+                <li><a href="https://openweathermap.org" target="_blank">OpenWeatherMap API</a> for weather conditions and forecasts</li>
+            </ul>
+            <p>This website is powered by:</p>
+            <ul>
+                <li><b>Python 3.6</b> for the language</li>
+                <li><b>Flask</b> for the webframework running the application</li>
+                <li><b>Bootstrap 4</b> for the frontend UI</li>
+                <li><b>ChartJS</b> to build beautiful weather data charts</li>
+                <li><b>AWS Elastic BeanStalk</b> provides the platform on which the application is running</li>
+                <li><b>AWS CodePipeline</b> handles deploys</li>
+            </ul>
+            <p>Thanks for using yaws ! Please feel free to contact us </p>
         </div>
-    </div>  
+    </div>
     <!-- END ABOUT SECTION -->
 {% endblock %}

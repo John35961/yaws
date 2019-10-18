@@ -4,212 +4,202 @@
 {% endblock %}
 {% block content %}
     <!-- HEADER -->
-    <div class="container mt-5 mb-5 w-75">
-        <div class="row">
-            <div class="col-md-9 pb-3">
-                <a class="links text-lowercase home-title" href="{{ url_for('home') }}">yaws</a>
-            </div>
-            <div class="col-md-3">
-                <form action="{{ url_for('home') }}" method="POST">
-                    <div class="input-group mb-3">
-                        {{ city_form.location(class_="form-control form-control", placeholder="Enter a location") }}
-                        <div class="input-group-append">
-                            {{ city_form.submit(class_="btn btn-sm btn-outline-primary float-right") }}
-                        </div>
+    <div class="row">
+        <div class="col-md-9 pb-3">
+            <a class="links text-lowercase home-title" href="{{ url_for('home') }}">yaws</a>
+        </div>
+        <div class="col-md-3">
+            <form action="{{ url_for('home') }}" method="POST">
+                <div class="input-group mb-3">
+                    {{ city_form.location(class_="form-control form-control", placeholder="Enter a location") }}
+                    <div class="input-group-append">
+                        {{ city_form.submit(class_="btn btn-sm btn-outline-primary float-right") }}
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
     <!-- END HEADER -->
     <!-- HERO SECTION -->
-    <div class="container mt-5 mb-5 w-75">
-        <div class="row justify-content-center mb-2">
-            <div class="d-flex">
-                <h2 class="display-4 font-weight-normal">{{ cache.get("weather_temp_current") }}</h2>
-                <h4 class="mt-1">°C</h4>
-            </div>
-        </div>
-        <div class="row justify-content-center mb-2">
-            <a href="{{ cache.get('location_more_link') }}" target="_blank" class="links pr-3">
-                <h3>{{ cache.get("user_query_location") }}</h3>
-            </a>
-        </div>
-        <div class="row justify-content-center">
-            <p>{{ cache.get("country_full_name") }} {{ cache.get("country_emoji_flag") }}</p>
-        </div>
-        <div class="row justify-content-center mb-5">
-            <p class="secondary">{{ cache.get("location_local_time").strftime('%A %d %b, %H:%M') }}</p>
+    <div class="row justify-content-center mb-2 mt-5">
+        <div class="d-flex">
+            <h2 class="display-4 font-weight-normal">{{ cache.get("weather_temp_current") }}</h2>
+            <h4 class="mt-1">°C</h4>
         </div>
     </div>
+    <div class="row justify-content-center mb-2">
+        <a href="{{ cache.get('location_more_link') }}" target="_blank" class="links pr-3">
+            <h3>{{ cache.get("user_query_location") }}</h3>
+        </a>
+    </div>
+    <div class="row justify-content-center">
+        <p>{{ cache.get("country_full_name") }} {{ cache.get("country_emoji_flag") }}</p>
+    </div>
+    <div class="row justify-content-center mb-5">
+        <p class="secondary">{{ cache.get("location_local_time").strftime('%A %d %b, %H:%M') }}</p>
+    </div>
     <!-- TODAY SECTION -->
-    <div class="container mt-5 mb-5 w-75">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="d-flex">
-                    <h4 class="section-title pr-2">Today</h4>
-                    <i class="fas fa-info-circle mt-1 secondary pointer" data-toggle="modal" data-target="#about_report_modal"></i>
-                </div>
-                <div class="modal fade" id="about_report_modal" tabindex="-1" role="dialog" aria-labelledby="about_report_modal" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title mb-2 section-title">About this report</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex">
+                <h4 class="section-title pr-2">Today</h4>
+                <i class="fas fa-info-circle mt-1 secondary pointer" data-toggle="modal" data-target="#about_report_modal"></i>
+            </div>
+            <div class="modal fade" id="about_report_modal" tabindex="-1" role="dialog" aria-labelledby="about_report_modal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title mb-2 section-title">About this report</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body mb-2">
+                            <div>
+                                <h4>{{ cache.get("weather_time_calc_utc") }}</h4>
+                                <p class="secondary">Time of calculation (UTC)</p>
                             </div>
-                            <div class="modal-body mb-2">
-                                <div>
-                                    <h4>{{ cache.get("weather_time_calc_utc") }}</h4>
-                                    <p class="secondary">Time of calculation (UTC)</p>
-                                </div>
-                                <div>
-                                    <h4>{{ cache.get("location_station_name") }}</h4>
-                                    <p class="secondary">Weather station's name</p>
-                                </div>
+                            <div>
+                                <h4>{{ cache.get("location_station_name") }}</h4>
+                                <p class="secondary">Weather station's name</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <hr>
-        <div class="row pb-3 pt-4">
-            <div class="col-md-4">
-                <div class="pb-3">
-                    <h3>{{ cache.get("weather_description") }}</h3>
-                    <p class="secondary">Current situation</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="pb-3">
-                    <div class="d-flex">
-                        {% if cache.get("weather_temp_min") == cache.get("weather_temp_max") %}
-                            <h3>{{ cache.get("weather_temp_min") }}</h3>
-                            <p class="pr-2">°C</p>
-                        {% else %}
-                            <h3>{{ cache.get("weather_temp_min") }}</h3>
-                            <p class="pr-2">°C</p>
-                            <h3 class="pr-2">to</h3>
-                            <h3>{{ cache.get("weather_temp_max") }}</h3>
-                            <p>°C</p>
-                        {% endif %}
-                    </div>
-                    <p class="secondary">Temperature range</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="pb-3">
-                    <div class="d-flex">
-                        <h3>{{ cache.get("weather_pressure") }}</h3>
-                        <p>hPa</p>
-                    </div>
-                    <p class="secondary">Current pressure</p>
-                </div>
+    </div>
+    <hr>
+    <div class="row pb-3 pt-4">
+        <div class="col-md-4">
+            <div class="pb-3">
+                <h3>{{ cache.get("weather_description") }}</h3>
+                <p class="secondary">Current situation</p>
             </div>
         </div>
-        <hr>
-        <div class="row pb-3 pt-4">
-            <div class="col-md-4">
-                <div class="pb-3">
-                    <div class="d-flex">
-                        <h3>{{ cache.get("weather_humidity") }}</h3>
-                        <p>%</p>
-                    </div>
-                    <p class="secondary">Current humidity</p>
+        <div class="col-md-4">
+            <div class="pb-3">
+                <div class="d-flex">
+                    {% if cache.get("weather_temp_min") == cache.get("weather_temp_max") %}
+                        <h3>{{ cache.get("weather_temp_min") }}</h3>
+                        <p class="pr-2">°C</p>
+                    {% else %}
+                        <h3>{{ cache.get("weather_temp_min") }}</h3>
+                        <p class="pr-2">°C</p>
+                        <h3 class="pr-2">to</h3>
+                        <h3>{{ cache.get("weather_temp_max") }}</h3>
+                        <p>°C</p>
+                    {% endif %}
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="pb-3">
-                    <div class="d-flex">
-                        <h3>{{ cache.get("weather_wind_speed") }}</h3>
-                        <p>m/s</p>
-                    </div>
-                    <p class="secondary">Current wind speed</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="pb-3">
-                    <h3>{{ cache.get("weather_wind_direction_abbr") }}</h3>
-                    <p class="secondary">Current wind direction</p>
-                </div>
+                <p class="secondary">Temperature range</p>
             </div>
         </div>
-        <hr>
-        <div class="row pb-3 pt-4">
-            <div class="col-md-4">
-                <div class="pb-3">
-                    <h3>{{ cache.get("weather_sunrise_time") }}</h3>
-                    <p class="secondary">Sunrise time (UTC)</p>
+        <div class="col-md-4">
+            <div class="pb-3">
+                <div class="d-flex">
+                    <h3>{{ cache.get("weather_pressure") }}</h3>
+                    <p>hPa</p>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="pb-3">
-                    <h3>{{ cache.get("weather_sunset_time") }}</h3>
-                    <p class="secondary">Sunset time (UTC)</p>
-                </div>
+                <p class="secondary">Current pressure</p>
             </div>
         </div>
-    </div>  
+    </div>
+    <hr>
+    <div class="row pb-3 pt-4">
+        <div class="col-md-4">
+            <div class="pb-3">
+                <div class="d-flex">
+                    <h3>{{ cache.get("weather_humidity") }}</h3>
+                    <p>%</p>
+                </div>
+                <p class="secondary">Current humidity</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pb-3">
+                <div class="d-flex">
+                    <h3>{{ cache.get("weather_wind_speed") }}</h3>
+                    <p>m/s</p>
+                </div>
+                <p class="secondary">Current wind speed</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pb-3">
+                <h3>{{ cache.get("weather_wind_direction_abbr") }}</h3>
+                <p class="secondary">Current wind direction</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row pb-3 pt-4 mb-5">
+        <div class="col-md-4">
+            <div class="pb-3">
+                <h3>{{ cache.get("weather_sunrise_time") }}</h3>
+                <p class="secondary">Sunrise time (UTC)</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pb-3">
+                <h3>{{ cache.get("weather_sunset_time") }}</h3>
+                <p class="secondary">Sunset time (UTC)</p>
+            </div>
+        </div>
+    </div>
     <!-- END TODAY SECTION -->
     <!-- NEXT 5 DAYS SECTION -->
-    <div class="container mt-5 mb-5 w-75">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="d-flex">
-                    <h4 class="section-title pr-2">Next 5 days</h4>
-                    <i class="fas fa-info-circle mt-1 secondary pointer" data-toggle="modal" data-target="#about_report_modal"></i>
-                </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex">
+                <h4 class="section-title pr-2">Next 5 days</h4>
+                <i class="fas fa-info-circle mt-1 secondary pointer" data-toggle="modal" data-target="#about_report_modal"></i>
             </div>
         </div>
-        <hr> 
-        <div class="row pt-4">
-            <div class="col-md-12">
-                <p class="secondary">Expected temperatures (UTC)</p>
-                <canvas id="weather_temp_next_five_days" widht="400" height="150" class="pt-4"></canvas>
-                <script>
-                    var ctx = document.getElementById('weather_temp_next_five_days').getContext('2d');
-                    var myChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: [{% for time_calc in cache.get("weather_forecast_time_calc_utc") %} "{{ time_calc.strftime('%a at %H:%M') }}", {% endfor %}],
-                            datasets: [{
-                                label: 'Temperature (°C)',
-                                data: [ {% for weather_temp in cache.get("weather_temp_forecast") %} {{ weather_temp }}, {% endfor %}
-                                ],
-                                backgroundColor: [
-                                    'rgba(0, 123, 255, 0.3)'
-                                ],
-                                borderColor: [
-                                    'rgba(0, 123, 255, 1)'
-                                ],
-                                borderWidth: 1
+    </div>
+    <hr> 
+    <div class="row pt-4 mb-5">
+        <div class="col-md-12">
+            <p class="secondary">Expected temperatures (UTC)</p>
+            <canvas id="weather_temp_next_five_days" widht="400" height="150" class="pt-4"></canvas>
+            <script>
+                var ctx = document.getElementById('weather_temp_next_five_days').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [{% for time_calc in cache.get("weather_forecast_time_calc_utc") %} "{{ time_calc.strftime('%a at %H:%M') }}", {% endfor %}],
+                        datasets: [{
+                            label: 'Temperature (°C)',
+                            data: [ {% for weather_temp in cache.get("weather_temp_forecast") %} {{ weather_temp }}, {% endfor %}
+                            ],
+                            backgroundColor: [
+                                'rgba(0, 123, 255, 0.3)'
+                            ],
+                            borderColor: [
+                                'rgba(0, 123, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
                             }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
                         }
-                    });
-                </script>
-            </div>
+                    }
+                });
+            </script>
         </div>
     </div>
     <!-- END NEXT 5 DAYS SECTION -->
 {% endblock %}
 {% block footer %}
-    <div class="container">
         <div class="row">
             <div class="col-md-12 text-center mb-5">
                 <a href="{{ url_for('about') }}">About</a>
             </div>
         </div>
-    </div>
 {% endblock %}
        
