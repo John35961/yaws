@@ -90,8 +90,9 @@ def not_found(e):
 
 @application.errorhandler(500)
 def not_found(e):
+    city_form = CityForm(request.form)
     return render_template("500.html", 
-                           user_query_location=cache.get("user_query_location")), 500
+                           raw_user_query_location=city_form.location.data), 500
 
 
 if __name__ == "__main__":

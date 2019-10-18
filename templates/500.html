@@ -5,8 +5,8 @@
 {% block content %}
     <div class="row text-center">
         <div class="col-md-12 p-5">
-            <h1>We could not find {{ user_query_location }} :(</h1>
-            <p class="secondary mb-5">We're very sorry, please try another location, or come back later.</p>
+            <h1>We could not find {{ raw_user_query_location }} :(</h1>
+            <p class="secondary mb-5">We're very sorry, please check as you may have done a small spelling mistake, or try another location.</p>
             <a href="{{ url_for('home') }}">
                 <button class="btn btn-danger">Take me back home !</button>
             </a>
