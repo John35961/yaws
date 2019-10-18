@@ -23,3 +23,9 @@ body {
 .home-title {
     font-family: 'Viga', sans-serif; 
 }
+
+@media screen and (max-width:700px) {
+    .main-section {
+        width: 100%!important;
+    }
+}
