@@ -13,19 +13,13 @@
         <script type="text/javascript " src="{{ url_for('static', filename='typeahead.bundle.js') }}"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                var cities = ['Montréal', 'Montléry', 'Montmorency', 'Montbonnot', 'Mont-Saint-Yvette', 'Mont-Calquier', 'Québec', 'Paris', 'Rennes', 'Lyon', 'Strasbourg', 'Tianjin'];
-                
                 var cities = new Bloodhound({
                     datumTokenizer: Bloodhound.tokenizers.whitespace,
                     queryTokenizer: Bloodhound.tokenizers.whitespace,
-                    local: cities
+                    prefetch : "static/cities.json"
                 });
         
-                $('.search-bar').typeahead({
-                    highlight: true,
-                    minLenght: 1
-                },
-                {
+                $('.search-bar').typeahead(null, {
                     name: 'cities',
                     source: cities
                 });
