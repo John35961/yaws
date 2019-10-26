@@ -9,15 +9,16 @@ from datetime import datetime
 from requests import get
 import os
 import time
+import csv
 
 application = Flask(__name__)
-cache = SimpleCache(default_timeout=180)
+cache = SimpleCache(default_timeout = 180)
 
-application.secret_key="dev_env"
+application.secret_key = "dev_env"
 OPWM_API_KEY = os.environ["OPWM_API_KEY"]
 TIMEZONEDB_API_KEY = os.environ["TIMEZONEDB_API_KEY"]
 
-@application.route("/", methods=["GET", "POST"])
+@application.route("/", methods = ["GET", "POST"])
 def home():
     city_form = CityForm(request.form)
 
@@ -39,7 +40,7 @@ def home():
 
         try:
             cache.set("weather_wind_direction_deg", round(opwm_json_response["wind"]["deg"]))
-            cache.set("weather_wind_direction_abbr", portolan.point(degree=cache.get("weather_wind_direction_deg")).capitalize())
+            cache.set("weather_wind_direction_abbr", portolan.point(degree = cache.get("weather_wind_direction_deg")).capitalize())
         except KeyError:
             cache.set("weather_wind_direction_deg", None)
             cache.set("weather_wind_direction_abbr", "No data")
@@ -72,15 +73,15 @@ def home():
         return render_template("weather_report.html",
                                 cache = cache, 
                                 city_form = city_form)
-
+    
     return render_template('home.html', 
                             cache = cache,
-                            city_form=city_form)
+                            city_form = city_form)
 
 @application.route("/about")
 def about():
     city_form = CityForm(request.form)
-    return render_template("about.html", city_form=city_form)
+    return render_template("about.html", city_form = city_form)
 
 
 @application.errorhandler(404)
