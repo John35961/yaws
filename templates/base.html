@@ -13,16 +13,45 @@
         <script type="text/javascript " src="{{ url_for('static', filename='typeahead.bundle.js') }}"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+
+                var cities = ["Toronto", "Montréal", "Laval", "Vancouver", "Ottawa", "Calgary", "Edmonton", "Hamilton", "Winnipeg", "Québec", "Oshawa", "Kitchener", "Halifax", "London", "Windsor", 
+                              "Victoria", "Saskatoon", "Barrie", "Regina", "Sudbury", "Abbotsford", "Sarnia", "Sherbrooke", "Saint John’s", "Kelowna", "Trois-Rivières", "Kingston", "Thunder Bay", 
+                              "Moncton", "Saint John", "Nanaimo", "Peterborough", "Saint-Jérôme", "Red Deer", "Lethbridge", "Kamloops", "Prince George", "Medicine Hat", "Drummondville", "Chicoutimi", 
+                              "Fredericton", "Chilliwack", "North Bay", "Shawinigan-Sud", "Cornwall", "Joliette", "Belleville", "Charlottetown", "Victoriaville", "Grande Prairie", "Penticton", "Sydney", 
+                              "Orillia", "Rimouski", "Timmins", "Prince Albert", "Campbell River", "Courtenay", "Orangeville", "Moose Jaw", "Brandon", "Brockville", "Saint-Georges", "Sept-Îles", "Rouyn-Noranda", 
+                              "Whitehorse", "Owen Sound", "Fort McMurray", "Corner Brook", "Val-d’Or", "New Glasgow", "Terrace", "North Battleford", "Yellowknife", "Fort Saint John", "Cranbrook", "Edmundston", 
+                              "Rivière-du-Loup", "Camrose", "Pembroke", "Yorkton", "Swift Current", "Prince Rupert", "Williams Lake", "Brooks", "Quesnel", "Thompson", "Dolbeau", "Powell River", "Wetaskiwin", 
+                              "Nelson", "Mont-Laurier", "Kenora", "Dawson Creek", "Amos", "Baie-Comeau", "Hinton", "Selkirk", "Steinbach", "Weyburn", "Amherst", "Kapuskasing", "Dauphin", "Dryden", "Revelstoke", 
+                              "Happy Valley", "Banff", "Yarmouth", "La Sarre", "Parry Sound", "Stephenville", "Antigonish", "Flin Flon", "Fort Nelson", "Smithers", "Iqaluit", "Bathurst", "The Pas", "Norway House", 
+                              "Meadow Lake", "Vegreville", "Stettler", "Peace River", "New Liskeard", "Hearst", "Creston", "Marathon", "Cochrane", "Kindersley", "Liverpool", "Melville", "Channel-Port aux Basques", 
+                              "Deer Lake", "Saint-Augustin", "Digby", "Jasper", "Hay River", "Windsor", "La Ronge", "Deer Lake", "Gaspé", "Atikokan", "Gander", "Fort Chipewyan", "Shelburne", "Inuvik", "Lac La Biche", 
+                              "Lillooet", "Chapleau", "Burns Lake", "Gimli", "Athabasca", "Nelson House", "Rankin Inlet", "Port Hardy", "Biggar", "Wiarton", "Wawa", "Hudson Bay", "Matagami", "Arviat", "Attawapiskat", 
+                              "Red Lake", "Moosonee", "Tofino", "Igloolik", "Inukjuak", "Little Current", "Baker Lake", "Pond Inlet", "Cap-Chat", "Cambridge Bay", "Thessalon", "New Bella Bella", "Cobalt", "Cape Dorset", 
+                              "Pangnirtung", "West Dawson", "Kugluktuk", "Geraldton", "Gillam", "Kuujjuaq", "Lake Louise", "Nipigon", "Nain", "Gjoa Haven", "Fort McPherson", "Argentia", "Norman Wells", "Churchill", 
+                              "Repulse Bay", "Tuktoyaktuk", "Berens River", "Shamattawa", "Baddeck", "Coral Harbour", "La Scie", "Watson Lake", "Taloyoak", "Natashquan", "Buchans", "Hall Beach", "Arctic Bay", 
+                              "Fort Good Hope", "Mingan", "Kangirsuk", "Sandspit", "Délįne", "Fort Smith", "Cartwright", "Holman", "Lynn Lake", "Schefferville", "Trout River", "Forteau Bay", "Fort Resolution", "Hopedale", 
+                              "Pukatawagan", "Trepassey", "Kimmirut", "Chesterfield Inlet", "Eastmain", "Dease Lake", "Paulatuk", "Fort Simpson", "Brochet", "Cat Lake", "Radisson", "Port-Menier", "Resolute", "Saint Anthony", 
+                              "Port Hope Simpson", "Oxford House", "Tsiigehtchic", "Ivujivik", "Stony Rapids", "Alert", "Fort Severn", "Rigolet", "Lansdowne House", "Salluit", "Łutselk’e", "Uranium City", "Burwash Landing", 
+                              "Grise Fiord", "Big Beaverhouse", "Island Lake", "Ennadai", "Paris", "Lyon", "Marseille", "Lille", "Nice", "Toulouse", "Bordeaux", "Rouen", "Strasbourg", "Nantes", "Metz", "Grenoble", 
+                              "Toulon", "Montpellier", "Nancy", "Saint-Étienne", "Melun", "LeHavre", "Tours", "Clermont-Ferrand", "Orléans", "Mulhouse", "Rennes", "Reims", "Caen", "Angers", "Dijon", "Nîmes", "Limoges", 
+                              "Aix-en-Provence", "Perpignan", "Biarritz", "Brest", "LeMans", "Amiens", "Besançon", "Annecy", "Calais", "Poitiers", "Versailles", "Kerbrient", "Béziers", "LaRochelle", "Roanne", "Bourges", 
+                              "Arras", "Troyes", "Cherbourg", "Agen", "Tarbes", "Ajaccio", "Saint-Brieuc", "Nevers", "Vichy", "Dieppe", "Auxerre", "Bastia", "Châlons-en-Champagne"]
+
                 var cities = new Bloodhound({
                     datumTokenizer: Bloodhound.tokenizers.whitespace,
                     queryTokenizer: Bloodhound.tokenizers.whitespace,
-                    prefetch : "static/cities.json"
+                    local: cities
                 });
         
-                $('.search-bar').typeahead(null, {
-                    name: 'cities',
-                    source: cities
-                });
+                $('.search-bar').typeahead({
+                        hint: true,
+                        highlight: true,
+                        minLenght: 1
+                    },
+                    {
+                        name: 'cities',
+                        source: cities
+                    });
             });
         </script>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
