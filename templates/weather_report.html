@@ -132,32 +132,17 @@
         </div>
     </div>
     <hr>
-    <div class="row pb-3 pt-4">
+    <div class="row pb-3 pt-4 mb-5">
         <div class="col-md-4">
             <div class="pb-3">
-                <h3>{{ cache.get("weather_uv_index") }}</h3>
+                <h3 id="uvIndex">{{ cache.get("weather_uv_index") }}</h3>
                 <p class="secondary">UV index</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="pb-3">
-                <h3>{{ cache.get("weather_sunrise_time") }}</h3>
-                <p class="secondary">Sunrise time (UTC)</p>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="pb-3">
-                <h3>{{ cache.get("weather_sunset_time") }}</h3>
-                <p class="secondary">Sunset time (UTC)</p>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row pb-3 pt-4 mb-5">
-        <div class="col-md-4">
-            <div class="pb-3">
-                <h3>{{ cache.get("weather_air_quality_index")}}</h3>
-                <p class="secondary">Air quality (US EPA standard)</p>
+                <h3 id="airQualityIndex">{{ cache.get("weather_air_quality_index") }}</h3>
+                <p class="secondary">Air quality index (US EPA)</p>
             </div>
         </div>
     </div>
@@ -211,10 +196,52 @@
     <!-- END NEXT 5 DAYS SECTION -->
 {% endblock %}
 {% block footer %}
-        <div class="row">
-            <div class="col-md-12 text-center mb-5">
-                <a href="{{ url_for('about') }}">About</a>
-            </div>
+    <div class="row">
+        <div class="col-md-12 text-center mb-5">
+            <a href="{{ url_for('about') }}">About</a>
         </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script> 
+        var x = {{ cache.get("weather_uv_index") }};
+        var uvIndex = document.getElementById("uvIndex");
+        if (x <= 2) {
+            uvIndex.style.color = "#27ae60";
+        }
+        else if (x >= 3 && x <= 5) {
+            uvIndex.style.color = "#f1c40f";
+        }
+        else if (x >= 6 && x <= 7) {
+            uvIndex.style.color = "#e67e22";
+        }
+        else if (x >= 8 && x <= 10) {
+            uvIndex.style.color = "#e74c3c";
+        }
+        else {
+            uvIndex.style.color = "#9b59b6";
+        };
+
+        var y = {{ cache.get("weather_air_quality_index") }};
+        var airQualityIndex = document.getElementById("airQualityIndex");
+        if (y <= 50) {
+            airQualityIndex.style.color = "#27ae60";
+        }
+        else if (y >= 51 && y <= 100) {
+            airQualityIndex.style.color = "#f1c40f";
+        }
+        else if (y >= 101 && y <= 150) {
+            airQualityIndex.style.color = "#e67e22";
+        }
+        else if (y >= 151 && y <= 200) {
+            airQualityIndex.style.color = "#e74c3c";
+        }
+        else if (y >= 201 && y <= 300) {
+            airQualityIndex.style.color = "#9b59b6";
+        }
+        else {
+            airQualityIndex.style.color = "#654321";
+        };
+    </script>
 {% endblock %}
        
