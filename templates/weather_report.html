@@ -132,7 +132,7 @@
         </div>
     </div>
     <hr>
-    <div class="row pb-3 pt-4 mb-5">
+    <div class="row pb-3 pt-4">
         <div class="col-md-4">
             <div class="pb-3">
                 <h3>{{ cache.get("weather_uv_index") }}</h3>
@@ -149,6 +149,15 @@
             <div class="pb-3">
                 <h3>{{ cache.get("weather_sunset_time") }}</h3>
                 <p class="secondary">Sunset time (UTC)</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row pb-3 pt-4 mb-5">
+        <div class="col-md-4">
+            <div class="pb-3">
+                <h3>{{ cache.get("weather_air_quality_index")}}</h3>
+                <p class="secondary">Air quality (US EPA standard)</p>
             </div>
         </div>
     </div>
