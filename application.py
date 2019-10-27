@@ -35,8 +35,10 @@ def home():
 
         opwm_json_response = get(f"https://api.openweathermap.org/data/2.5/weather?lat={location_lat}&lon={location_lon}&appid={OPWM_API_KEY}&units=metric")\
                               .json()
+        opwm_uv_index_json_response = get(f"https://api.openweathermap.org/data/2.5/uvi?&appid={OPWM_API_KEY}&lat={location_lat}&lon={location_lon}")\
+                              .json()
         opwm_forecast_json_response = get(f"https://api.openweathermap.org/data/2.5/forecast?lat={location_lat}&lon={location_lon}&appid={OPWM_API_KEY}&units=metric")\
-                                                .json()
+                                       .json()
 
         try:
             cache.set("weather_wind_direction_deg", round(opwm_json_response["wind"]["deg"]))
@@ -63,6 +65,7 @@ def home():
         cache.set("weather_pressure", opwm_json_response["main"]["pressure"])
         cache.set("weather_humidity", opwm_json_response["main"]["humidity"])
         cache.set("weather_wind_speed", opwm_json_response["wind"]["speed"])
+        cache.set("weather_uv_index", opwm_uv_index_json_response["value"])
         cache.set("weather_sunrise_time", datetime.fromtimestamp(opwm_json_response["sys"]["sunrise"]).strftime("%H:%M"))
         cache.set("weather_sunset_time", datetime.fromtimestamp(opwm_json_response["sys"]["sunset"]).strftime("%H:%M"))
         cache.set("weather_temp_forecast", [temp["main"]["temp"] for temp in opwm_forecast_json_response["list"][::5]])
