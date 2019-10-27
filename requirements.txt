@@ -40,3 +40,4 @@ wcwidth==0.1.7
 websocket-client==0.56.0
 Werkzeug==0.16.0
 WTForms==2.2.1
+
