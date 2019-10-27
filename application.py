@@ -17,6 +17,7 @@ cache = SimpleCache(default_timeout = 180)
 application.secret_key = "dev_env"
 OPWM_API_KEY = os.environ["OPWM_API_KEY"]
 TIMEZONEDB_API_KEY = os.environ["TIMEZONEDB_API_KEY"]
+AIRQUALITY_API_KEY = os.environ["AIRQUALITY_API_KEY"]
 
 @application.route("/", methods = ["GET", "POST"])
 def home():
@@ -35,8 +36,10 @@ def home():
 
         opwm_json_response = get(f"https://api.openweathermap.org/data/2.5/weather?lat={location_lat}&lon={location_lon}&appid={OPWM_API_KEY}&units=metric")\
                               .json()
+        opwm_uv_index_json_response = get(f"https://api.openweathermap.org/data/2.5/uvi?&appid={OPWM_API_KEY}&lat={location_lat}&lon={location_lon}")\
+                              .json()
         opwm_forecast_json_response = get(f"https://api.openweathermap.org/data/2.5/forecast?lat={location_lat}&lon={location_lon}&appid={OPWM_API_KEY}&units=metric")\
-                                                .json()
+                                       .json()
 
         try:
             cache.set("weather_wind_direction_deg", round(opwm_json_response["wind"]["deg"]))
@@ -47,6 +50,9 @@ def home():
 
         timezonedb_json_response = get(f"http://api.timezonedb.com/v2.1/get-time-zone?format=json&by=position&lat={location_lat}&lng={location_lon}&key={TIMEZONEDB_API_KEY}")\
                                     .json()
+        
+        aq_json_response = get(f"http://api.airvisual.com/v2/nearest_city?lat={location_lat}&lon={location_lon}&key={AIRQUALITY_API_KEY}")\
+                            .json()
 
         cache.set("user_query_location", city_form.location.data.split(",")[0].title())
         cache.set("country_code", opwm_json_response["sys"]["country"])
@@ -63,8 +69,10 @@ def home():
         cache.set("weather_pressure", opwm_json_response["main"]["pressure"])
         cache.set("weather_humidity", opwm_json_response["main"]["humidity"])
         cache.set("weather_wind_speed", opwm_json_response["wind"]["speed"])
+        cache.set("weather_uv_index", opwm_uv_index_json_response["value"])
         cache.set("weather_sunrise_time", datetime.fromtimestamp(opwm_json_response["sys"]["sunrise"]).strftime("%H:%M"))
         cache.set("weather_sunset_time", datetime.fromtimestamp(opwm_json_response["sys"]["sunset"]).strftime("%H:%M"))
+        cache.set("weather_air_quality_index", aq_json_response["data"]["current"]["pollution"]["aqius"])
         cache.set("weather_temp_forecast", [temp["main"]["temp"] for temp in opwm_forecast_json_response["list"][::5]])
         cache.set("weather_forecast_time_calc_utc", [datetime.strptime(time_calc["dt_txt"],"%Y-%m-%d %H:%M:%S") for time_calc in opwm_forecast_json_response["list"][::5]])
 
