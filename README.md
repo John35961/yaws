@@ -2,10 +2,15 @@
 Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
+__1.2.1__
+- Added JS conditional highlighting for UV index and air quality index
+- Corrected various typos in about.html
+- Mentioned the use of typeahead.js in about.html
+- Removed useless import of csv module
+
 __1.2.0__
 - Added UV index from OpenWeatherMap API 
 - Added air quality index from AirVisual API
-- Updated /about to reflect changes
 
 __1.1.0__
 - Implemented typeahead.js for user's input
