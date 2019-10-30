@@ -2,6 +2,11 @@
 Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
+__1.2.2__
+- PEP 8 refactoring
+- Deleted unused variable "request_server_datetime" in application.py
+- Did various typeahead.js CSS and Bootstrap classes adjustments
+
 __1.2.1__
 - Added JS conditional highlighting for UV index and air quality index
 - Added support for US, Spanish, Italian, German and UK cities in typeahead.js
