@@ -137,6 +137,7 @@ def home():
 @application.route("/about")
 def about():
     city_form = CityForm(request.form)
+
     return render_template("about.html", 
                            city_form=city_form)
 
@@ -149,6 +150,7 @@ def not_found(e):
 @application.errorhandler(500)
 def not_found(e):
     city_form = CityForm(request.form)
+    
     return render_template("500.html", 
                            raw_user_query_location=city_form.location.data), 500
 
