@@ -23,6 +23,9 @@ def home():
     city_form = CityForm(request.form)
 
     if request.method == "POST":
+        user_lat_lon = request.get_json()
+        print(user_lat_lon)
+
         corrected_user_query_location = city_form.location.data.replace(" ","%20")
         nominatim_json_reponse = get(f"https://nominatim.openstreetmap.org/search/"
                                      f"{corrected_user_query_location}"
@@ -132,6 +135,11 @@ def home():
     return render_template("home.html", 
                            cache=cache,
                            city_form=city_form)
+
+
+@application.route("/xhr", methods=["POST"])
+def xhr():
+ return "OK"
 
 
 @application.route("/about")

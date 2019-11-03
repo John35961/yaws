@@ -19,6 +19,9 @@
                     </div>
                 </form> 
             </div>
+            <div class="row justify-content-center">
+                <a href="#" onclick="getCoords()">Use my location</a>
+            </div>
         </div>
 {% endblock %}
 {% block footer %}
@@ -31,4 +34,23 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block script %}
+    <script>
+        function getCoords() {
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    var user_geolocation = {
+                        "user_latitude": position.coords.latitude,
+                        "user_longitude": position.coords.longitude
+                    };
+                    console.log("user_geolocation");
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/xhr");
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.send(JSON.stringify(user_geolocation));
+                });
+            };
+        }
+    </script>
 {% endblock %}
