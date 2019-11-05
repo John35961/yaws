@@ -16,11 +16,9 @@
                         {{ city_form.location(class_="search-bar tt-query form-control form-control-md", placeholder="Enter a location", type="text", autocomplete="off", spellcheck="false") }}
                     <div>
                         {{ city_form.submit(class_="btn btn-md btn-outline-primary") }}
+                        <button class="btn btn-outline-info" onclick="getCoords()">Use my location</button>
                     </div>
-                </form> 
-            </div>
-            <div class="row justify-content-center">
-                <a href="#" onclick="getCoords()">Use my location</a>
+                </form>  
             </div>
         </div>
 {% endblock %}
@@ -44,9 +42,9 @@
                         "user_latitude": position.coords.latitude,
                         "user_longitude": position.coords.longitude
                     };
-                    console.log("user_geolocation");
+                    console.log(user_geolocation);
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/xhr");
+                    xhr.open("POST", "/");
                     xhr.setRequestHeader("Content-Type", "application/json");
                     xhr.send(JSON.stringify(user_geolocation));
                 });
