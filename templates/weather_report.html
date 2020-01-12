@@ -3,7 +3,6 @@
     <title>yaws | {{ cache.get("user_query_location") }} ({{ cache.get("country_code") }})</title>
 {% endblock %}
 {% block content %}
-    <!-- HEADER -->
     <div class="row">
         <div class="col-md-8 pb-3">
             <h4><a class="links text-lowercase home-title" href="{{ url_for('home') }}">yaws</a></h4>
@@ -19,8 +18,6 @@
             </form>
         </div>
     </div>
-    <!-- END HEADER -->
-    <!-- HERO SECTION -->
     <div class="row justify-content-center mb-2 mt-5">
         <div class="d-flex">
             <h2 class="display-4 font-weight-normal">{{ cache.get("weather_temp_current") }}</h2>
@@ -38,7 +35,6 @@
     <div class="row justify-content-center mb-5">
         <p class="secondary">{{ cache.get("location_local_time").strftime('%A %d %b, %H:%M') }}</p>
     </div>
-    <!-- TODAY SECTION -->
     <div class="row">
         <div class="col-md-12">
             <div class="d-flex">
@@ -146,8 +142,6 @@
             </div>
         </div>
     </div>
-    <!-- END TODAY SECTION -->
-    <!-- NEXT 5 DAYS SECTION -->
     <div class="row">
         <div class="col-md-12">
             <div class="d-flex">
@@ -193,7 +187,6 @@
             </script>
         </div>
     </div>
-    <!-- END NEXT 5 DAYS SECTION -->
 {% endblock %}
 {% block script %}
     <script> 
