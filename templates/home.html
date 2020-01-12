@@ -3,32 +3,21 @@
     <title>yaws | Home</title>
 {% endblock %}
 {% block content %}
-        <div class="row text-center">
-            <div class="col-md-12 p-5">
-                <h1 class="home-title">yaws</h1>
-                <p class="secondary">Yet another weather service ;)</p>
-            </div>
+    <div class="row text-center">
+        <div class="col-md-12 p-5">
+            <h1 class="home-title">yaws</h1>
+            <p class="secondary">Yet another weather service ;)</p>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-8 pt-5">
-                <form action="{{ url_for('home') }}" method="POST">
-                    <div class="input-group mb-3">
-                        {{ city_form.location(class_="search-bar tt-query form-control form-control-md", placeholder="Enter a location", type="text", autocomplete="off", spellcheck="false") }}
-                    <div>
-                        {{ city_form.submit(class_="btn btn-md btn-outline-primary") }}
-                    </div>
-                </form> 
-            </div>
-        </div>
-{% endblock %}
-{% block footer %}
-    <div class="container" style="height: 250px;">
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <a href="{{ url_for('about') }}">About</a>
-            </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8 pt-5">
+            <form action="{{ url_for('home') }}" method="POST">
+                <div class="input-group mb-3">
+                    {{ city_form.location(class_="search-bar tt-query form-control form-control-md", placeholder="Enter a location", type="text", autocomplete="off", spellcheck="false") }}
+                <div>
+                    {{ city_form.submit(class_="btn btn-md btn-outline-primary") }}
+                </div>
+            </form> 
         </div>
     </div>
 {% endblock %}

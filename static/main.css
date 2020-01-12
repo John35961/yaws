@@ -24,6 +24,14 @@ body {
     font-family: 'Viga', sans-serif; 
 }
 
+.footer {
+    width: 100%;
+    line-height: 50px;
+    background-color:#eff1f5;
+    position:absolute;
+    bottom:0;
+}
+
 .input-group > .twitter-typeahead {
     flex: 1 1 auto;
     width: auto;

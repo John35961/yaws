@@ -174,14 +174,25 @@
     </head>
     <body>
         <div class="main-section container p-5 w-75">
-            {% block content %}
-            {% endblock %}
-            {% block footer %}
-            {% endblock %}
+        {% block content %}
+        {% endblock %}
         </div>
-    {% block script %}
-    {% endblock %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <footer class="container">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <span class="mr-3"><a href="{{ url_for('about') }}">About</a></span>
+                    <span class="mr-3"><a href="https://github.com/John35961/weather-app" target="_blank">Fork us on GitHub</a></span>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <span class="mr-3 secondary text-">Made with ♥ in France !</span>
+                </div>
+            </div>
+        </footer>
+        {% block script %}
+        {% endblock %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
