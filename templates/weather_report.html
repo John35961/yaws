@@ -20,8 +20,8 @@
     </div>
     <div class="row justify-content-center mb-2 mt-5">
         <div class="d-flex">
-            <h2 class="display-4 font-weight-normal">{{ cache.get("weather_temp_current") }}</h2>
-            <h4 class="mt-1">°C</h4>
+            <h2 class="display-4 font-weight-normal weather_temp_current">{{ cache.get("weather_cel_temp_current") }}</h2>
+            <h4 class="mt-1 weather_temp_unit">°C</h4>
         </div>
     </div>
     <div class="row justify-content-center mb-2">
@@ -39,7 +39,15 @@
         <div class="col-md-12">
             <div class="d-flex">
                 <h4 class="section-title pr-2">Today</h4>
-                <i class="fas fa-info-circle mt-1 secondary pointer" data-toggle="modal" data-target="#about_report_modal"></i>
+                <i class="fas fa-info-circle mt-1 secondary pointer pr-2" data-toggle="modal" data-target="#about_report_modal"></i>
+                <div class="btn-group btn-group-toggle ml-auto" data-toggle="buttons">
+                    <label class="btn btn-outline-secondary active" onclick="toCelsius();">
+                      <input type="radio" name="options" id="temp_celsius">°C
+                    </label>
+                    <label class="btn btn-outline-secondary" onclick="toFahrenheit();">
+                      <input type="radio" name="options" id="temp_fahrenheit" autocomplete="off">°F
+                    </label>
+                </div>
             </div>
             <div class="modal fade" id="about_report_modal" tabindex="-1" role="dialog" aria-labelledby="about_report_modal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -52,7 +60,7 @@
                         </div>
                         <div class="modal-body mb-2">
                             <div>
-                                <h4>{{ cache.get("weather_time_calc_utc") }}</h4>
+                                <h4>{{ cache.get("weather_time_calc_utc_current") }}</h4>
                                 <p class="secondary">Time of calculation (UTC)</p>
                             </div>
                             <div>
@@ -76,15 +84,15 @@
         <div class="col-md-4">
             <div class="pb-3">
                 <div class="d-flex">
-                    {% if cache.get("weather_temp_min") == cache.get("weather_temp_max") %}
-                        <h3>{{ cache.get("weather_temp_min") }}</h3>
-                        <p class="pr-2">°C</p>
+                    {% if cache.get("weather_cel_temp_min") == cache.get("weather_cel_temp_max") %}
+                        <h3 class="weather_temp_min">{{ cache.get("weather_cel_temp_min") }}</h3>
+                        <p class="pr-2 weather_temp_unit">°C</p>
                     {% else %}
-                        <h3>{{ cache.get("weather_temp_min") }}</h3>
-                        <p class="pr-2">°C</p>
+                        <h3 class="weather_temp_min">{{ cache.get("weather_cel_temp_min") }}</h3>
+                        <p class="pr-2 weather_temp_unit">°C</p>
                         <h3 class="pr-2">to</h3>
-                        <h3>{{ cache.get("weather_temp_max") }}</h3>
-                        <p>°C</p>
+                        <h3 class="weather_temp_max">{{ cache.get("weather_cel_temp_max") }}</h3>
+                        <p class="pr-2 weather_temp_unit">°C</p>
                     {% endif %}
                 </div>
                 <p class="secondary">Temperature range</p>
@@ -114,8 +122,8 @@
         <div class="col-md-4">
             <div class="pb-3">
                 <div class="d-flex">
-                    <h3>{{ cache.get("weather_wind_speed") }}</h3>
-                    <p>m/s</p>
+                    <h3 class="weather_wind_speed">{{ cache.get("weather_cel_wind_speed") }}</h3>
+                    <p class="weather_wind_speed_unit">m/s</p>
                 </div>
                 <p class="secondary">Current wind speed</p>
             </div>
@@ -131,13 +139,13 @@
     <div class="row pb-3 pt-4 mb-5">
         <div class="col-md-4">
             <div class="pb-3">
-                <h3 id="uvIndex">{{ cache.get("weather_uv_index") }}</h3>
+                <h3 id="weather_uv_index">{{ cache.get("weather_uv_index") }}</h3>
                 <p class="secondary">UV index</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="pb-3">
-                <h3 id="airQualityIndex">{{ cache.get("weather_air_quality_index") }}</h3>
+                <h3 id="weather_air_quality_index">{{ cache.get("weather_air_quality_index") }}</h3>
                 <p class="secondary">Air quality index (US EPA)</p>
             </div>
         </div>
@@ -154,16 +162,17 @@
     <div class="row pt-4 mb-5">
         <div class="col-md-12">
             <p class="secondary">Expected temperatures (UTC)</p>
-            <canvas id="weather_temp_next_five_days" widht="400" height="150" class="pt-4"></canvas>
+            <canvas id="weather_temp_forecast_chart" widht="400" height="150" class="pt-4"></canvas>
             <script>
-                var ctx = document.getElementById('weather_temp_next_five_days').getContext('2d');
-                var myChart = new Chart(ctx, {
+                var ctx = document.getElementById('weather_temp_forecast_chart').getContext('2d');
+                var  weather_temp_forecast_chart = new Chart(ctx, 
+                {
                     type: 'line',
                     data: {
-                        labels: [{% for time_calc in cache.get("weather_forecast_time_calc_utc") %} "{{ time_calc.strftime('%a at %H:%M') }}", {% endfor %}],
+                        labels: [{% for time_calc in cache.get("weather_time_calc_utc_forecast") %} "{{ time_calc.strftime('%a at %H:%M') }}", {% endfor %}],
                         datasets: [{
                             label: 'Temperature (°C)',
-                            data: [ {% for weather_temp in cache.get("weather_temp_forecast") %} {{ weather_temp }}, {% endfor %}
+                            data: [ {% for weather_temp in cache.get("weather_cel_temp_forecast") %} {{ weather_temp }}, {% endfor %}
                             ],
                             backgroundColor: [
                                 'rgba(0, 123, 255, 0.3)'
@@ -190,44 +199,67 @@
 {% endblock %}
 {% block script %}
     <script> 
-        var x = {{ cache.get("weather_uv_index") }};
-        var uvIndex = document.getElementById("uvIndex");
-        if (x <= 2) {
-            uvIndex.style.color = "#27ae60";
+        var weather_uv_index = {{ cache.get("weather_uv_index") }};
+        var weather_uv_index_tint = document.getElementById("weather_uv_index");
+        if (weather_uv_index <= 2) {
+            weather_uv_index_tint.style.color = "#27ae60";
         }
-        else if (x >= 3 && x <= 5) {
-            uvIndex.style.color = "#f1c40f";
+        else if (weather_uv_index >= 3 && weather_uv_index <= 5) {
+            weather_uv_index_tint.style.color = "#f1c40f";
         }
-        else if (x >= 6 && x <= 7) {
-            uvIndex.style.color = "#e67e22";
+        else if (weather_uv_index >= 6 && weather_uv_index <= 7) {
+            weather_uv_index_tint.style.color = "#e67e22";
         }
-        else if (x >= 8 && x <= 10) {
-            uvIndex.style.color = "#e74c3c";
+        else if (weather_uv_index >= 8 && weather_uv_index <= 10) {
+            weather_uv_index_tint.style.color = "#e74c3c";
         }
         else {
-            uvIndex.style.color = "#9b59b6";
+            weather_uv_index.style.color = "#9b59b6";
         };
 
-        var y = {{ cache.get("weather_air_quality_index") }};
-        var airQualityIndex = document.getElementById("airQualityIndex");
-        if (y <= 50) {
-            airQualityIndex.style.color = "#27ae60";
+        var weather_air_quality_index = {{ cache.get("weather_air_quality_index") }};
+        var weather_air_quality_index_tint = document.getElementById("weather_air_quality_index");
+        if (weather_air_quality_index <= 50) {
+            weather_air_quality_index_tint.style.color = "#27ae60";
         }
-        else if (y >= 51 && y <= 100) {
-            airQualityIndex.style.color = "#f1c40f";
+        else if (weather_air_quality_index >= 51 && weather_air_quality_index <= 100) {
+            weather_air_quality_index_tint.style.color = "#f1c40f";
         }
-        else if (y >= 101 && y <= 150) {
-            airQualityIndex.style.color = "#e67e22";
+        else if (weather_air_quality_index >= 101 && weather_air_quality_index <= 150) {
+            weather_air_quality_index_tint.style.color = "#e67e22";
         }
-        else if (y >= 151 && y <= 200) {
-            airQualityIndex.style.color = "#e74c3c";
+        else if (weather_air_quality_index >= 151 && weather_air_quality_index <= 200) {
+            weather_air_quality_index_tint.style.color = "#e74c3c";
         }
-        else if (y >= 201 && y <= 300) {
-            airQualityIndex.style.color = "#9b59b6";
+        else if (weather_air_quality_index >= 201 && weather_air_quality_index <= 300) {
+            weather_air_quality_index_tint.style.color = "#9b59b6";
         }
         else {
-            airQualityIndex.style.color = "#654321";
+            weather_air_quality_index_tint.style.color = "#654321";
+        };
+ 
+        function toCelsius() {
+            $(".weather_temp_current").html({{ cache.get("weather_cel_temp_current") }});
+            $(".weather_temp_min").html({{ cache.get("weather_cel_temp_min") }});
+            $(".weather_temp_max").html({{ cache.get("weather_cel_temp_max") }});
+            $(".weather_wind_speed").html({{ cache.get("weather_cel_wind_speed") }});
+            $(".weather_temp_unit").html("°C");
+            $(".weather_wind_speed_unit").html("m/s");
+            weather_temp_forecast_chart.data.datasets[0].data = [{% for weather_temp in cache.get("weather_cel_temp_forecast") %} {{ weather_temp }}, {% endfor %}];
+            weather_temp_forecast_chart.data.datasets[0].label = "Temperature (°C)";
+            weather_temp_forecast_chart.update();
+        };
+
+        function toFahrenheit() {
+            $(".weather_temp_current").html({{ cache.get("weather_far_temp_current") }});
+            $(".weather_temp_min").html({{ cache.get("weather_far_temp_min") }});
+            $(".weather_temp_max").html({{ cache.get("weather_far_temp_max") }});
+            $(".weather_wind_speed").html({{ cache.get("weather_far_wind_speed") }});
+            $(".weather_temp_unit").html("°F");
+            $(".weather_wind_speed_unit").html("mi/h");
+            weather_temp_forecast_chart.data.datasets[0].data = [{% for weather_temp in cache.get("weather_far_temp_forecast") %} {{ weather_temp }}, {% endfor %}];
+            weather_temp_forecast_chart.data.datasets[0].label = "Temperature (°F)";
+            weather_temp_forecast_chart.update();
         };
     </script>
 {% endblock %}
-       
