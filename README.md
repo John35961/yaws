@@ -2,7 +2,7 @@
 Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
-__1.3.1
+__1.3.1__
 - Fixed header search-bar's CSS to prevent button from falling under when resizing
 - Moved JS code in separate files
 - Isolated footer in footer.html
