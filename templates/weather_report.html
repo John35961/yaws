@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-{% block title %}
-    <title>yaws | {{ cache.get("user_query_location") }} ({{ cache.get("country_code") }})</title>
-{% endblock %}
+{% block title %} yaws | {{ cache.get("user_query_location") }} ({{ cache.get("country_code") }}) {% endblock %}
 {% block content %}
     <div class="row">
         <div class="col-md-8 pb-3">
@@ -163,103 +161,23 @@
         <div class="col-md-12">
             <p class="secondary">Expected temperatures (UTC)</p>
             <canvas id="weather_temp_forecast_chart" widht="400" height="150" class="pt-4"></canvas>
-            <script>
-                var ctx = document.getElementById('weather_temp_forecast_chart').getContext('2d');
-                var  weather_temp_forecast_chart = new Chart(ctx, 
-                {
-                    type: 'line',
-                    data: {
-                        labels: [{% for time_calc in cache.get("weather_time_calc_utc_forecast") %} "{{ time_calc.strftime('%a at %H:%M') }}", {% endfor %}],
-                        datasets: [{
-                            label: 'Temperature (°C)',
-                            data: [ {% for weather_temp in cache.get("weather_cel_temp_forecast") %} {{ weather_temp }}, {% endfor %}
-                            ],
-                            backgroundColor: [
-                                'rgba(0, 123, 255, 0.3)'
-                            ],
-                            borderColor: [
-                                'rgba(0, 123, 255, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
-                    }
-                });
+            <script type="text/javascript"> 
+                window.chartCelData = [{% for weather_temp in cache.get("weather_cel_temp_forecast") %} {{ weather_temp }}, {% endfor %}];
+                window.chartFarData = [{% for weather_temp in cache.get("weather_far_temp_forecast") %} {{ weather_temp }}, {% endfor %}];
+                window.chartLabels = [{% for time_calc in cache.get("weather_time_calc_utc_forecast") %} "{{ time_calc.strftime('%a at %H:%M') }}", {% endfor %}];
+                window.weatherUvIndex = {{ cache.get("weather_uv_index") }};
+                window.weatherAirQualityIndex = {{ cache.get("weather_air_quality_index") }};
+                window.weatherCelTempCurrent = {{ cache.get("weather_cel_temp_current") }};
+                window.weatherCelTempMin = {{ cache.get("weather_cel_temp_min") }};
+                window.weatherCelTempMax = {{ cache.get("weather_cel_temp_max") }};
+                window.weatherCelWindSpeed = {{ cache.get("weather_cel_wind_speed") }};
+                window.weatherFarTempCurrent = {{ cache.get("weather_far_temp_current") }};
+                window.weatherFarTempMin = {{ cache.get("weather_far_temp_min") }};
+                window.weatherFarTempMax = {{ cache.get("weather_far_temp_max") }};
+                window.weatherFarWindSpeed = {{ cache.get("weather_far_wind_speed") }};
             </script>
+            <script type="text/javascript" src="{{ url_for('static', filename='javascript/weather_temp_forecast_chart.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('static', filename='javascript/weather_report.js') }}"></script>
         </div>
     </div>
-{% endblock %}
-{% block script %}
-    <script> 
-        var weather_uv_index = {{ cache.get("weather_uv_index") }};
-        var weather_uv_index_tint = document.getElementById("weather_uv_index");
-        if (weather_uv_index <= 2) {
-            weather_uv_index_tint.style.color = "#27ae60";
-        }
-        else if (weather_uv_index >= 3 && weather_uv_index <= 5) {
-            weather_uv_index_tint.style.color = "#f1c40f";
-        }
-        else if (weather_uv_index >= 6 && weather_uv_index <= 7) {
-            weather_uv_index_tint.style.color = "#e67e22";
-        }
-        else if (weather_uv_index >= 8 && weather_uv_index <= 10) {
-            weather_uv_index_tint.style.color = "#e74c3c";
-        }
-        else {
-            weather_uv_index.style.color = "#9b59b6";
-        };
-
-        var weather_air_quality_index = {{ cache.get("weather_air_quality_index") }};
-        var weather_air_quality_index_tint = document.getElementById("weather_air_quality_index");
-        if (weather_air_quality_index <= 50) {
-            weather_air_quality_index_tint.style.color = "#27ae60";
-        }
-        else if (weather_air_quality_index >= 51 && weather_air_quality_index <= 100) {
-            weather_air_quality_index_tint.style.color = "#f1c40f";
-        }
-        else if (weather_air_quality_index >= 101 && weather_air_quality_index <= 150) {
-            weather_air_quality_index_tint.style.color = "#e67e22";
-        }
-        else if (weather_air_quality_index >= 151 && weather_air_quality_index <= 200) {
-            weather_air_quality_index_tint.style.color = "#e74c3c";
-        }
-        else if (weather_air_quality_index >= 201 && weather_air_quality_index <= 300) {
-            weather_air_quality_index_tint.style.color = "#9b59b6";
-        }
-        else {
-            weather_air_quality_index_tint.style.color = "#654321";
-        };
- 
-        function toCelsius() {
-            $(".weather_temp_current").html({{ cache.get("weather_cel_temp_current") }});
-            $(".weather_temp_min").html({{ cache.get("weather_cel_temp_min") }});
-            $(".weather_temp_max").html({{ cache.get("weather_cel_temp_max") }});
-            $(".weather_wind_speed").html({{ cache.get("weather_cel_wind_speed") }});
-            $(".weather_temp_unit").html("°C");
-            $(".weather_wind_speed_unit").html("m/s");
-            weather_temp_forecast_chart.data.datasets[0].data = [{% for weather_temp in cache.get("weather_cel_temp_forecast") %} {{ weather_temp }}, {% endfor %}];
-            weather_temp_forecast_chart.data.datasets[0].label = "Temperature (°C)";
-            weather_temp_forecast_chart.update();
-        };
-
-        function toFahrenheit() {
-            $(".weather_temp_current").html({{ cache.get("weather_far_temp_current") }});
-            $(".weather_temp_min").html({{ cache.get("weather_far_temp_min") }});
-            $(".weather_temp_max").html({{ cache.get("weather_far_temp_max") }});
-            $(".weather_wind_speed").html({{ cache.get("weather_far_wind_speed") }});
-            $(".weather_temp_unit").html("°F");
-            $(".weather_wind_speed_unit").html("mi/h");
-            weather_temp_forecast_chart.data.datasets[0].data = [{% for weather_temp in cache.get("weather_far_temp_forecast") %} {{ weather_temp }}, {% endfor %}];
-            weather_temp_forecast_chart.data.datasets[0].label = "Temperature (°F)";
-            weather_temp_forecast_chart.update();
-        };
-    </script>
 {% endblock %}
