@@ -33,6 +33,7 @@ body {
 .input-group > .twitter-typeahead {
     flex: 1 1 auto;
     width: auto;
+    width: 70%;
  }
 
  .tt-query {
@@ -64,6 +65,10 @@ body {
 
 .tt-cursor {
     background-color:#f5f5f5;
+}
+
+.input-group > .twitter-typeahead {
+    width: 60%;
 }
 
 @media screen and (max-width:700px) {
