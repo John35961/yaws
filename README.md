@@ -2,6 +2,13 @@
 Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
+__1.3.1
+- Fixed header search-bar's CSS to prevent button from falling under when resizing
+- Moved JS code in separate files
+- Isolated footer in footer.html
+- Removed unnecessary footer on HTTP error pages
+- Fixed typos
+
 __1.3.0__
 - Added  Celsius / Fahrenheit radio button for user to chose the unit of current temperature, temperature range and current wind speed 
 - Added Celsius / Fahrenheit support to the 5 days forecast chart accordingly
