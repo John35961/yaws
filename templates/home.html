@@ -12,10 +12,16 @@
             <form action="{{ url_for('home') }}" method="POST">
                 <div class="input-group mb-3">
                     {{ city_form.location(class_="search-bar tt-query form-control form-control-md", placeholder="Enter a location", type="text", autocomplete="off", spellcheck="false") }}
-                <div>
-                    {{ city_form.submit(class_="btn btn-md btn-outline-primary") }}
+                    <div>
+                        {{ city_form.submit(class_="btn btn-md btn-outline-primary") }}
+                    </div>
                 </div>
             </form> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="d-flex justify-content-center col-md-12 pt-3">
+            <a href="{{ url_for('map') }}"><i class="fas fa-map-marker-alt links-secondary pr-2"></i>Use map mode</a>  
         </div>
     </div>
 {% endblock %}

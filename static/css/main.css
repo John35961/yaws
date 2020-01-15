@@ -3,6 +3,10 @@ body {
     font-family: 'Krub', sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6, p, a {
+    font-family: 'Krub', sans-serif;
+}
+
 .secondary {
     color:#8395a7;
 }
@@ -69,6 +73,14 @@ body {
 
 .input-group > .twitter-typeahead {
     width: 60%;
+}
+
+#weather_current_map {
+    height: 500px;
+}
+
+.leaflet-popup-content p {
+    margin: 0!important;
 }
 
 @media screen and (max-width:700px) {
