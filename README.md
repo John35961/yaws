@@ -2,7 +2,12 @@
 Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
-__1.3.1
+__1.4.0__
+- Added a map mode relying on Leaflet
+- Added /map_click route, dedicated to map mode, to make calls to OpenWeatherMap API in the backend
+- On /map_click route, added a limiter decorator (Flask-Limiter) to prevent user from hitting the OpenWeatherMap API calls rate limit (60/minute)
+
+__1.3.1__
 - Fixed header search-bar's CSS to prevent button from falling under when resizing
 - Moved JS code in separate files
 - Isolated footer in footer.html
