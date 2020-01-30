@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %} yaws | Map mode {% endblock %}
+{% block content %}
+    <div class="row mb-5">
+        <div class="col-md-8 mb-3">
+            <h4><a class="links text-lowercase home-title" href="{{ url_for('home') }}">yaws</a></h4>
+        </div>
+        <div class="col-md-4">
+            <form action="{{ url_for('home') }}" method="POST">
+                <div class="input-group mb-3">
+                    {{ city_form.location(class_="search-bar tt-query form-control form-control", placeholder="Enter a location") }}
+                    <div class="input-group-append">
+                        {{ city_form.submit(class_="btn btn-sm btn-outline-primary float-right") }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="section-title pr-2">Today</h4>
+        </div>
+    </div>
+    <hr>
+    <div class="row pb-3 pt-4">
+        <div class="secondary col-md-12 pb-3">
+            <p>Click somewhere on the map to get location's current temperature.</p>
+            <div id="weather_current_map"></div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='javascript/weather_current_map.js') }}"></script>
+{% endblock %}
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
