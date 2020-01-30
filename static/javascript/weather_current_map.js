@@ -11,16 +11,20 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/
     minZoom: 3
 }).addTo(weatherCurrentMap);
 
-let lat, lng;
+let lat, lon;
 
 weatherCurrentMap.addEventListener('click', function(ev) {
+    
     clicked_coordinates = {
-        lat: ev.latlng.lat,
-        lng: ev.latlng.lng
+        lat: ev.latlon.lat,
+        lon: ev.latlon.lon
     };
+
     let request = new XMLHttpRequest();
-    opwm_cel_json = `https://api.openweathermap.org/data/2.5/weather?lat=${clicked_coordinates['lat']}&lon=${clicked_coordinates['lng']}&appid=6d6a8a1723819a00e3a2aa6310cfccce&units=metric`
+
+    opwm_cel_json = `/map_click?lat=${clicked_coordinates['lat']}&lon=${clicked_coordinates['lon']}`
     request.open('GET', opwm_cel_json);
+    
     request.onload = function() {
         let data = JSON.parse(this.response);
         try {
@@ -35,14 +39,13 @@ weatherCurrentMap.addEventListener('click', function(ev) {
             weather_cel_temp_current = data.main.temp.toFixed(1);
             weather_cel_temp_min = data.main.temp_min.toFixed(1);
             weather_cel_temp_max = data.main.temp_max.toFixed(1);
-
         } catch (e) {
             console.log(e); 
             weather_cel_temp_current = 'No temperature found!';
         };
         L.popup()
-        .setLatLng([clicked_coordinates['lat'], 
-                    clicked_coordinates['lng']])
+        .setLatlon([clicked_coordinates['lat'], 
+                    clicked_coordinates['lon']])
         .setContent(`<h4>${location_station_name} ${country_code}</h4>
                     <hr/>
                     <div class="row mt-3 mr-3">
@@ -64,10 +67,11 @@ weatherCurrentMap.addEventListener('click', function(ev) {
                             </div>
                         </div>
                     </div>
-                    <a href="http://localhost:5000/?location=${location_station_name}" target="_blank">
+                    <a href="/?location=${location_station_name}" target="_blank">
                         <button class="btn btn-outline-primary mb-2">More<i class="fas fa-chevron-right pl-2"></i></button>
                     </a>`)
         .openOn(weatherCurrentMap);
     };
+    
     request.send();
 });

@@ -1,5 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_wtf import FlaskForm
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from werkzeug.contrib.cache import SimpleCache
 from forms import CityForm
 from iso3166 import countries
@@ -16,6 +18,11 @@ cache = SimpleCache(default_timeout=180)
 OPWM_API_KEY = os.environ["OPWM_API_KEY"]
 TIMEZONEDB_API_KEY = os.environ["TIMEZONEDB_API_KEY"]
 AIRQUALITY_API_KEY = os.environ["AIRQUALITY_API_KEY"]
+
+limiter = Limiter(
+    application,
+    key_func=get_remote_address
+)
 
 
 def api_calling_caching(location_lat, 
@@ -191,6 +198,16 @@ def map():
 
     return render_template("map.html",
                            city_form=city_form)
+
+@application.route("/map_click")
+@limiter.limit("60/minute")
+def map_click():
+    location_lat = request.args.get("lat")
+    location_lon = request.args.get("lon")
+    opwm = get(f"https://api.openweathermap.org/data/2.5/weather?lat={location_lat}&lon={location_lon}&appid={OPWM_API_KEY}&units=metric")\
+                .json()
+    
+    return opwm
 
 @application.route("/about")
 def about():
