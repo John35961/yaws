@@ -16,8 +16,8 @@ let lat, lon;
 weatherCurrentMap.addEventListener('click', function(ev) {
     
     clicked_coordinates = {
-        lat: ev.latlon.lat,
-        lon: ev.latlon.lon
+        lat: ev.latlng.lat,
+        lon: ev.latlng.lng
     };
 
     let request = new XMLHttpRequest();
@@ -44,7 +44,7 @@ weatherCurrentMap.addEventListener('click', function(ev) {
             weather_cel_temp_current = 'No temperature found!';
         };
         L.popup()
-        .setLatlon([clicked_coordinates['lat'], 
+        .setLatLng([clicked_coordinates['lat'], 
                     clicked_coordinates['lon']])
         .setContent(`<h4>${location_station_name} ${country_code}</h4>
                     <hr/>

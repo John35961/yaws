@@ -12,6 +12,7 @@ portolan = "*"
 requests = "*"
 flask-wtf = "*"
 iso3166 = "*"
+flask-limiter = "*"
 
 [requires]
 python_version = "3.7"
