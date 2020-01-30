@@ -1,8 +1,14 @@
-let weatherCurrentMap = L.map('weather_current_map').setView([48.8534, 2.3488], 7);
+let weatherCurrentMap = new L.map('weather_current_map', {
+                                  fullscreenControl: {
+                                      pseudoFullscreen: true
+                                  }})
+                            .setView([48.8534, 2.3488], 7);
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap contributors',
-    maxZoom: 19
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 17,
+    minZoom: 3
 }).addTo(weatherCurrentMap);
 
 let lat, lng;
@@ -26,9 +32,9 @@ weatherCurrentMap.addEventListener('click', function(ev) {
             if (typeof data.sys.country == 'undefined') {
                 country_code = '';    
             }
-            weather_cel_temp_current = data.main.temp.toString();
-            weather_cel_temp_min = data.main.temp_min.toString();
-            weather_cel_temp_max = data.main.temp_max.toString();
+            weather_cel_temp_current = data.main.temp.toFixed(1);
+            weather_cel_temp_min = data.main.temp_min.toFixed(1);
+            weather_cel_temp_max = data.main.temp_max.toFixed(1);
 
         } catch (e) {
             console.log(e); 
