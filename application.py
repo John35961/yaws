@@ -32,11 +32,11 @@ def api_calling_caching(location_lat,
               TIMEZONEDB_API_KEY=TIMEZONEDB_API_KEY, 
               AIRQUALITY_API_KEY=AIRQUALITY_API_KEY):
     opwm_cel_json = get(f"https://api.openweathermap.org/data/2.5/weather"
-                                    f"?lat={location_lat}"
-                                    f"&lon={location_lon}"
-                                    f"&appid={OPWM_API_KEY}"
-                                    f"&units=metric")\
-                                        .json()
+                        f"?lat={location_lat}"
+                        f"&lon={location_lon}"
+                        f"&appid={OPWM_API_KEY}"
+                        f"&units=metric")\
+                            .json()
     
     opwm_far_json = get(f"https://api.openweathermap.org/data/2.5/weather"
                         f"?lat={location_lat}"
@@ -50,20 +50,20 @@ def api_calling_caching(location_lat,
                                     f"&lon={location_lon}"
                                     f"&appid={OPWM_API_KEY}"
                                     f"&units=metric")\
-                                    .json()
+                                        .json()
 
     opwm_far_forecast_json = get(f"https://api.openweathermap.org/data/2.5/forecast"
                                     f"?lat={location_lat}"
                                     f"&lon={location_lon}"
                                     f"&appid={OPWM_API_KEY}"
                                     f"&units=imperial")\
-                                    .json()
+                                        .json()
 
     opwm_uv_index_json = get(f"https://api.openweathermap.org/data/2.5/uvi"
                                 f"?&appid={OPWM_API_KEY}"
                                 f"&lat={location_lat}"
                                 f"&lon={location_lon}")\
-                                .json()
+                                    .json()
 
     timezonedb_json = get(f"http://api.timezonedb.com/v2.1/get-time-zone"
                                     f"?format=json"
@@ -204,10 +204,14 @@ def map():
 def map_click():
     location_lat = request.args.get("lat")
     location_lon = request.args.get("lon")
-    opwm = get(f"https://api.openweathermap.org/data/2.5/weather?lat={location_lat}&lon={location_lon}&appid={OPWM_API_KEY}&units=metric")\
-                .json()
+    opwm_cel_json = get(f"https://api.openweathermap.org/data/2.5/weather"
+                        f"?lat={location_lat}"
+                        f"&lon={location_lon}"
+                        f"&appid={OPWM_API_KEY}"
+                        f"&units=metric")\
+                            .json()
     
-    return opwm
+    return opwm_cel_json
 
 @application.route("/about")
 def about():
