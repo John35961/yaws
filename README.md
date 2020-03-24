@@ -1,4 +1,4 @@
-# weather-app
+# [yaws.me](http://yaws.me)
 Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
