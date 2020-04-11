@@ -7,12 +7,6 @@ let  weather_temp_forecast_chart = new Chart(ctx,
         datasets: [{
             label: 'Temperature (°C)',
             data: chartCelData,
-            backgroundColor: [
-                'rgba(0, 123, 255, 0.3)'
-            ],
-            borderColor: [
-                'rgba(0, 123, 255, 1)'
-            ],
             borderWidth: 1
         }]
     },
@@ -25,4 +19,25 @@ let  weather_temp_forecast_chart = new Chart(ctx,
             }]
         }
     }
+});
+
+adaptChartTheme = function() {
+    if ($('#darkSwitch').is(':checked')) {
+        weather_temp_forecast_chart.data.datasets[0].backgroundColor = 'rgba(222, 113, 25, 0.3)';
+        weather_temp_forecast_chart.data.datasets[0].borderColor = 'rgba(222, 113, 25, 1)';
+        weather_temp_forecast_chart.update();
+    } else {
+        weather_temp_forecast_chart.data.datasets[0].backgroundColor = 'rgba(0, 123, 255, 0.3)';
+        weather_temp_forecast_chart.data.datasets[0].borderColor = 'rgba(0, 123, 255, 1)';
+        weather_temp_forecast_chart.update();
+    };
+}
+
+$(document).ready(function(){
+    adaptChartTheme();
+});
+
+
+$('#darkSwitch').click(function() {
+    adaptChartTheme();
 });

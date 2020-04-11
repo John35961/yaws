@@ -4,12 +4,32 @@ let weatherCurrentMap = new L.map('weather_current_map', {
                                   }})
                             .setView([48.8534, 2.3488], 7);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: 'abcd',
-    maxZoom: 17,
-    minZoom: 3
-}).addTo(weatherCurrentMap);
+adaptMapTheme = function() {
+    if ($('#darkSwitch').is(':checked')) {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 17,
+        minZoom: 3
+        }).addTo(weatherCurrentMap);
+    }
+    else {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 17,
+        minZoom: 3
+        }).addTo(weatherCurrentMap);
+    }
+};
+
+$(document).ready(function() {
+    adaptMapTheme();
+});
+
+$('#darkSwitch').click(function() {
+    adaptMapTheme();
+});
 
 let lat, lon;
 
