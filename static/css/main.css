@@ -3,12 +3,13 @@
     --font-secondary: 'Viga', sans-serif;
     --light-background: rgb(244, 245, 249);
     --light-background-variant :rgb(239,241,245);
-    --dark-background: rgb(20, 20, 20);
-    --dark-background-variant: rgb(26, 26, 26);
+    --dark-background: rgb(26, 26, 26);
+    --dark-background-variant: rgb(20, 20, 20);
     --blue: rgb(0, 123, 255);
     --orange: rgb(222, 113, 25);
     --orange-variant: rgb(146, 75, 17);
     --orange-variant-2: rgb(255, 180, 120);
+    --orange-variant-3: rgb(168, 140, 118);
     --grey: rgb(131,149,167);
     --grey-variant: rgb(153, 153, 153);
     --grey-variant-2: rgb(245, 245, 245);
@@ -54,12 +55,16 @@ body {
     font-family: var(--font-secondary);
 }
 
+.btn-outline-secondary {
+    cursor: pointer;
+}
+
 /* Typeahead.js form styling */
 
 .input-group > .twitter-typeahead {
     flex: 1 1 auto;
     width: auto;
-    width: 70%;
+    width: 60%;
  }
 
  .tt-query {

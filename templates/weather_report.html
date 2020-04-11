@@ -23,20 +23,22 @@
         </div>
     </div>
     <div class="row justify-content-center mb-2">
-        <a href="{{ cache.get('location_more_link') }}" target="_blank" class="links pr-3">
-            <h3 id="user_query_location">{{ cache.get("user_query_location") }}</h3>
-        </a>
+        <h3>
+            <a href="{{ cache.get('location_more_link') }}" target="_blank" class="links pr-3">
+            {{ cache.get("user_query_location") }}
+            </a>
+        </h3>
     </div>
     <div class="row justify-content-center text-center">
         <p>{{ cache.get("country_full_name") }} {{ cache.get("country_emoji_flag") }}</p>
     </div>
     <div class="row justify-content-center mb-5">
-        <p class="secondary">{{ cache.get("location_local_time").strftime('%A %d %b, %H:%M') }}</p>
+        <p class="text-secondary">{{ cache.get("location_local_time").strftime('%A %d %b, %H:%M') }}</p>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="d-flex">
-                <h4 class="section-title pr-2">Today</h4>
+                <h4 class="section-title no-select pr-2">Today</h4>
                 <i class="fas fa-info-circle mt-1 text-secondary pointer pr-2" data-toggle="modal" data-target="#about_report_modal"></i>
                 <div class="btn-group btn-group-toggle ml-auto" data-toggle="buttons">
                     <label class="btn btn-outline-secondary active" onclick="toCelsius();">
@@ -51,7 +53,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title mb-2 section-title">About this report</h5>
+                            <h5 class="modal-title section-title no-select mb-2">About this report</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -76,7 +78,7 @@
         <div class="col-md-4">
             <div class="pb-3">
                 <h3>{{ cache.get("weather_description") }}</h3>
-                <p class="text-secondary">Current situation</p>
+                <p class="text-secondary no-select">Current situation</p>
             </div>
         </div>
         <div class="col-md-4">
@@ -93,7 +95,7 @@
                         <p class="pr-2 weather_temp_unit">°C</p>
                     {% endif %}
                 </div>
-                <p class="text-secondary">Temperature range</p>
+                <p class="text-secondary no-select">Temperature range</p>
             </div>
         </div>
         <div class="col-md-4">
@@ -102,7 +104,7 @@
                     <h3>{{ cache.get("weather_pressure") }}</h3>
                     <p>hPa</p>
                 </div>
-                <p class="text-secondary">Current pressure</p>
+                <p class="text-secondary no-select">Current pressure</p>
             </div>
         </div>
     </div>
@@ -114,7 +116,7 @@
                     <h3>{{ cache.get("weather_humidity") }}</h3>
                     <p>%</p>
                 </div>
-                <p class="text-secondary">Current humidity</p>
+                <p class="text-secondary no-select">Current humidity</p>
             </div>
         </div>
         <div class="col-md-4">
@@ -123,13 +125,13 @@
                     <h3 class="weather_wind_speed">{{ cache.get("weather_cel_wind_speed") }}</h3>
                     <p class="weather_wind_speed_unit">m/s</p>
                 </div>
-                <p class="text-secondary">Current wind speed</p>
+                <p class="text-secondary no-select">Current wind speed</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="pb-3">
                 <h3>{{ cache.get("weather_wind_direction_abbr") }}</h3>
-                <p class="text-secondary">Current wind direction</p>
+                <p class="text-secondary no-select">Current wind direction</p>
             </div>
         </div>
     </div>
@@ -138,28 +140,28 @@
         <div class="col-md-4">
             <div class="pb-3">
                 <h3 id="weather_uv_index">{{ cache.get("weather_uv_index") }}</h3>
-                <p class="secondary">UV index</p>
+                <p class="text-secondary no-select">UV index</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="pb-3">
                 <h3 id="weather_air_quality_index">{{ cache.get("weather_air_quality_index") }}</h3>
-                <p class="secondary">Air quality index (US EPA)</p>
+                <p class="text-secondary no-select">Air quality index (US EPA)</p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="d-flex">
-                <h4 class="section-title pr-2">Next 5 days</h4>
-                <i class="fas fa-info-circle mt-1 secondary pointer" data-toggle="modal" data-target="#about_report_modal"></i>
+                <h4 class="section-title no-select pr-2">Next 5 days</h4>
+                <i class="fas fa-info-circle mt-1 text-secondary pointer" data-toggle="modal" data-target="#about_report_modal"></i>
             </div>
         </div>
     </div>
     <hr> 
     <div class="row pt-4 mb-5">
         <div class="col-md-12">
-            <p class="text-secondary">Expected temperatures (UTC)</p>
+            <p class="text-secondary no-select">Expected temperatures (UTC)</p>
             <canvas id="weather_temp_forecast_chart" widht="400" height="150" class="pt-4"></canvas>
             <script type="text/javascript"> 
                 window.chartCelData = [{% for weather_temp in cache.get("weather_cel_temp_forecast") %} {{ weather_temp }}, {% endfor %}];
@@ -176,8 +178,8 @@
                 window.weatherFarTempMax = {{ cache.get("weather_far_temp_max") }};
                 window.weatherFarWindSpeed = {{ cache.get("weather_far_wind_speed") }};
             </script>
-            <script type="text/javascript" src="{{ url_for('static', filename='javascript/weather_temp_forecast_chart.js') }}"></script>
-            <script type="text/javascript" src="{{ url_for('static', filename='javascript/weather_report.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/weather_temp_forecast_chart.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/weather_report.js') }}"></script>
         </div>
     </div>
 {% endblock %}
