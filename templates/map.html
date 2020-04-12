@@ -29,8 +29,10 @@
             <p class="small text-right">Please empty your browser's cache if you have troubles displaying the map.</p>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='js/weather_current_map.js') }}"></script>
 {% endblock %}
 {% block footer %}
 {% include "footer.html" %}
+{% endblock %}
+{% block script %}
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
 {% endblock %}

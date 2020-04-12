@@ -1,3 +1,5 @@
+/* Theme colors */
+
 :root {
     --font-primary: 'Krub', sans-serif;
     --font-secondary: 'Viga', sans-serif;
@@ -14,6 +16,8 @@
     --grey-variant: rgb(153, 153, 153);
     --grey-variant-2: rgb(245, 245, 245);
     --grey-variant-3: rgb(72, 71, 67);
+    --grey-variant-4: rgb(206, 212, 218);
+    --grey-variant-5: rgb(34, 34, 34);
     --broken-white: rgb(246, 244, 230);
     --broken-white-variant: rgb(172, 170, 158);
 }
@@ -59,7 +63,7 @@ body {
     cursor: pointer;
 }
 
-/* Typeahead.js form styling */
+/* Search bar styling */
 
 .input-group > .twitter-typeahead {
     flex: 1 1 auto;
@@ -68,21 +72,25 @@ body {
  }
 
  .tt-query {
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	box-shadow: 0 1px 1px rgba(black, 0.075) inset;
 }
 
 .tt-hint {
 	color: var(--grey-variant);
 }
+
 .tt-menu {
 	background-color: white;
-	border: 1px solid rgba(0, 0, 0, 0.2);
+	border: 1px solid rgba(0 0, 0, 0.2);
 	border-radius: 5px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	margin-top: 10px;
 	padding: 8px 0;
 	width: 100%;
+	background-color: white;
+	color: black;
 }
+
 .tt-suggestion {
 	font-size: 1rem; 
 	padding: 3px 10px;
@@ -129,4 +137,4 @@ body {
          -moz-user-select: none; 
           -ms-user-select: none; 
               user-select: none; 
-  }
+}

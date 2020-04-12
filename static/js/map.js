@@ -1,8 +1,14 @@
+// Instanciating new map
+
 let weatherCurrentMap = new L.map('weather_current_map', {
                                   fullscreenControl: {
                                       pseudoFullscreen: true
                                   }})
                             .setView([48.8534, 2.3488], 7);
+
+
+// Adapting map tiles to selected CSS theme,
+// when DOM is ready, or checkbox is clicked
 
 adaptMapTheme = function() {
     if ($('#darkSwitch').is(':checked')) {
@@ -30,6 +36,11 @@ $(document).ready(function() {
 $('#darkSwitch').click(function() {
     adaptMapTheme();
 });
+
+
+// Adding a click event to the map,
+// so that the user can access weather data by clicking
+// a given location
 
 let lat, lon;
 
@@ -75,7 +86,7 @@ weatherCurrentMap.addEventListener('click', function(ev) {
                                     <h5>${weather_cel_temp_current}</h5>
                                     <h6>°C</h6>
                                 </div>
-                                <p class="secondary pb-4">Current temperature</p>
+                                <p class="secondary no-select pb-4">Current temperature</p>
                                 <div class="d-flex">
                                     <h5>${weather_cel_temp_min}</h5>
                                     <h6 class="pr-2">°C</h6>
@@ -83,7 +94,7 @@ weatherCurrentMap.addEventListener('click', function(ev) {
                                     <h5>${weather_cel_temp_max}</h5>
                                     <h6 class="pr-2">°C</h6>
                                 </div>
-                                <p class="secondary pb-4">Temperature range</p>
+                                <p class="secondary no-select pb-4">Temperature range</p>
                             </div>
                         </div>
                     </div>
@@ -91,6 +102,7 @@ weatherCurrentMap.addEventListener('click', function(ev) {
                         <button class="btn btn-outline-primary mb-2">More<i class="fas fa-chevron-right pl-2"></i></button>
                     </a>`)
         .openOn(weatherCurrentMap);
+        $('.leaflet-popup-close-button').addClass('no-select');
     };
     
     request.send();

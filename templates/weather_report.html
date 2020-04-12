@@ -54,7 +54,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title section-title no-select mb-2">About this report</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close no-select" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -178,11 +178,12 @@
                 window.weatherFarTempMax = {{ cache.get("weather_far_temp_max") }};
                 window.weatherFarWindSpeed = {{ cache.get("weather_far_wind_speed") }};
             </script>
-            <script type="text/javascript" src="{{ url_for('static', filename='js/weather_temp_forecast_chart.js') }}"></script>
-            <script type="text/javascript" src="{{ url_for('static', filename='js/weather_report.js') }}"></script>
         </div>
     </div>
 {% endblock %}
 {% block footer %}
 {% include "footer.html" %}
+{% endblock %}
+{% block script %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/weather_report.js') }}"></script>
 {% endblock %}

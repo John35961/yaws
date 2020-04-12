@@ -39,10 +39,13 @@
             {% block footer %}
             {% endblock %}
         </div>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/typeahead.bundle.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/typeahead_search_bar.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/dark-mode-switch.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/typeahead/typeahead.bundle.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/typeahead/typeahead_search_bar.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/dark-mode-switch.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        {% block script %}
+        {% endblock %}
     </body>
 </html>

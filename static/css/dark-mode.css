@@ -72,18 +72,23 @@
   border-color: var(--grey-variant-3);
 }
 
-[data-theme="dark"] .form-control:focus {
-  border-color: rgb(--orange-variant-2);
-}
-
-/* Typeahead.js form styling */
-
-[data-theme="dark"] .twitter-typeahead {
-  color:black;
-}
+/* Search bar styling */
 
 [data-theme="dark"] .tt-suggestion:hover {
 	background-color: var(--orange);
+}
+
+[data-theme="dark"] .tt-cursor {
+  background-color: var(--dark-background-variant);
+}
+
+[data-theme="dark"] .tt-menu {
+  background-color: var(--grey-variant-5);
+  color:var(--broken-white);
+}
+
+[data-theme="dark"] ::placeholder {
+  color: var(--broken-white-variant);
 }
 
 /* Map styling */
