@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %} yaws | Map mode {% endblock %}
 {% block content %}
-    <div class="row mb-5">
+    <div class="row mb-5 mt-4">
         <div class="col-md-8 mb-3">
             <h4><a class="links text-lowercase home-title" href="{{ url_for('home') }}">yaws</a></h4>
         </div>
@@ -23,14 +23,16 @@
     </div>
     <hr>
     <div class="row pb-3 pt-4">
-        <div class="secondary col-md-12 pb-3">
+        <div class="text-secondary col-md-12 pb-3">
             <p>Click somewhere on the map to get location's current temperature.</p>
             <div id="weather_current_map" class="mb-2"></div>
             <p class="small text-right">Please empty your browser's cache if you have troubles displaying the map.</p>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='javascript/weather_current_map.js') }}"></script>
 {% endblock %}
 {% block footer %}
 {% include "footer.html" %}
+{% endblock %}
+{% block script %}
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
 {% endblock %}

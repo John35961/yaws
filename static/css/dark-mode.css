@@ -1,0 +1,116 @@
+/* Global styling */
+
+[data-theme="dark"] {
+  background-color: var(--dark-background);
+}
+
+[data-theme="dark"] hr {
+  background-color: var(--grey-variant-3);
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] li,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6,
+[data-theme="dark"] .home-title,
+[data-theme="dark"] .home-title:hover {
+  color: var(--broken-white);
+}
+
+[data-theme="dark"] a,
+[data-theme="dark"] .links {
+  color: var(--orange);
+}
+
+[data-theme="dark"] a:hover,
+[data-theme="dark"] .links:hover {
+  color: var(--orange-variant);
+}
+
+[data-theme="dark"] .footer {
+  background-color: var(--dark-background-variant);
+}
+
+[data-theme="dark"] .text-secondary {
+  color: var(--broken-white-variant)!important;
+}
+
+[data-theme="dark"] .links-secondary {
+  color: var(--orange);
+}
+
+[data-theme="dark"] .btn-outline-primary {
+  color: var(--orange);
+  background-color: transparent;
+  border-color: var(--orange);
+  background-image: none;
+}
+
+[data-theme="dark"] .btn-outline-primary:hover {
+  color: white;
+  background-color: var(--orange);
+  border-color: var(--orange);
+}
+
+[data-theme="dark"] .btn-outline-secondary {
+  color: var(--grey-variant-3);
+  border-color: var(--grey-variant-3);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+  color: var(--broken-white);
+  background-color: var(--grey-variant-3);
+}
+
+[data-theme="dark"] .btn-outline-secondary:not(:disabled):not(.disabled).active {
+  color: var(--broken-white);
+  background-color: var(--grey-variant-3);
+  border-color: var(--grey-variant-3);
+}
+
+/* Search bar styling */
+
+[data-theme="dark"] .tt-suggestion:hover {
+	background-color: var(--orange);
+}
+
+[data-theme="dark"] .tt-cursor {
+  background-color: var(--dark-background-variant);
+}
+
+[data-theme="dark"] .tt-menu {
+  background-color: var(--grey-variant-5);
+  color:var(--broken-white);
+}
+
+[data-theme="dark"] ::placeholder {
+  color: var(--broken-white-variant);
+}
+
+/* Map styling */
+
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .leaflet-popup-tip,
+[data-theme="dark"] .leaflet-popup-content-wrapper {
+  background: var(--dark-background-variant);
+}
+
+[data-theme="dark"] .modal-header {
+  border-bottom: 1px solid var(--grey-variant-3);
+}
+
+[data-theme="dark"] .modal-header button span {
+  color: var(--broken-white);
+  text-shadow: none;
+}
+
+/* Various */
+
+[data-theme="dark"] ::selection {
+  background-color: var(--orange-variant-3);
+}
+

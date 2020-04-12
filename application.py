@@ -13,24 +13,23 @@ import os
 import time
 
 application = Flask(__name__)
+
 cache = SimpleCache(default_timeout=180)
+
+limiter = Limiter(application,
+                  key_func=get_remote_address)
 
 OPWM_API_KEY = os.environ["OPWM_API_KEY"]
 TIMEZONEDB_API_KEY = os.environ["TIMEZONEDB_API_KEY"]
 AIRQUALITY_API_KEY = os.environ["AIRQUALITY_API_KEY"]
 
-limiter = Limiter(
-    application,
-    key_func=get_remote_address
-)
-
 
 def api_calling_caching(location_lat, 
-              location_lon,
-              city_form, 
-              OPWM_API_KEY=OPWM_API_KEY, 
-              TIMEZONEDB_API_KEY=TIMEZONEDB_API_KEY, 
-              AIRQUALITY_API_KEY=AIRQUALITY_API_KEY):
+                        location_lon,
+                        city_form, 
+                        OPWM_API_KEY=OPWM_API_KEY, 
+                        TIMEZONEDB_API_KEY=TIMEZONEDB_API_KEY, 
+                        AIRQUALITY_API_KEY=AIRQUALITY_API_KEY):
     opwm_cel_json = get(f"https://api.openweathermap.org/data/2.5/weather"
                         f"?lat={location_lat}"
                         f"&lon={location_lon}"
@@ -186,11 +185,11 @@ def home():
         return api_calling_caching(location_lat, 
                                    location_lon,
                                    city_form)
-        
-    
+
     return render_template("home.html", 
                            cache=cache,
                            city_form=city_form)
+
 
 @application.route("/map")
 def map():
@@ -198,6 +197,7 @@ def map():
 
     return render_template("map.html",
                            city_form=city_form)
+
 
 @application.route("/map_click")
 @limiter.limit("60/minute")
@@ -212,6 +212,7 @@ def map_click():
                             .json()
     
     return opwm_cel_json
+
 
 @application.route("/about")
 def about():

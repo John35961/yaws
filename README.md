@@ -2,6 +2,11 @@
 Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
+__1.5.0__
+- Added a dark mode, relying on dark-mode-switch, to be toggled via a switch
+- Reorganized JS files and imports
+- Added CSS theme variables for better scalability
+
 __1.4.0__
 - Added a map mode relying on Leaflet
 - Added /map_click route, dedicated to map mode, to make calls to OpenWeatherMap API in the backend
