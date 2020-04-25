@@ -46,64 +46,78 @@ let lat, lon;
 
 weatherCurrentMap.addEventListener('click', function(ev) {
     
-    clicked_coordinates = {
+    clickedCoordinates = {
         lat: ev.latlng.lat,
         lon: ev.latlng.lng
     };
 
     let request = new XMLHttpRequest();
 
-    opwm_cel_json = `/map_click?lat=${clicked_coordinates['lat']}&lon=${clicked_coordinates['lon']}`
-    request.open('GET', opwm_cel_json);
+    opwmCelJson = `/map_click?lat=${clickedCoordinates['lat']}&lon=${clickedCoordinates['lon']}`;
+    
+    request.open('GET', opwmCelJson);
     
     request.onload = function() {
         let data = JSON.parse(this.response);
+        
         try {
-            location_station_name = data.name;
+            var locationStationName = data.name;
+            var countryCode = `(${data.sys.country})`;
+            var weatherCelTempCurrent = `<h5>${data.main.temp.toFixed(1)}</h5>
+                                         <h6>°C</h6>`;
+            var moreBtn = `<a href="/?location=${locationStationName}" target="_blank">
+                                <button class="btn btn-outline-primary mb-2">More<i class="fas fa-chevron-right pl-2"></i></button>
+                           </a>`;
+
+            if (data.main.temp_min.toFixed(1) != data.main.temp_max.toFixed(1)) {
+                weatherCelTempRange = `<h5>${data.main.temp_min.toFixed(1)}</h5>
+                                       <h6 class="pr-2">°C</h6>
+                                       <h5 class="pr-2">to</h5>
+                                       <h5>${data.main.temp_max.toFixed(1)}</h5>
+                                       <h6 class="pr-2">°C</h6>`;
+            } else {
+                var weatherCelTempRange = `<h5>No data</h5>`;
+            };
+
             if (data.name == '') {
-                location_station_name = 'Imprecise location';
-            }
-            country_code = `(${data.sys.country})`;
-            if (typeof data.sys.country == 'undefined') {
-                country_code = '';    
-            }
-            weather_cel_temp_current = data.main.temp.toFixed(1);
-            weather_cel_temp_min = data.main.temp_min.toFixed(1);
-            weather_cel_temp_max = data.main.temp_max.toFixed(1);
+                locationStationName = 'Imprecise location';
+                countryCode = '';
+                moreBtn = '';
+            };
+
         } catch (e) {
             console.log(e); 
-            weather_cel_temp_current = 'No temperature found!';
+            locationStationName = 'Imprecise location';
+            countryCode = '';
+            weatherCelTempCurrent = `<h5>No data</h5>`;
+            weatherCelTempRange = `<h5>No data</h5>`;
+            moreBtn = '';
         };
+
         L.popup()
-        .setLatLng([clicked_coordinates['lat'], 
-                    clicked_coordinates['lon']])
-        .setContent(`<h4>${location_station_name} ${country_code}</h4>
+        .setLatLng([clickedCoordinates['lat'], 
+                    clickedCoordinates['lon']])
+        .setContent(`<h4>${locationStationName} ${countryCode}</h4>
                     <hr/>
                     <div class="row mt-3 mr-3">
                         <div class="col-md-12">
                             <div class="pb-3">
                                 <div class="d-flex">
-                                    <h5>${weather_cel_temp_current}</h5>
-                                    <h6>°C</h6>
+                                    ${weatherCelTempCurrent}
                                 </div>
                                 <p class="secondary no-select pb-4">Current temperature</p>
                                 <div class="d-flex">
-                                    <h5>${weather_cel_temp_min}</h5>
-                                    <h6 class="pr-2">°C</h6>
-                                    <h5 class="pr-2">to</h5>
-                                    <h5>${weather_cel_temp_max}</h5>
-                                    <h6 class="pr-2">°C</h6>
+                                    ${weatherCelTempRange}
                                 </div>
                                 <p class="secondary no-select pb-4">Temperature range</p>
                             </div>
                         </div>
                     </div>
-                    <a href="/?location=${location_station_name}" target="_blank">
-                        <button class="btn btn-outline-primary mb-2">More<i class="fas fa-chevron-right pl-2"></i></button>
-                    </a>`)
+                    ${moreBtn}`)
         .openOn(weatherCurrentMap);
         $('.leaflet-popup-close-button').addClass('no-select');
     };
     
     request.send();
+
 });

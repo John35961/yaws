@@ -2,6 +2,9 @@
 Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
+__1.5.1__
+- In map mode, enhanced handling of remote areas clicks, on which often very little data is available, via try/catch use
+
 __1.5.0__
 - Added a dark mode, relying on dark-mode-switch, to be toggled via a switch
 - Reorganized JS files and imports
