@@ -19,12 +19,13 @@ weather_blueprint = Blueprint('weather_blueprint',
 
 cache = SimpleCache(default_timeout=180)
 
-def api_calling_caching(location_lat, 
-                        location_lon,
-                        city_form, 
-                        OPWM_API_KEY=OPWM_API_KEY, 
-                        TIMEZONEDB_API_KEY=TIMEZONEDB_API_KEY, 
-                        AIRQUALITY_API_KEY=AIRQUALITY_API_KEY):
+
+def call_apis(location_lat, 
+              location_lon,
+              city_form,
+              OPWM_API_KEY=OPWM_API_KEY, 
+              TIMEZONEDB_API_KEY=TIMEZONEDB_API_KEY, 
+              AIRQUALITY_API_KEY=AIRQUALITY_API_KEY):
     opwm_cel_json = get(f"https://api.openweathermap.org/data/2.5/weather"
                         f"?lat={location_lat}"
                         f"&lon={location_lon}"
@@ -138,8 +139,6 @@ def api_calling_caching(location_lat,
                 round(opwm_far_json["wind"]["speed"], 1))
     cache.set("weather_far_temp_forecast", 
                 [temp["main"]["temp"] for temp in opwm_far_forecast_json["list"][::5]])
-    
-    city_form.location.data = ""
 
     return render_template("dashboard.html",
                             cache=cache, 
@@ -150,6 +149,7 @@ def api_calling_caching(location_lat,
 def home():
     city_form = CityForm(request.form)
     
+    # Handling GET request when the 'location' parameter is used in the URL
     if request.method == "GET" and request.args.get("location"):
         corrected_user_query_location = request.args.get("location").replace(" ","%20")
         nominatim_json = get(f"https://nominatim.openstreetmap.org/search/"
@@ -161,10 +161,13 @@ def home():
         cache.set("user_query_location", 
                   request.args.get("location"))
 
-        return api_calling_caching(location_lat, 
-                                   location_lon,
-                                   city_form)
+        city_form.location.data = ""
 
+        return call_apis(location_lat, 
+                         location_lon,
+                         city_form)
+
+    # Handling POST request when CityForm is submitted
     elif request.method == "POST":
         corrected_user_query_location = city_form.location.data.replace(" ","%20")
         nominatim_json = get(f"https://nominatim.openstreetmap.org/search/"
@@ -176,11 +179,14 @@ def home():
         cache.set("user_query_location", 
                   city_form.location.data.split(",")[0]\
                     .title())
-        
-        return api_calling_caching(location_lat, 
-                                   location_lon,
-                                   city_form)
 
+        city_form.location.data = ""
+        
+        return call_apis(location_lat, 
+                         location_lon,
+                         city_form)
+
+    # Handling GET request with no parameter
     return render_template("home.html", 
                            cache=cache,
                            city_form=city_form)
