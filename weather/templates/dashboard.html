@@ -2,19 +2,7 @@
 {% block title %} yaws | {{ cache.get("user_query_location") }} ({{ cache.get("country_code") }}) {% endblock %}
 {% block content %}
     <div class="row">
-        <div class="col-md-8 pb-3">
-            <h4><a class="links text-lowercase home-title" href="{{ url_for('weather_blueprint.home') }}">yaws</a></h4>
-        </div>
-        <div class="col-md-4">
-            <form action="{{ url_for('weather_blueprint.home') }}" method="POST">
-                <div class="input-group mb-3">
-                    {{ city_form.location(class_="search-bar tt-query form-control form-control", placeholder="Enter a location", type="text", autocomplete="off", spellcheck="false") }}
-                    <div class="input-group-append">
-                        {{ city_form.submit(class_="btn btn-sm btn-outline-primary") }}
-                    </div>
-                </div>
-            </form>
-        </div>
+        {% include "header.html" %}
     </div>
     <div class="row justify-content-center mb-2 mt-5">
         <div class="d-flex">
