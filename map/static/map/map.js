@@ -53,7 +53,7 @@ weatherCurrentMap.addEventListener('click', function(ev) {
 
     let request = new XMLHttpRequest();
 
-    opwmCelJson = `/map_click?lat=${clickedCoordinates['lat']}&lon=${clickedCoordinates['lon']}`;
+    opwmCelJson = `/map/click?lat=${clickedCoordinates['lat']}&lon=${clickedCoordinates['lon']}`;
     
     request.open('GET', opwmCelJson);
     
