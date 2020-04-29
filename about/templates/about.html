@@ -2,19 +2,7 @@
 {% block title %} yaws | About {% endblock %}
 {% block content %}
     <div class="row mb-5">
-        <div class="col-md-8 mb-3">
-            <h4><a class="links text-lowercase home-title" href="{{ url_for('home') }}">yaws</a></h4>
-        </div>
-        <div class="col-md-4">
-            <form action="{{ url_for('home') }}" method="POST">
-                <div class="input-group mb-3">
-                    {{ city_form.location(class_="search-bar tt-query form-control form-control", placeholder="Enter a location") }}
-                    <div class="input-group-append">
-                        {{ city_form.submit(class_="btn btn-sm btn-outline-primary float-right") }}
-                    </div>
-                </div>
-            </form>
-        </div>
+        {% include "header.html" %}
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -48,7 +36,7 @@
             </ul>
             <p>If you have any feedback or are experiencing troubles using the website, please feel free to <a href="mailto:jean.guillet@grenoble-em.com">contact us</a>!</p>
             <p>Thanks for using yaws!</p>
-            <p><b>v1.5.1</b></p>
+            <p><b>v1.5.2</b></p>
         </div>
     </div>
 {% endblock %}

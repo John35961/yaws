@@ -2,19 +2,7 @@
 {% block title %} yaws | Map mode {% endblock %}
 {% block content %}
     <div class="row mb-5 mt-4">
-        <div class="col-md-8 mb-3">
-            <h4><a class="links text-lowercase home-title" href="{{ url_for('home') }}">yaws</a></h4>
-        </div>
-        <div class="col-md-4">
-            <form action="{{ url_for('home') }}" method="POST">
-                <div class="input-group mb-3">
-                    {{ city_form.location(class_="search-bar tt-query form-control form-control", placeholder="Enter a location") }}
-                    <div class="input-group-append">
-                        {{ city_form.submit(class_="btn btn-sm btn-outline-primary float-right") }}
-                    </div>
-                </div>
-            </form>
-        </div>
+        {% include "header.html" %}
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -34,5 +22,5 @@
 {% include "footer.html" %}
 {% endblock %}
 {% block script %}
-<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script src="{{ url_for('map_blueprint.static', filename='map.js') }}"></script>
 {% endblock %}

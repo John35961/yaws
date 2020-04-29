@@ -67,7 +67,6 @@ body {
 
 .input-group > .twitter-typeahead {
     flex: 1 1 auto;
-    width: auto;
     width: 60%;
  }
 

@@ -3,11 +3,11 @@
 {% block content %}
     <div class="row text-center">
         <div class="col-md-12 p-5">
-            <h1>Oops, nothing found here!</h1>
+            <h1>We could not find {{ raw_user_query_location }} :(</h1>
             <div class="text-secondary">
-                <p class="mb-5">No worries, we'll help you to get back on tracks ;)</p>
+                <p class="mb-5">We're very sorry, please check as you may have done a small spelling mistake, or try another location.</p>
             </div>
-            <a href="{{ url_for('home') }}">
+            <a href="{{ url_for('weather_blueprint.home') }}">
                 <button class="btn btn-danger">Take me back home !</button>
             </a>
         </div>

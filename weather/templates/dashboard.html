@@ -1,39 +1,27 @@
 {% extends "base.html" %}
-{% block title %} yaws | {{ cache.get("user_query_location") }} ({{ cache.get("country_code") }}) {% endblock %}
+{% block title %} yaws | {{ cache.get("user_query_location") }} ({{ apis_data["country_code"] }}) {% endblock %}
 {% block content %}
     <div class="row">
-        <div class="col-md-8 pb-3">
-            <h4><a class="links text-lowercase home-title" href="{{ url_for('home') }}">yaws</a></h4>
-        </div>
-        <div class="col-md-4">
-            <form action="{{ url_for('home') }}" method="POST">
-                <div class="input-group mb-3">
-                    {{ city_form.location(class_="search-bar tt-query form-control form-control", placeholder="Enter a location", type="text", autocomplete="off", spellcheck="false") }}
-                    <div class="input-group-append">
-                        {{ city_form.submit(class_="btn btn-sm btn-outline-primary") }}
-                    </div>
-                </div>
-            </form>
-        </div>
+        {% include "header.html" %}
     </div>
     <div class="row justify-content-center mb-2 mt-5">
         <div class="d-flex">
-            <h2 class="display-4 font-weight-normal weather_temp_current">{{ cache.get("weather_cel_temp_current") }}</h2>
+            <h2 class="display-4 font-weight-normal weather_temp_current">{{ apis_data["weather_cel_temp_current"] }}</h2>
             <h4 class="mt-1 weather_temp_unit">°C</h4>
         </div>
     </div>
     <div class="row justify-content-center mb-2">
         <h3>
-            <a href="{{ cache.get('location_more_link') }}" target="_blank" class="links pr-3">
+            <a href="{{ apis_data['location_more_link'] }}" target="_blank" class="links pr-3">
             {{ cache.get("user_query_location") }}
             </a>
         </h3>
     </div>
     <div class="row justify-content-center text-center">
-        <p>{{ cache.get("country_full_name") }} {{ cache.get("country_emoji_flag") }}</p>
+        <p>{{ apis_data["country_full_name"] }} {{ apis_data["country_emoji_flag"] }}</p>
     </div>
     <div class="row justify-content-center mb-5">
-        <p class="text-secondary">{{ cache.get("location_local_time").strftime('%A %d %b, %H:%M') }}</p>
+        <p class="text-secondary">{{ apis_data["location_local_time"].strftime('%A %d %b, %H:%M') }}</p>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -60,11 +48,11 @@
                         </div>
                         <div class="modal-body mb-2">
                             <div>
-                                <h4>{{ cache.get("weather_time_calc_utc_current") }}</h4>
+                                <h4>{{ apis_data["weather_time_calc_utc_current"] }}</h4>
                                 <p class="text-secondary">Time of calculation (UTC)</p>
                             </div>
                             <div>
-                                <h4>{{ cache.get("location_station_name") }}</h4>
+                                <h4>{{ apis_data["location_station_name"] }}</h4>
                                 <p class="text-secondary">Weather station's name</p>
                             </div>
                         </div>
@@ -77,21 +65,21 @@
     <div class="row pb-3 pt-4">
         <div class="col-md-4">
             <div class="pb-3">
-                <h3>{{ cache.get("weather_description") }}</h3>
+                <h3>{{ apis_data["weather_description"] }}</h3>
                 <p class="text-secondary no-select">Current situation</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="pb-3">
                 <div class="d-flex">
-                    {% if cache.get("weather_cel_temp_min") == cache.get("weather_cel_temp_max") %}
-                        <h3 class="weather_temp_min">{{ cache.get("weather_cel_temp_min") }}</h3>
+                    {% if apis_data["weather_cel_temp_min"] == apis_data["weather_cel_temp_max"] %}
+                        <h3 class="weather_temp_min">{{ apis_data["weather_cel_temp_min"] }}</h3>
                         <p class="pr-2 weather_temp_unit">°C</p>
                     {% else %}
-                        <h3 class="weather_temp_min">{{ cache.get("weather_cel_temp_min") }}</h3>
+                        <h3 class="weather_temp_min">{{ apis_data["weather_cel_temp_min"] }}</h3>
                         <p class="pr-2 weather_temp_unit">°C</p>
                         <h3 class="pr-2">to</h3>
-                        <h3 class="weather_temp_max">{{ cache.get("weather_cel_temp_max") }}</h3>
+                        <h3 class="weather_temp_max">{{ apis_data["weather_cel_temp_max"] }}</h3>
                         <p class="pr-2 weather_temp_unit">°C</p>
                     {% endif %}
                 </div>
@@ -101,7 +89,7 @@
         <div class="col-md-4">
             <div class="pb-3">
                 <div class="d-flex">
-                    <h3>{{ cache.get("weather_pressure") }}</h3>
+                    <h3>{{ apis_data["weather_pressure"] }}</h3>
                     <p>hPa</p>
                 </div>
                 <p class="text-secondary no-select">Current pressure</p>
@@ -113,7 +101,7 @@
         <div class="col-md-4">
             <div class="pb-3">
                 <div class="d-flex">
-                    <h3>{{ cache.get("weather_humidity") }}</h3>
+                    <h3>{{ apis_data["weather_humidity"] }}</h3>
                     <p>%</p>
                 </div>
                 <p class="text-secondary no-select">Current humidity</p>
@@ -122,7 +110,7 @@
         <div class="col-md-4">
             <div class="pb-3">
                 <div class="d-flex">
-                    <h3 class="weather_wind_speed">{{ cache.get("weather_cel_wind_speed") }}</h3>
+                    <h3 class="weather_wind_speed">{{ apis_data["weather_cel_wind_speed"] }}</h3>
                     <p class="weather_wind_speed_unit">m/s</p>
                 </div>
                 <p class="text-secondary no-select">Current wind speed</p>
@@ -130,7 +118,7 @@
         </div>
         <div class="col-md-4">
             <div class="pb-3">
-                <h3>{{ cache.get("weather_wind_direction_abbr") }}</h3>
+                <h3>{{ apis_data["weather_wind_direction_abbr"] }}</h3>
                 <p class="text-secondary no-select">Current wind direction</p>
             </div>
         </div>
@@ -139,13 +127,13 @@
     <div class="row pb-3 pt-4 mb-5">
         <div class="col-md-4">
             <div class="pb-3">
-                <h3 id="weather_uv_index">{{ cache.get("weather_uv_index") }}</h3>
+                <h3 id="weather_uv_index">{{ apis_data["weather_uv_index"] }}</h3>
                 <p class="text-secondary no-select">UV index</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="pb-3">
-                <h3 id="weather_air_quality_index">{{ cache.get("weather_air_quality_index") }}</h3>
+                <h3 id="weather_air_quality_index">{{ apis_data["weather_air_quality_index"] }}</h3>
                 <p class="text-secondary no-select">Air quality index (US EPA)</p>
             </div>
         </div>
@@ -164,19 +152,19 @@
             <p class="text-secondary no-select">Expected temperatures (UTC)</p>
             <canvas id="weather_temp_forecast_chart" widht="400" height="150" class="pt-4"></canvas>
             <script type="text/javascript"> 
-                window.chartCelData = [{% for weather_temp in cache.get("weather_cel_temp_forecast") %} {{ weather_temp }}, {% endfor %}];
-                window.chartFarData = [{% for weather_temp in cache.get("weather_far_temp_forecast") %} {{ weather_temp }}, {% endfor %}];
-                window.chartLabels = [{% for time_calc in cache.get("weather_time_calc_utc_forecast") %} "{{ time_calc.strftime('%a at %H:%M') }}", {% endfor %}];
-                window.weatherUvIndex = {{ cache.get("weather_uv_index") }};
-                window.weatherAirQualityIndex = {{ cache.get("weather_air_quality_index") }};
-                window.weatherCelTempCurrent = {{ cache.get("weather_cel_temp_current") }};
-                window.weatherCelTempMin = {{ cache.get("weather_cel_temp_min") }};
-                window.weatherCelTempMax = {{ cache.get("weather_cel_temp_max") }};
-                window.weatherCelWindSpeed = {{ cache.get("weather_cel_wind_speed") }};
-                window.weatherFarTempCurrent = {{ cache.get("weather_far_temp_current") }};
-                window.weatherFarTempMin = {{ cache.get("weather_far_temp_min") }};
-                window.weatherFarTempMax = {{ cache.get("weather_far_temp_max") }};
-                window.weatherFarWindSpeed = {{ cache.get("weather_far_wind_speed") }};
+                window.chartCelData = [{% for weather_temp in apis_data["weather_cel_temp_forecast"] %} {{ weather_temp }}, {% endfor %}];
+                window.chartFarData = [{% for weather_temp in apis_data["weather_far_temp_forecast"] %} {{ weather_temp }}, {% endfor %}];
+                window.chartLabels = [{% for time_calc in apis_data["weather_time_calc_utc_forecast"] %} "{{ time_calc.strftime('%a at %H:%M') }}", {% endfor %}];
+                window.weatherUvIndex = {{ apis_data["weather_uv_index"] }};
+                window.weatherAirQualityIndex = {{ apis_data["weather_air_quality_index"] }};
+                window.weatherCelTempCurrent = {{ apis_data["weather_cel_temp_current"] }};
+                window.weatherCelTempMin = {{ apis_data["weather_cel_temp_min"] }};
+                window.weatherCelTempMax = {{ apis_data["weather_cel_temp_max"] }};
+                window.weatherCelWindSpeed = {{ apis_data["weather_cel_wind_speed"] }};
+                window.weatherFarTempCurrent = {{ apis_data["weather_far_temp_current"] }};
+                window.weatherFarTempMin = {{ apis_data["weather_far_temp_min"] }};
+                window.weatherFarTempMax = {{ apis_data["weather_far_temp_max"] }};
+                window.weatherFarWindSpeed = {{ apis_data["weather_far_wind_speed"] }};
             </script>
         </div>
     </div>
@@ -185,5 +173,5 @@
 {% include "footer.html" %}
 {% endblock %}
 {% block script %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/weather_report.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('weather_blueprint.static', filename='dashboard.js') }}"></script>
 {% endblock %}
