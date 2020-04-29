@@ -1,23 +1,14 @@
-from requests import get
-from datetime import datetime
-from iso3166 import countries
-import flag
-import portolan
-import os
-from weather.routes import cache
-
-OPWM_API_KEY = os.environ["OPWM_API_KEY"]
-TIMEZONEDB_API_KEY = os.environ["TIMEZONEDB_API_KEY"]
-AIRQUALITY_API_KEY = os.environ["AIRQUALITY_API_KEY"]
-
-
 # Function to perfom calls to APIs
-# then store raw JSON object responses in a custom dictionnary
+# then store raw JSON responses
 def call_apis(location_lat, 
-              location_lon,
-              OPWM_API_KEY=OPWM_API_KEY, 
-              TIMEZONEDB_API_KEY=TIMEZONEDB_API_KEY, 
-              AIRQUALITY_API_KEY=AIRQUALITY_API_KEY):
+              location_lon):
+    from requests import get
+    import os
+
+    OPWM_API_KEY = os.environ["OPWM_API_KEY"]
+    TIMEZONEDB_API_KEY = os.environ["TIMEZONEDB_API_KEY"]
+    AIRQUALITY_API_KEY = os.environ["AIRQUALITY_API_KEY"]
+
     opwm_cel_api = get(f"https://api.openweathermap.org/data/2.5/weather"
                        f"?lat={location_lat}&lon={location_lon}"
                        f"&appid={OPWM_API_KEY}&units=metric").json()
@@ -47,6 +38,9 @@ def call_apis(location_lat,
                           f"?lat={location_lat}&lon={location_lon}"
                           f"&key={AIRQUALITY_API_KEY}").json()
     
+    # Storing raw JSON responses
+    # in a custom dictionnary to be used 
+    # by the store_data_from function
     apis_responses = {
         "opwm_cel_api": opwm_cel_api,
         "opwm_far_api": opwm_far_api,
@@ -60,8 +54,9 @@ def call_apis(location_lat,
     return apis_responses
 
 
-# Function to parse retrieved JSON object responses
-# then store them in a custom dictionnary
+# Function to alter and store values
+# from retrieved JSON responses,
+# so that they be used in corresponding templates
 def store_data_from(opwm_cel_api,
                     opwm_far_api,
                     opwm_cel_forecast_api,
@@ -69,37 +64,63 @@ def store_data_from(opwm_cel_api,
                     opwm_uv_index_api,
                     timezonedb_api,
                     air_quality_api):
+    from datetime import datetime
+    from iso3166 import countries
+    from weather.routes import cache
+    import flag
+    import portolan
+
+    # In a dictionnary, storing raw values.
+    # Some others are altered before being store
     apis_data = {}
+    apis_data["country_full_name"] = (countries
+                                      .get(opwm_cel_api["sys"]["country"])
+                                      .name)
     apis_data["country_code"] = opwm_cel_api["sys"]["country"]
-    apis_data["country_full_name"] = countries.get(opwm_cel_api["sys"]["country"]).name
-    apis_data["country_emoji_flag"] = flag.flagize(f":{opwm_cel_api['sys']['country']}:")
     apis_data["location_station_name"] = opwm_cel_api["name"]
-    apis_data["location_more_link"] =  f"https://www.google.com/search?q={cache.get('user_query_location')}"
-    apis_data["location_local_time"] = datetime.strptime(timezonedb_api["formatted"], "%Y-%m-%d %H:%M:%S")
-    apis_data["weather_time_calc_utc_current"] = datetime.fromtimestamp(opwm_cel_api["dt"]).strftime("%d/%m/%Y, at %H:%M")
-    apis_data["weather_time_calc_utc_forecast"] = [datetime.strptime(time_calc["dt_txt"], "%Y-%m-%d %H:%M:%S") for time_calc in opwm_cel_forecast_api["list"][::5]]
-    apis_data["weather_description"] =  opwm_cel_api["weather"][0]["description"].capitalize()
+    apis_data["location_more_link"] = (f"https://www.google.com/search?"
+                                       f"q={cache.get('user_query_location')}")
+    apis_data["location_local_time"] = (datetime
+                                        .strptime(timezonedb_api["formatted"], 
+                                        "%Y-%m-%d %H:%M:%S"))
+    apis_data["weather_time_calc_utc_current"] = (datetime
+                                                  .fromtimestamp(opwm_cel_api["dt"])
+                                                  .strftime("%d/%m/%Y, at %H:%M"))
+    apis_data["weather_time_calc_utc_forecast"] = ([datetime
+                                                    .strptime(time_calc["dt_txt"], 
+                                                    "%Y-%m-%d %H:%M:%S")
+                                                    for time_calc 
+                                                    in opwm_cel_forecast_api["list"][::5]])
+    apis_data["weather_description"] = (opwm_cel_api["weather"][0]["description"]
+                                        .capitalize())
     apis_data["weather_pressure"] = opwm_cel_api["main"]["pressure"]
     apis_data["weather_humidity"] = opwm_cel_api["main"]["humidity"]
-    apis_data["weather_uv_index"] = round(opwm_uv_index_api["value"])
     apis_data["weather_air_quality_index"] = air_quality_api["data"]["current"]["pollution"]["aqius"]
+    apis_data["country_emoji_flag"] = (flag
+                                       .flagize(f":{opwm_cel_api['sys']['country']}:"))
+    apis_data["weather_uv_index"] = round(opwm_uv_index_api["value"])
     apis_data["weather_cel_temp_current"] = round(opwm_cel_api["main"]["temp"], 1)
     apis_data["weather_cel_temp_min"] = round(opwm_cel_api["main"]["temp_min"], 1)
-    apis_data["weather_cel_temp_max"] =  round(opwm_cel_api["main"]["temp_max"], 1)
+    apis_data["weather_cel_temp_max"] = round(opwm_cel_api["main"]["temp_max"], 1)
     apis_data["weather_cel_wind_speed"] = round(opwm_cel_api["wind"]["speed"], 1)
-    apis_data["weather_cel_temp_forecast"] = [temp["main"]["temp"] for temp in opwm_cel_forecast_api["list"][::5]]
     apis_data["weather_far_temp_current"] = round(opwm_far_api["main"]["temp"], 1)
     apis_data["weather_far_temp_min"] = round(opwm_far_api["main"]["temp_min"], 1)
     apis_data["weather_far_temp_max"] = round(opwm_far_api["main"]["temp_max"], 1)
     apis_data["weather_far_wind_speed"] = round(opwm_far_api["wind"]["speed"], 1)
-    apis_data["weather_far_temp_forecast"] = [temp["main"]["temp"] for temp in opwm_far_forecast_api["list"][::5]]
+    apis_data["weather_cel_temp_forecast"] = [temp["main"]["temp"] 
+                                              for temp 
+                                              in opwm_cel_forecast_api["list"][::5]]
+    apis_data["weather_far_temp_forecast"] = [temp["main"]["temp"] 
+                                              for temp 
+                                              in opwm_far_forecast_api["list"][::5]]
 
+    # Handling the situation when the JSON response
+    # lacks the ["wind"]["deg"] key    
     try:
-        apis_data["weather_wind_direction_deg"] = round(opwm_cel_api["wind"]["deg"])
-        apis_data["weather_wind_direction_abbr"] = portolan.point(degree=apis_data["weather_wind_direction_deg"])\
-                                                            .capitalize()
+        apis_data["weather_wind_direction_abbr"] = (portolan
+                                                    .point(degree=round(opwm_cel_api["wind"]["deg"]))
+                                                    .capitalize())
     except KeyError:
-        apis_data["weather_wind_direction_deg"] = None
         apis_data["weather_wind_direction_abbr"] = "No data"
 
     return apis_data
