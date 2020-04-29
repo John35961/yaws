@@ -2,6 +2,12 @@
 Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
+__1.5.2__
+- Wrapped the app architecture into Flask blueprints, for better scalability
+- Created header.html
+- Refactored API calls into a separate function
+- Refactored data storage into a separate function. Data is now stored in a dictionnary, not in cache.
+
 __1.5.1__
 - In map mode, enhanced handling of remote areas clicks, on which often very little data is available, via try/catch use
 
