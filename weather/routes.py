@@ -22,14 +22,12 @@ def home():
     if request.method == "POST":
         corrected_user_query_location = city_form.location.data.replace(" ","%20")
         nominatim_api = get(f"https://nominatim.openstreetmap.org/search/"
-                             f"{corrected_user_query_location}"
-                             f"?format=json").json()
+                            f"{corrected_user_query_location}?format=json").json()
         location_lat = nominatim_api[0]["lat"]
         location_lon = nominatim_api[0]["lon"]
 
         cache.set("user_query_location", 
-                  city_form.location.data.split(",")[0]\
-                    .title())
+                  city_form.location.data.split(",")[0].title())
         
         apis_responses = call_apis(location_lat, 
                                    location_lon)
@@ -53,8 +51,7 @@ def home():
     elif request.method == "GET" and request.args.get("location"):
         corrected_user_query_location = request.args.get("location").replace(" ","%20")
         nominatim_api = get(f"https://nominatim.openstreetmap.org/search/"
-                            f"{corrected_user_query_location}"
-                            f"?format=json").json()
+                            f"{corrected_user_query_location}?format=json").json()
         location_lat = nominatim_api[0]["lat"]
         location_lon = nominatim_api[0]["lon"]
 
