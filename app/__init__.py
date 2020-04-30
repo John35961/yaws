@@ -4,10 +4,10 @@ def create_app():
     application = Flask(__name__)
 
     # Available environments are Production and Development
-    ENV = "Development"
+    ENV = "Production"
 
     application.config.from_object(f"config.{ENV}Config")
-    application.config['VERSION'] = "1.5.2"
+    application.config['VERSION'] = "1.5.3"
 
     from app.weather.routes import weather_blueprint
     from app.map.routes import map_blueprint
