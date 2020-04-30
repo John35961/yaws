@@ -1,5 +1,4 @@
-# Function to perfom calls to APIs
-# then store raw JSON responses
+# Function to perfom calls to APIs then store raw JSON responses
 def call_apis(location_lat, 
               location_lon):
     from requests import get
@@ -55,8 +54,7 @@ def call_apis(location_lat,
     return apis_responses
 
 
-# Function to alter and store values
-# from retrieved JSON responses,
+# Function to alter and store values from retrieved JSON responses,
 # so that they be used in corresponding templates
 def store_data_from(opwm_cel_api,
                     opwm_far_api,
