@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from requests import get
-from forms import CityForm
+from app.forms import CityForm
 import os
 
 OPWM_API_KEY = os.environ["OPWM_API_KEY"]

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from forms import CityForm
+from app.forms import CityForm
 
 errors_blueprint = Blueprint('errors_blueprint',
                             __name__,

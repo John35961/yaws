@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template, request
 from requests import get
 from werkzeug.contrib.cache import SimpleCache
-from forms import CityForm
+from app.forms import CityForm
 
 cache = SimpleCache(default_timeout=180)
 
-from weather.functions import (call_apis,
-                               store_data_from)
+from app.weather.functions import (call_apis,
+                                          store_data_from)
 
 weather_blueprint = Blueprint('weather_blueprint',
                               __name__,

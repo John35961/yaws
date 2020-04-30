@@ -3,40 +3,41 @@
 def call_apis(location_lat, 
               location_lon):
     from requests import get
+    from application import application
     import os
 
-    OPWM_API_KEY = os.environ["OPWM_API_KEY"]
-    TIMEZONEDB_API_KEY = os.environ["TIMEZONEDB_API_KEY"]
-    AIRQUALITY_API_KEY = os.environ["AIRQUALITY_API_KEY"]
+    # OPWM_API_KEY = os.environ["OPWM_API_KEY"]
+    # TIMEZONEDB_API_KEY = os.environ["TIMEZONEDB_API_KEY"]
+    # AIRQUALITY_API_KEY = os.environ["AIRQUALITY_API_KEY"]
 
     opwm_cel_api = get(f"https://api.openweathermap.org/data/2.5/weather"
                        f"?lat={location_lat}&lon={location_lon}"
-                       f"&appid={OPWM_API_KEY}&units=metric").json()
+                       f"&appid={application.config['OPWM_API_KEY']}&units=metric").json()
     
     opwm_far_api = get(f"https://api.openweathermap.org/data/2.5/weather"
                        f"?lat={location_lat}&lon={location_lon}"
-                       f"&appid={OPWM_API_KEY}&units=imperial").json()
+                       f"&appid={application.config['OPWM_API_KEY']}&units=imperial").json()
 
     opwm_cel_forecast_api = get(f"https://api.openweathermap.org/data/2.5/forecast"
                                 f"?lat={location_lat}&lon={location_lon}"
-                                f"&appid={OPWM_API_KEY}&units=metric").json()
+                                f"&appid={application.config['OPWM_API_KEY']}&units=metric").json()
 
     opwm_far_forecast_api = get(f"https://api.openweathermap.org/data/2.5/forecast"
                                 f"?lat={location_lat}&lon={location_lon}"
-                                f"&appid={OPWM_API_KEY}&units=imperial").json()
+                                f"&appid={application.config['OPWM_API_KEY']}&units=imperial").json()
 
     opwm_uv_index_api = get(f"https://api.openweathermap.org/data/2.5/uvi"
-                            f"?&appid={OPWM_API_KEY}&lat={location_lat}"
+                            f"?&appid={application.config['OPWM_API_KEY']}&lat={location_lat}"
                             f"&lon={location_lon}").json()
 
     timezonedb_api = get(f"http://api.timezonedb.com/v2.1/get-time-zone"
                          f"?format=json&by=position"
                          f"&lat={location_lat}&lng={location_lon}"
-                         f"&key={TIMEZONEDB_API_KEY}").json()
+                         f"&key={application.config['TIMEZONEDB_API_KEY']}").json()
     
     air_quality_api = get(f"http://api.airvisual.com/v2/nearest_city"
                           f"?lat={location_lat}&lon={location_lon}"
-                          f"&key={AIRQUALITY_API_KEY}").json()
+                          f"&key={application.config['AIRQUALITY_API_KEY']}").json()
     
     # Storing raw JSON responses
     # in a custom dictionnary to be used 
@@ -66,7 +67,7 @@ def store_data_from(opwm_cel_api,
                     air_quality_api):
     from datetime import datetime
     from iso3166 import countries
-    from weather.routes import cache
+    from app.weather.routes import cache
     import flag
     import portolan
 
