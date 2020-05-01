@@ -6,7 +6,7 @@ from app.forms import CityForm
 cache = SimpleCache(default_timeout=180)
 
 from app.weather.functions import (call_apis,
-                                          store_data_from)
+                                   store_data_from)
 
 weather_blueprint = Blueprint('weather_blueprint',
                               __name__,
