@@ -5,10 +5,6 @@ def call_apis(location_lat,
     from application import application
     import os
 
-    # OPWM_API_KEY = os.environ["OPWM_API_KEY"]
-    # TIMEZONEDB_API_KEY = os.environ["TIMEZONEDB_API_KEY"]
-    # AIRQUALITY_API_KEY = os.environ["AIRQUALITY_API_KEY"]
-
     opwm_cel_api = get(f"https://api.openweathermap.org/data/2.5/weather"
                        f"?lat={location_lat}&lon={location_lon}"
                        f"&appid={application.config['OPWM_API_KEY']}&units=metric").json()
@@ -38,8 +34,7 @@ def call_apis(location_lat,
                           f"?lat={location_lat}&lon={location_lon}"
                           f"&key={application.config['AIRQUALITY_API_KEY']}").json()
     
-    # Storing raw JSON responses
-    # in a custom dictionnary to be used 
+    # Storing raw JSON responses in a custom dictionnary to be used 
     # by the store_data_from function
     apis_responses = {
         "opwm_cel_api": opwm_cel_api,

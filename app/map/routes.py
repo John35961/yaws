@@ -5,8 +5,6 @@ from requests import get
 from app.forms import CityForm
 import os
 
-OPWM_API_KEY = os.environ["OPWM_API_KEY"]
-
 map_blueprint = Blueprint('map_blueprint', 
                           __name__,
                           static_folder='static/map',
@@ -34,7 +32,7 @@ def map_click():
     opwm_cel_json = get(f"https://api.openweathermap.org/data/2.5/weather"
                         f"?lat={location_lat}"
                         f"&lon={location_lon}"
-                        f"&appid={OPWM_API_KEY}"
+                        f"&appid={application.config['OPWM_API_KEY']}"
                         f"&units=metric")\
                             .json()
     
