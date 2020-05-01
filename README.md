@@ -1,7 +1,13 @@
-# [yaws.me](http://yaws.me)
+# [Yet Another Weather Service](http://yaws.me)
 Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
+__1.5.3__
+- Moved application's blueprints into app module
+- Added create_app() dedicated to building the application 
+- Made application.py the building file
+- Added config.py to handle various development environments 
+
 __1.5.2__
 - Wrapped the app architecture into Flask blueprints, for better scalability
 - Created header.html
