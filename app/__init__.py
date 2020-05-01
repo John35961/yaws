@@ -1,10 +1,12 @@
 from flask import Flask
 
 def create_app():
-    application = Flask(__name__)
+    application = Flask(__name__,
+                        static_url_path="", 
+                        static_folder="static")
 
     # Available environments are Production and Development
-    ENV = "Production"
+    ENV = "Development"
 
     application.config.from_object(f"config.{ENV}Config")
     application.config['VERSION'] = "1.5.3"
