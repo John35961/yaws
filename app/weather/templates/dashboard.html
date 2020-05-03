@@ -72,6 +72,15 @@
         <div class="col-md-4">
             <div class="pb-3">
                 <div class="d-flex">
+                    <h3 class="weather_temp_feels_like">{{ apis_data["weather_cel_feels_like"] }}</h3>
+                    <p class="pr-2 weather_temp_unit">°C</p>
+                </div>
+                <p class="text-secondary no-select">Feels like</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pb-3">
+                <div class="d-flex">
                     {% if apis_data["weather_cel_temp_min"] == apis_data["weather_cel_temp_max"] %}
                         <h3 class="weather_temp_min">{{ apis_data["weather_cel_temp_min"] }}</h3>
                         <p class="pr-2 weather_temp_unit">°C</p>
@@ -86,6 +95,9 @@
                 <p class="text-secondary no-select">Temperature range</p>
             </div>
         </div>
+    </div>
+    <hr>
+    <div class="row pb-3 pt-4">
         <div class="col-md-4">
             <div class="pb-3">
                 <div class="d-flex">
@@ -95,9 +107,6 @@
                 <p class="text-secondary no-select">Current pressure</p>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="row pb-3 pt-4">
         <div class="col-md-4">
             <div class="pb-3">
                 <div class="d-flex">
@@ -116,15 +125,15 @@
                 <p class="text-secondary no-select">Current wind speed</p>
             </div>
         </div>
+    </div>
+    <hr>
+    <div class="row pb-3 pt-4 mb-5">
         <div class="col-md-4">
             <div class="pb-3">
                 <h3>{{ apis_data["weather_wind_direction_abbr"] }}</h3>
                 <p class="text-secondary no-select">Current wind direction</p>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="row pb-3 pt-4 mb-5">
         <div class="col-md-4">
             <div class="pb-3">
                 <h3 id="weather_uv_index">{{ apis_data["weather_uv_index"] }}</h3>
@@ -158,10 +167,12 @@
                 window.weatherUvIndex = {{ apis_data["weather_uv_index"] }};
                 window.weatherAirQualityIndex = {{ apis_data["weather_air_quality_index"] }};
                 window.weatherCelTempCurrent = {{ apis_data["weather_cel_temp_current"] }};
+                window.weatherCelTempFeelsLike = {{ apis_data["weather_cel_feels_like"] }};
                 window.weatherCelTempMin = {{ apis_data["weather_cel_temp_min"] }};
                 window.weatherCelTempMax = {{ apis_data["weather_cel_temp_max"] }};
                 window.weatherCelWindSpeed = {{ apis_data["weather_cel_wind_speed"] }};
                 window.weatherFarTempCurrent = {{ apis_data["weather_far_temp_current"] }};
+                window.weatherFarTempFeelsLike = {{ apis_data["weather_far_feels_like"] }};
                 window.weatherFarTempMin = {{ apis_data["weather_far_temp_min"] }};
                 window.weatherFarTempMax = {{ apis_data["weather_far_temp_max"] }};
                 window.weatherFarWindSpeed = {{ apis_data["weather_far_wind_speed"] }};

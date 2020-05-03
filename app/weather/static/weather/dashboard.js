@@ -95,6 +95,7 @@ else {
 
 function toCelsius() {
     $('.weather_temp_current').html(weatherCelTempCurrent);
+    $('.weather_temp_feels_like').html(weatherCelTempFeelsLike);
     $('.weather_temp_min').html(weatherCelTempMin);
     $('.weather_temp_max').html(weatherCelTempMax);
     $('.weather_wind_speed').html(weatherCelWindSpeed);
@@ -107,6 +108,7 @@ function toCelsius() {
 
 function toFahrenheit() {
     $('.weather_temp_current').html(weatherFarTempCurrent);
+    $('.weather_temp_feels_like').html(weatherFarTempFeelsLike);
     $('.weather_temp_min').html(weatherFarTempMin);
     $('.weather_temp_max').html(weatherFarTempMax);
     $('.weather_wind_speed').html(weatherFarWindSpeed);
