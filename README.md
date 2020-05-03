@@ -1,5 +1,5 @@
 # [Yet Another Weather Service](http://yaws.me)
-Simple weather application made with Python, Flask and AWS Elastic Beanstalk.
+Minimalist weather application made with Python, Flask and AWS Elastic Beanstalk.
 
 ## Change Log
 __1.5.3__
