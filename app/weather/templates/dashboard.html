@@ -161,8 +161,10 @@
             <p class="text-secondary no-select">Expected temperatures (UTC)</p>
             <canvas id="weather_temp_forecast_chart" widht="400" height="150" class="pt-4"></canvas>
             <script type="text/javascript"> 
-                window.chartCelData = [{% for weather_temp in apis_data["weather_cel_temp_forecast"] %} {{ weather_temp }}, {% endfor %}];
-                window.chartFarData = [{% for weather_temp in apis_data["weather_far_temp_forecast"] %} {{ weather_temp }}, {% endfor %}];
+                window.chartCelTempForecast = [{% for temp in apis_data["weather_cel_temp_forecast"] %} {{ temp }}, {% endfor %}];
+                window.chartCelFeelsLikeForecast = [{% for temp in apis_data["weather_cel_feels_like_forecast"] %} {{ temp }}, {% endfor %}];
+                window.chartFarTempForecast = [{% for temp in apis_data["weather_far_temp_forecast"] %} {{ temp }}, {% endfor %}];
+                window.chartFarFeelsLikeForecast = [{% for temp in apis_data["weather_far_feels_like_forecast"] %} {{ temp }}, {% endfor %}];
                 window.chartLabels = [{% for time_calc in apis_data["weather_time_calc_utc_forecast"] %} "{{ time_calc.strftime('%a at %H:%M') }}", {% endfor %}];
                 window.weatherUvIndex = {{ apis_data["weather_uv_index"] }};
                 window.weatherAirQualityIndex = {{ apis_data["weather_air_quality_index"] }};

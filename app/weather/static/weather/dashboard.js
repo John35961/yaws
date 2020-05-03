@@ -3,14 +3,19 @@
 let ctx = document.getElementById('weather_temp_forecast_chart').getContext('2d');
 let  weather_temp_forecast_chart = new Chart(ctx, 
 {
-    type: 'line',
+    type: 'bar',
     data: {
-        labels: chartLabels,
         datasets: [{
             label: 'Temperature (°C)',
-            data: chartCelData,
+            data: chartCelTempForecast,
             borderWidth: 1
-        }]
+        }, {
+            label: 'Feels like (°C)',
+            data: chartCelFeelsLikeForecast,
+            borderWidth: 1,
+            type: 'line'
+        }],
+        labels: chartLabels
     },
     options: {
         scales: {
@@ -31,10 +36,14 @@ adaptChartTheme = function() {
     if ($('#darkSwitch').is(':checked')) {
         weather_temp_forecast_chart.data.datasets[0].backgroundColor = 'rgba(222, 113, 25, 0.3)';
         weather_temp_forecast_chart.data.datasets[0].borderColor = 'rgba(222, 113, 25, 1)';
+        weather_temp_forecast_chart.data.datasets[1].backgroundColor = 'rgba(0, 0, 0, 0)';
+        weather_temp_forecast_chart.data.datasets[1].borderColor = 'rgba(206, 212, 218)';
         weather_temp_forecast_chart.update();
     } else {
         weather_temp_forecast_chart.data.datasets[0].backgroundColor = 'rgba(0, 123, 255, 0.3)';
         weather_temp_forecast_chart.data.datasets[0].borderColor = 'rgba(0, 123, 255, 1)';
+        weather_temp_forecast_chart.data.datasets[1].backgroundColor = 'rgba(0, 0, 0, 0)';
+        weather_temp_forecast_chart.data.datasets[1].borderColor = 'rgba(34, 34, 34)';
         weather_temp_forecast_chart.update();
     };
 };
@@ -101,7 +110,8 @@ function toCelsius() {
     $('.weather_wind_speed').html(weatherCelWindSpeed);
     $('.weather_temp_unit').html('°C');
     $('.weather_wind_speed_unit').html('m/s');
-    weather_temp_forecast_chart.data.datasets[0].data = chartCelData;
+    weather_temp_forecast_chart.data.datasets[0].data = chartCelTempForecast;
+    weather_temp_forecast_chart.data.datasets[1].data = chartCelFeelsLikeForecast;
     weather_temp_forecast_chart.data.datasets[0].label = 'Temperature (°C)';
     weather_temp_forecast_chart.update();
 };
@@ -114,7 +124,8 @@ function toFahrenheit() {
     $('.weather_wind_speed').html(weatherFarWindSpeed);
     $('.weather_temp_unit').html('°F');
     $('.weather_wind_speed_unit').html('mi/h');
-    weather_temp_forecast_chart.data.datasets[0].data = chartFarData;
+    weather_temp_forecast_chart.data.datasets[0].data = chartFarTempForecast;
+    weather_temp_forecast_chart.data.datasets[1].data = chartFarFeelsLikeForecast;
     weather_temp_forecast_chart.data.datasets[0].label = 'Temperature (°F)';
     weather_temp_forecast_chart.update();
 };

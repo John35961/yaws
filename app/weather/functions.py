@@ -84,7 +84,7 @@ def store_data_from(opwm_cel_api,
                                                     .strptime(time_calc["dt_txt"], 
                                                     "%Y-%m-%d %H:%M:%S")
                                                     for time_calc 
-                                                    in opwm_cel_forecast_api["list"][::5]])
+                                                    in opwm_cel_forecast_api["list"]])
     apis_data["weather_description"] = (opwm_cel_api["weather"][0]["description"]
                                         .capitalize())
     apis_data["weather_pressure"] = opwm_cel_api["main"]["pressure"]
@@ -94,21 +94,27 @@ def store_data_from(opwm_cel_api,
                                        .flagize(f":{opwm_cel_api['sys']['country']}:"))
     apis_data["weather_uv_index"] = round(opwm_uv_index_api["value"])
     apis_data["weather_cel_temp_current"] = round(opwm_cel_api["main"]["temp"], 1)
+    apis_data["weather_cel_temp_forecast"] = [temp["main"]["temp"] 
+                                              for temp 
+                                              in opwm_cel_forecast_api["list"]]
     apis_data["weather_cel_feels_like"] = round(opwm_cel_api["main"]["feels_like"], 1)
+    apis_data["weather_cel_feels_like_forecast"] = [temp["main"]["feels_like"] 
+                                                    for temp 
+                                                    in opwm_cel_forecast_api["list"]]
     apis_data["weather_cel_temp_min"] = round(opwm_cel_api["main"]["temp_min"], 1)
     apis_data["weather_cel_temp_max"] = round(opwm_cel_api["main"]["temp_max"], 1)
     apis_data["weather_cel_wind_speed"] = round(opwm_cel_api["wind"]["speed"], 1)
     apis_data["weather_far_temp_current"] = round(opwm_far_api["main"]["temp"], 1)
+    apis_data["weather_far_temp_forecast"] = [temp["main"]["temp"] 
+                                              for temp 
+                                              in opwm_far_forecast_api["list"]]
     apis_data["weather_far_feels_like"] = round(opwm_far_api["main"]["feels_like"], 1)
+    apis_data["weather_far_feels_like_forecast"] = [temp["main"]["feels_like"] 
+                                                    for temp 
+                                                    in opwm_far_forecast_api["list"]]
     apis_data["weather_far_temp_min"] = round(opwm_far_api["main"]["temp_min"], 1)
     apis_data["weather_far_temp_max"] = round(opwm_far_api["main"]["temp_max"], 1)
     apis_data["weather_far_wind_speed"] = round(opwm_far_api["wind"]["speed"], 1)
-    apis_data["weather_cel_temp_forecast"] = [temp["main"]["temp"] 
-                                              for temp 
-                                              in opwm_cel_forecast_api["list"][::5]]
-    apis_data["weather_far_temp_forecast"] = [temp["main"]["temp"] 
-                                              for temp 
-                                              in opwm_far_forecast_api["list"][::5]]
 
     # Handling the situation when the JSON response
     # lacks the ["wind"]["deg"] key    
