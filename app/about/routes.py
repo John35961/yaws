@@ -10,3 +10,9 @@ def about():
     city_form = CityForm(request.form)
     return render_template("about.html",
                            city_form=city_form)
+
+@about_blueprint.route("/changelog")
+def changelog():
+    city_form = CityForm(request.form)
+    return render_template("changelog.html",
+                           city_form=city_form)
