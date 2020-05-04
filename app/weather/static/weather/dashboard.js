@@ -113,6 +113,7 @@ function toCelsius() {
     weather_temp_forecast_chart.data.datasets[0].data = chartCelTempForecast;
     weather_temp_forecast_chart.data.datasets[1].data = chartCelFeelsLikeForecast;
     weather_temp_forecast_chart.data.datasets[0].label = 'Temperature (°C)';
+    weather_temp_forecast_chart.data.datasets[1].label = 'Feels like (°C)';
     weather_temp_forecast_chart.update();
 };
 
@@ -127,5 +128,6 @@ function toFahrenheit() {
     weather_temp_forecast_chart.data.datasets[0].data = chartFarTempForecast;
     weather_temp_forecast_chart.data.datasets[1].data = chartFarFeelsLikeForecast;
     weather_temp_forecast_chart.data.datasets[0].label = 'Temperature (°F)';
+    weather_temp_forecast_chart.data.datasets[1].label = 'Feels like (°F)';
     weather_temp_forecast_chart.update();
 };
