@@ -156,29 +156,48 @@
         </div>
     </div>
     <hr> 
-    <div class="row pt-4 mb-5">
+    <div class="row pb-3 pt-4">
         <div class="col-md-12">
             <p class="text-secondary no-select">Expected temperatures (UTC)</p>
             <canvas id="weather_temp_forecast_chart" widht="400" height="150" class="pt-4"></canvas>
-            <script type="text/javascript"> 
-                window.chartCelTempForecast = [{% for temp in apis_data["weather_cel_temp_forecast"] %} {{ temp }}, {% endfor %}];
-                window.chartCelFeelsLikeForecast = [{% for temp in apis_data["weather_cel_feels_like_forecast"] %} {{ temp }}, {% endfor %}];
-                window.chartFarTempForecast = [{% for temp in apis_data["weather_far_temp_forecast"] %} {{ temp }}, {% endfor %}];
-                window.chartFarFeelsLikeForecast = [{% for temp in apis_data["weather_far_feels_like_forecast"] %} {{ temp }}, {% endfor %}];
-                window.chartLabels = [{% for time_calc in apis_data["weather_time_calc_utc_forecast"] %} "{{ time_calc.strftime('%a at %H:%M') }}", {% endfor %}];
-                window.weatherUvIndex = {{ apis_data["weather_uv_index"] }};
-                window.weatherAirQualityIndex = {{ apis_data["weather_air_quality_index"] }};
-                window.weatherCelTempCurrent = {{ apis_data["weather_cel_temp_current"] }};
-                window.weatherCelTempFeelsLike = {{ apis_data["weather_cel_feels_like"] }};
-                window.weatherCelTempMin = {{ apis_data["weather_cel_temp_min"] }};
-                window.weatherCelTempMax = {{ apis_data["weather_cel_temp_max"] }};
-                window.weatherCelWindSpeed = {{ apis_data["weather_cel_wind_speed"] }};
-                window.weatherFarTempCurrent = {{ apis_data["weather_far_temp_current"] }};
-                window.weatherFarTempFeelsLike = {{ apis_data["weather_far_feels_like"] }};
-                window.weatherFarTempMin = {{ apis_data["weather_far_temp_min"] }};
-                window.weatherFarTempMax = {{ apis_data["weather_far_temp_max"] }};
-                window.weatherFarWindSpeed = {{ apis_data["weather_far_wind_speed"] }};
-            </script>
+        </div>
+    </div>
+    <hr>
+    <div class="row pb-3 pt-4">
+        <div class="col-md-12">
+            <p class="text-secondary no-select">Expected situations (UTC)</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-secondary">Time</th>
+                        <th class="text-secondary">Situation</th>
+                        <th class="text-secondary">Humidity</th>
+                        <th class="text-secondary">Wind speed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(40) %}
+                        <tr>
+                            <th>{{ apis_data["weather_time_calc_utc_forecast"][i].strftime('%a, %Hh') }}</th>
+                            <th>{{ apis_data["table_forecast"]["table_weather_description"][i] }}</th>
+                            <th>
+                                <div class="d-flex">
+                                    {{ apis_data["table_forecast"]["table_weather_humidity"][i] }}
+                                    <small>%</small>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="d-flex">
+                                    <div class="weather_wind_speed_forecast">
+                                        {{ apis_data["table_forecast"]["table_weather_cel_wind_speed"][i] }}
+                                    </div>
+                                    <small class="weather_wind_speed_unit">m/s</small>
+                                </div>
+                            </th>
+                        </tr>
+                    {% endfor %}
+                </tbody> 
+            </table>
         </div>
     </div>
 {% endblock %}
@@ -186,5 +205,26 @@
 {% include "footer.html" %}
 {% endblock %}
 {% block script %}
+<script type="text/javascript"> 
+    window.chartCelTempForecast = [{% for temp in apis_data["weather_cel_temp_forecast"] %} {{ temp }}, {% endfor %}];
+    window.chartCelFeelsLikeForecast = [{% for temp in apis_data["weather_cel_feels_like_forecast"] %} {{ temp }}, {% endfor %}];
+    window.chartFarTempForecast = [{% for temp in apis_data["weather_far_temp_forecast"] %} {{ temp }}, {% endfor %}];
+    window.chartFarFeelsLikeForecast = [{% for temp in apis_data["weather_far_feels_like_forecast"] %} {{ temp }}, {% endfor %}];
+    window.chartLabels = [{% for time_calc in apis_data["weather_time_calc_utc_forecast"] %} "{{ time_calc.strftime('%a, %Hh') }}", {% endfor %}];
+    window.weatherUvIndex = {{ apis_data["weather_uv_index"] }};
+    window.weatherAirQualityIndex = {{ apis_data["weather_air_quality_index"] }};
+    window.weatherCelTempCurrent = {{ apis_data["weather_cel_temp_current"] }};
+    window.weatherCelTempFeelsLike = {{ apis_data["weather_cel_feels_like"] }};
+    window.weatherCelTempMin = {{ apis_data["weather_cel_temp_min"] }};
+    window.weatherCelTempMax = {{ apis_data["weather_cel_temp_max"] }};
+    window.weatherCelWindSpeed = {{ apis_data["weather_cel_wind_speed"] }};
+    window.weatherFarTempCurrent = {{ apis_data["weather_far_temp_current"] }};
+    window.weatherFarTempFeelsLike = {{ apis_data["weather_far_feels_like"] }};
+    window.weatherFarTempMin = {{ apis_data["weather_far_temp_min"] }};
+    window.weatherFarTempMax = {{ apis_data["weather_far_temp_max"] }};
+    window.weatherFarWindSpeed = {{ apis_data["weather_far_wind_speed"] }};
+    window.tableCelWindSpeedForecast = {{ apis_data["table_forecast"]["table_weather_cel_wind_speed"] }};
+    window.tableFarWindSpeedForecast = {{ apis_data["table_forecast"]["table_weather_far_wind_speed"] }};
+</script>
 <script type="text/javascript" src="{{ url_for('weather_blueprint.static', filename='dashboard.js') }}"></script>
 {% endblock %}
