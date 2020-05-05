@@ -108,6 +108,8 @@ function toCelsius() {
     $('.weather_temp_min').html(weatherCelTempMin);
     $('.weather_temp_max').html(weatherCelTempMax);
     $('.weather_wind_speed').html(weatherCelWindSpeed);
+    $('.weather_cel_wind_speed_forecast').css('display', 'block');
+    $('.weather_far_wind_speed_forecast').css('display', 'none');
     $('.weather_temp_unit').html('°C');
     $('.weather_wind_speed_unit').html('m/s');
     weather_temp_forecast_chart.data.datasets[0].data = chartCelTempForecast;
@@ -123,6 +125,8 @@ function toFahrenheit() {
     $('.weather_temp_min').html(weatherFarTempMin);
     $('.weather_temp_max').html(weatherFarTempMax);
     $('.weather_wind_speed').html(weatherFarWindSpeed);
+    $('.weather_cel_wind_speed_forecast').css('display', 'none');
+    $('.weather_far_wind_speed_forecast').css('display', 'block');
     $('.weather_temp_unit').html('°F');
     $('.weather_wind_speed_unit').html('mi/h');
     weather_temp_forecast_chart.data.datasets[0].data = chartFarTempForecast;

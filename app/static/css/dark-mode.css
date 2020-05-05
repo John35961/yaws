@@ -108,9 +108,13 @@
   text-shadow: none;
 }
 
+/* Table styling */
+[data-theme="dark"] td {
+  color: var(--broken-white);
+}
+
 /* Various */
 
 [data-theme="dark"] ::selection {
   background-color: var(--orange-variant-3);
 }
-

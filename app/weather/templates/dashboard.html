@@ -176,24 +176,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for i in range(40) %}
+                    {% for i in range(apis_data["weather_time_calc_utc_forecast"]|length) %}
                         <tr>
-                            <th>{{ apis_data["weather_time_calc_utc_forecast"][i].strftime('%a, %Hh') }}</th>
-                            <th>{{ apis_data["table_forecast"]["table_weather_description"][i] }}</th>
-                            <th>
+                            <td>{{ apis_data["weather_time_calc_utc_forecast"][i].strftime('%a, %Hh') }}</td>
+                            <td>{{ apis_data["table_forecast"]["table_weather_description"][i] }}</td>
+                            <td>
                                 <div class="d-flex">
                                     {{ apis_data["table_forecast"]["table_weather_humidity"][i] }}
                                     <small>%</small>
                                 </div>
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <div class="d-flex">
-                                    <div class="weather_wind_speed_forecast">
+                                    <div class="weather_cel_wind_speed_forecast">
                                         {{ apis_data["table_forecast"]["table_weather_cel_wind_speed"][i] }}
+                                    </div>
+                                    <div class="weather_far_wind_speed_forecast no-display">
+                                        {{ apis_data["table_forecast"]["table_weather_far_wind_speed"][i] }}
                                     </div>
                                     <small class="weather_wind_speed_unit">m/s</small>
                                 </div>
-                            </th>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody> 
@@ -223,8 +226,6 @@
     window.weatherFarTempMin = {{ apis_data["weather_far_temp_min"] }};
     window.weatherFarTempMax = {{ apis_data["weather_far_temp_max"] }};
     window.weatherFarWindSpeed = {{ apis_data["weather_far_wind_speed"] }};
-    window.tableCelWindSpeedForecast = {{ apis_data["table_forecast"]["table_weather_cel_wind_speed"] }};
-    window.tableFarWindSpeedForecast = {{ apis_data["table_forecast"]["table_weather_far_wind_speed"] }};
 </script>
 <script type="text/javascript" src="{{ url_for('weather_blueprint.static', filename='dashboard.js') }}"></script>
 {% endblock %}
