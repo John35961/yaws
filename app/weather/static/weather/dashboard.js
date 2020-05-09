@@ -21,11 +21,13 @@ let weather_temp_forecast_chart = new Chart(ctx, {
             xAxes: [{
                 ticks: {
                     fontFamily: "'Krub', sans-serif", 
+                    fontColor: "'rgb(131, 149, 167)'"
                 }
             }],
             yAxes: [{
                 ticks: {
                     fontFamily: "'Krub', sans-serif",
+                    fontColor: "'rgb(131, 149, 167)'",
                     beginAtZero: true
                 }
             }]
