@@ -195,8 +195,8 @@
                                     <div class="weather_cel_wind_speed_forecast">
                                         {{ apis_data["table_forecast"]["table_weather_cel_wind_speed"][i] }}
                                     </div>
-                                    <div class="weather_far_wind_speed_forecast no-display">
-                                        {{ apis_data["table_forecast"]["table_weather_far_wind_speed"][i] }}
+                                    <div class="weather_fah_wind_speed_forecast no-display">
+                                        {{ apis_data["table_forecast"]["table_weather_fah_wind_speed"][i] }}
                                     </div>
                                     <small class="weather_wind_speed_unit">m/s</small>
                                 </div>
@@ -215,8 +215,8 @@
 <script type="text/javascript"> 
     window.chartCelTempForecast = [{% for temp in apis_data["weather_cel_temp_forecast"] %} {{ temp }}, {% endfor %}];
     window.chartCelFeelsLikeForecast = [{% for temp in apis_data["weather_cel_feels_like_forecast"] %} {{ temp }}, {% endfor %}];
-    window.chartFarTempForecast = [{% for temp in apis_data["weather_far_temp_forecast"] %} {{ temp }}, {% endfor %}];
-    window.chartFarFeelsLikeForecast = [{% for temp in apis_data["weather_far_feels_like_forecast"] %} {{ temp }}, {% endfor %}];
+    window.chartFahTempForecast = [{% for temp in apis_data["weather_fah_temp_forecast"] %} {{ temp }}, {% endfor %}];
+    window.chartFahFeelsLikeForecast = [{% for temp in apis_data["weather_fah_feels_like_forecast"] %} {{ temp }}, {% endfor %}];
     window.chartLabels = [{% for time_calc in apis_data["weather_time_calc_utc_forecast"] %} "{{ time_calc.strftime('%a, %Hh') }}", {% endfor %}];
     window.weatherUvIndex = {{ apis_data["weather_uv_index"] }};
     window.weatherAirQualityIndex = {{ apis_data["weather_air_quality_index"] }};
@@ -225,11 +225,11 @@
     window.weatherCelTempMin = {{ apis_data["weather_cel_temp_min"] }};
     window.weatherCelTempMax = {{ apis_data["weather_cel_temp_max"] }};
     window.weatherCelWindSpeed = {{ apis_data["weather_cel_wind_speed"] }};
-    window.weatherFarTempCurrent = {{ apis_data["weather_far_temp_current"] }};
-    window.weatherFarTempFeelsLike = {{ apis_data["weather_far_feels_like"] }};
-    window.weatherFarTempMin = {{ apis_data["weather_far_temp_min"] }};
-    window.weatherFarTempMax = {{ apis_data["weather_far_temp_max"] }};
-    window.weatherFarWindSpeed = {{ apis_data["weather_far_wind_speed"] }};
+    window.weatherFahTempCurrent = {{ apis_data["weather_fah_temp_current"] }};
+    window.weatherFahTempFeelsLike = {{ apis_data["weather_fah_feels_like"] }};
+    window.weatherFahTempMin = {{ apis_data["weather_fah_temp_min"] }};
+    window.weatherFahTempMax = {{ apis_data["weather_fah_temp_max"] }};
+    window.weatherFahWindSpeed = {{ apis_data["weather_fah_wind_speed"] }};
 </script>
 <script type="text/javascript" src="{{ url_for('weather_blueprint.static', filename='dashboard.js') }}"></script>
 {% endblock %}
