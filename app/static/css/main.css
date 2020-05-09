@@ -1,17 +1,18 @@
-/* Theme colors */
+/* Theme variables */
 
 :root {
+    /* Fonts */
     --font-primary: 'Krub', sans-serif;
     --font-secondary: 'Viga', sans-serif;
+
+    /* Shades */
     --light-background: rgb(244, 245, 249);
-    --light-background-variant :rgb(239,241,245);
+    --light-background-variant: rgb(239, 241, 245);
     --dark-background: rgb(26, 26, 26);
     --dark-background-variant: rgb(20, 20, 20);
-    --blue: rgb(0, 123, 255);
-    --orange: rgb(222, 113, 25);
-    --orange-variant: rgb(146, 75, 17);
-    --orange-variant-2: rgb(255, 180, 120);
-    --orange-variant-3: rgb(168, 140, 118);
+    --white-alpha: rgba(255, 255, 255, 0.1);
+    --black-alpha: rgba(0, 0, 0, 0.1);
+    --black-alpha-variant: rgba(0, 0, 0, 0.2);
     --grey: rgb(131,149,167);
     --grey-variant: rgb(153, 153, 153);
     --grey-variant-2: rgb(245, 245, 245);
@@ -20,7 +21,21 @@
     --grey-variant-5: rgb(34, 34, 34);
     --broken-white: rgb(246, 244, 230);
     --broken-white-variant: rgb(172, 170, 158);
+
+    /* Colors */
+    --red: rgb(231, 76, 60);
+    --green: rgb(39, 174, 96);
+    --blue: rgb(0, 123, 255);
+    --blue-alpha: rgba(0, 123, 255, 0.1); 
+    --orange: rgb(222, 113, 25);
+    --orange-variant: rgb(146, 75, 17);
+    --orange-variant-2: rgb(255, 180, 120);
+    --orange-variant-3: rgb(168, 140, 118);
+    --yellow: rgb(241, 196, 15);
+    --purple: rgb(155, 89, 182);
+    --brown: rgb(101, 67, 33);
 }
+
 
 /* Global styling */
 
@@ -63,6 +78,7 @@ body {
     cursor: pointer;
 }
 
+
 /* Search bar styling */
 
 .input-group > .twitter-typeahead {
@@ -71,7 +87,7 @@ body {
  }
 
  .tt-query {
-	box-shadow: 0 1px 1px rgba(black, 0.075) inset;
+	box-shadow: 0 1px 1px var(--black-alpha) inset;
 }
 
 .tt-hint {
@@ -80,9 +96,8 @@ body {
 
 .tt-menu {
 	background-color: white;
-	border: 1px solid rgba(0 0, 0, 0.2);
 	border-radius: 5px;
-	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 10px var(--black-alpha-variant);
 	margin-top: 10px;
 	padding: 8px 0;
 	width: 100%;
@@ -102,8 +117,9 @@ body {
 }
 
 .tt-cursor {
-    background-color:var(--grey-variant-2);
+    background-color: var(--grey-variant-2);
 }
+
 
 /* Map styling */
 
@@ -125,9 +141,10 @@ body {
 }
 
 .icon-box {
-    background-color: rgba(0, 123, 255, 0.1); 
+    background-color: var(--blue-alpha);
     border-radius: 5px;
 }
+
 
 /* Media queries */
 
@@ -139,6 +156,7 @@ body {
         display: none;
     }
 }
+
 
 /* Various */
 

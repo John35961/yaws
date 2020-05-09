@@ -49,14 +49,14 @@ adaptChartTheme = function() {
 };
 
 
-// Adapting chart's background and border colors to selected CSS theme,
+// Adapting icons' background to selected CSS theme,
 // when DOM is ready, or checkbox is clicked
 
 adaptIconsTheme = function() {
     if ($('#darkSwitch').is(':checked')) {
-        $(".icon-box").css('background-color', 'rgba(255, 255, 255, 0.1)');
+        $(".icon-box").css('background-color', 'var(--white-alpha)');
     } else {
-        $(".icon-box").css('background-color', 'rgba(0, 123, 255, 0.1)');
+        $(".icon-box").css('background-color', 'var(--blue-alpha)');
     };
 };
 
@@ -76,19 +76,15 @@ $('#darkSwitch').click(function() {
 // for weatherUvIndex
 
 if (weatherUvIndex <= 2) {
-    $('#weather_uv_index').css('color', '#27ae60');
-}
-else if (weatherUvIndex >= 3 && weatherUvIndex <= 5) {
-    $('#weather_uv_index').css('color', '#f1c40f');
-}
-else if (weatherUvIndex >= 6 && weatherUvIndex <= 7) {
-    $('#weather_uv_index').css('color', '#e67e22');
-}
-else if (weatherUvIndex >= 8 && weatherUvIndex <= 10) {
-    $('#weather_uv_index').css('color', '#e74c3c');
-}
-else {
-    $('#weather_uv_index').css('color', '#9b59b6');
+    $('#weather_uv_index').css('color', 'var(--green)');
+} else if (weatherUvIndex >= 3 && weatherUvIndex <= 5) {
+    $('#weather_uv_index').css('color', 'var(--yellow)');
+} else if (weatherUvIndex >= 6 && weatherUvIndex <= 7) {
+    $('#weather_uv_index').css('color', 'var(--orange)');
+} else if (weatherUvIndex >= 8 && weatherUvIndex <= 10) {
+    $('#weather_uv_index').css('color', 'var(--red)');
+} else {
+    $('#weather_uv_index').css('color', 'var(--purple)');
 };
 
 
@@ -96,22 +92,17 @@ else {
 // for weatherAirQualityIndex
 
 if (weatherAirQualityIndex <= 50) {
-    $('#weather_air_quality_index').css('color', '#27ae60');
-}
-else if (weatherAirQualityIndex >= 51 && weatherAirQualityIndex <= 100) {
-    $('#weather_air_quality_index').css('color', '#f1c40f');
-}
-else if (weatherAirQualityIndex  >= 101 && weatherAirQualityIndex <= 150) {
-    $('#weather_air_quality_index').css('color', '#e67e22');
-}
-else if (weatherAirQualityIndex  >= 151 && weatherAirQualityIndex <= 200) {
-    $('#weather_air_quality_index').css('color', '#e74c3c');
-}
-else if (weatherAirQualityIndex  >= 201 && weatherAirQualityIndex <= 300) {
-    $('#weather_air_quality_index').css('color', '#9b59b6');
-}
-else {
-    $('#weather_air_quality_index').css('color', '#654321');
+    $('#weather_air_quality_index').css('color', 'var(--green)');
+} else if (weatherAirQualityIndex >= 51 && weatherAirQualityIndex <= 100) {
+    $('#weather_air_quality_index').css('color', 'var(--yellow)');
+} else if (weatherAirQualityIndex  >= 101 && weatherAirQualityIndex <= 150) {
+    $('#weather_air_quality_index').css('color', 'var(--orange)');
+} else if (weatherAirQualityIndex  >= 151 && weatherAirQualityIndex <= 200) {
+    $('#weather_air_quality_index').css('color', 'var(--red)');
+} else if (weatherAirQualityIndex  >= 201 && weatherAirQualityIndex <= 300) {
+    $('#weather_air_quality_index').css('color', 'var(--purple)');
+} else {
+    $('#weather_air_quality_index').css('color', 'var(--brown)');
 };
 
 
