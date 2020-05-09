@@ -119,11 +119,24 @@ body {
     margin: 0!important;
 }
 
+/* Table styling */
+.table-hover tbody tr:hover {
+    background-color: var(--light-background-variant);
+}
+
+.icon-box {
+    background-color: rgba(0, 123, 255, 0.1); 
+    border-radius: 5px;
+}
+
 /* Media queries */
 
 @media screen and (max-width:700px) {
     .main-section {
         width: 100%!important;
+    }
+    .no-display-on-resize {
+        display: none;
     }
 }
 

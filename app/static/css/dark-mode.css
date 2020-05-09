@@ -113,6 +113,10 @@
   color: var(--broken-white);
 }
 
+[data-theme="dark"] .table-hover tbody tr:hover {
+  background-color: var(--dark-background-variant);
+}
+
 /* Various */
 
 [data-theme="dark"] ::selection {

@@ -117,16 +117,19 @@ def store_data_from(opwm_cel_api,
     apis_data["weather_far_wind_speed"] = round(opwm_far_api["wind"]["speed"], 1)
     apis_data["table_forecast"] = {"table_weather_description" : [descr["weather"][0]["description"].capitalize()
                                                                   for descr
-                                                                  in opwm_cel_forecast_api["list"]],
+                                                                  in opwm_cel_forecast_api["list"][::3]],
+                                    "table_weather_icon" : [ico['weather'][0]['icon']
+                                                            for ico 
+                                                            in opwm_cel_forecast_api["list"][::3]],
                                    "table_weather_humidity" : [level["main"]["humidity"] 
                                                                for level
-                                                               in opwm_cel_forecast_api["list"]],
+                                                               in opwm_cel_forecast_api["list"][::3]],
                                    "table_weather_cel_wind_speed": [round(speed["wind"]["speed"], 1)
                                                                     for speed
-                                                                    in opwm_cel_forecast_api["list"]],
+                                                                    in opwm_cel_forecast_api["list"][::3]],
                                    "table_weather_far_wind_speed": [round(speed["wind"]["speed"], 1)
                                                                     for speed
-                                                                    in opwm_far_forecast_api["list"]]}      
+                                                                    in opwm_far_forecast_api["list"][::3]]}      
 
 
     # Handling the situation when the JSON response

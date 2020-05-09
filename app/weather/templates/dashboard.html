@@ -165,21 +165,25 @@
     <hr>
     <div class="row pb-3 pt-4">
         <div class="col-md-12">
-            <p class="text-secondary no-select">Expected situations (UTC)</p>
-            <table class="table">
+            <p class="text-secondary no-select">Expected forecasts (UTC)</p>
+            <table class="table table-borderless table-hover">
                 <thead>
                     <tr>
-                        <th class="text-secondary">Time</th>
-                        <th class="text-secondary">Situation</th>
-                        <th class="text-secondary">Humidity</th>
-                        <th class="text-secondary">Wind speed</th>
+                        <th class="text-secondary no-select">Time</th>
+                        <th class="text-secondary no-select">Situation</th>
+                        <th class="text-secondary no-select no-display-on-resize">Description</th>
+                        <th class="text-secondary no-select">Humidity</th>
+                        <th class="text-secondary no-select">Wind speed</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for i in range(apis_data["weather_time_calc_utc_forecast"]|length) %}
+                    {% for i in range(apis_data["weather_time_calc_utc_forecast"][::3]|length) %}
                         <tr>
-                            <td>{{ apis_data["weather_time_calc_utc_forecast"][i].strftime('%a, %Hh') }}</td>
-                            <td>{{ apis_data["table_forecast"]["table_weather_description"][i] }}</td>
+                            <td class="text-secondary no-select">{{ apis_data["weather_time_calc_utc_forecast"][::3][i].strftime('%a, %Hh') }}</td>
+                            <td class="no-select">
+                                <img class="icon-box" src="http://openweathermap.org/img/wn/{{ apis_data['table_forecast']['table_weather_icon'][i] }}.png" width="40px" heigth="40px">
+                            </td>
+                            <td class="no-display-on-resize">{{ apis_data["table_forecast"]["table_weather_description"][i] }}</td>
                             <td>
                                 <div class="d-flex">
                                     {{ apis_data["table_forecast"]["table_weather_humidity"][i] }}

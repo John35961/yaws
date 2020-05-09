@@ -48,12 +48,27 @@ adaptChartTheme = function() {
     };
 };
 
+
+// Adapting chart's background and border colors to selected CSS theme,
+// when DOM is ready, or checkbox is clicked
+
+adaptIconsTheme = function() {
+    if ($('#darkSwitch').is(':checked')) {
+        $(".icon-box").css('background-color', 'rgba(255, 255, 255, 0.1)');
+    } else {
+        $(".icon-box").css('background-color', 'rgba(0, 123, 255, 0.1)');
+    };
+};
+
+
 $(document).ready(function(){
     adaptChartTheme();
+    adaptIconsTheme();
 });
 
 $('#darkSwitch').click(function() {
     adaptChartTheme();
+    adaptIconsTheme();
 });
 
 
