@@ -6,7 +6,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h4 class="section-title pr-2">About</h4>
+            <h4 class="section-title no-select pr-2">About</h4>
         </div>
     </div>
     <hr>
@@ -37,6 +37,7 @@
             <p>If you have any feedback or are experiencing troubles using the website, please feel free to <a href="mailto:jean.guillet@grenoble-em.com">contact us</a>!</p>
             <p>Thanks for using yaws!</p>
             <p><b>v{{ config["VERSION"] }}</b></p>
+            <a href="{{ url_for('about_blueprint.changelog') }}">Changelog</a>
         </div>
     </div>
 {% endblock %}

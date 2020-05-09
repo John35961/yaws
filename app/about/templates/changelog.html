@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %} yaws | About {% endblock %}
+{% block content %}
+    <div class="row mb-5">
+        {% include "header.html" %}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="section-title no-select pr-2">Changelog</h4>
+        </div>
+    </div>
+    <hr>
+    <div class="row pb-3 pt-4">
+        <div class="text-secondary col-md-12 pb-3">
+            <span class="badge badge-success mb-2">Current</span>
+            <h4>1.6.0</h4>
+            <ul>
+                <li>Added forecast table for the next 5 days</li>
+                <li>Added feels_like data to dashboard, pulled from OpenWeatherMap API</li>
+                <li>Added feels_like data to forecast chart, plotted as a curve</li>
+                <li>Added details to forecast chart, changed plot type to line</li>
+            </ul>
+            <h4>1.5.3</h4>
+            <ul>
+                <li>Moved application's blueprints into app module</li>
+                <li>Added create_app() dedicated to building the application</li>
+                <li>Made application.py the building file</li>
+                <li>Added config.py to handle various development environments</li>
+            </ul>
+            <h4>1.5.2</h4>
+            <ul>
+                <li>Wrapped the app architecture into Flask blueprints, for better scalability</li>
+                <li>Created header.html</li>
+                <li>Refactored API calls into a separate function</li>
+                <li>Refactored data storage into a separate function. Data is now stored in a dictionnary, not in cache.</li>
+            </ul>
+            <h4>1.5.1</h4>
+            <ul>
+                <li>In map mode, enhanced handling of remote areas clicks, on which often very little data is available, via try/catch use</li>
+            </ul>
+            <h4>1.5.0</h4>
+            <ul>
+                <li>Added a dark mode, relying on dark-mode-switch, to be toggled via a switch</li>
+                <li>Reorganized JS files and imports</li>
+                <li>Added CSS theme variables for better scalability</li>
+            </ul>
+            <h4>1.4.0</h4>
+            <ul>
+                <li>Added a map mode relying on Leaflet</li>
+                <li>Added /map_click route, dedicated to map mode, to make calls to OpenWeatherMap API in the backend</li>
+                <li>On /map_click route, added a limiter decorator (Flask-Limiter) to prevent user from hitting the OpenWeatherMap API calls rate limit (60/minute)</li>
+            </ul>
+            <h4>1.3.1</h4>
+            <ul>
+                <li>Fixed header search-bar's CSS to prevent button from falling under when resizing</li>
+                <li>Moved JS code in separate files</li>
+                <li>Isolated footer in footer.html</li>
+                <li>Removed unnecessary footer on HTTP error pages</li>
+                <li>Fixed typos</li>
+            </ul>
+            <h4>1.3.0</h4>
+            <ul>
+                <li>Added  Celsius / Fahrenheit radio button for user to chose the unit of current temperature, temperature range and current wind speed</li> 
+                <li>Added Celsius / Fahrenheit support to the 5 days forecast chart accordingly</li>
+                <li>Unified variables naming</li> 
+            </ul>    
+            <h4>1.2.2</h4>
+            <ul>
+                <li>PEP 8 refactoring</li>
+                <li>Deleted unused variable "request_server_datetime" in application.py</li>
+                <li>Did various typeahead.js CSS and Bootstrap classes adjustments</li>
+            </ul>
+            <h4>1.2.1</h4>
+            <ul>
+                <li>Added JS conditional highlighting for UV index and air quality index</li>
+                <li>Added support for US, Spanish, Italian, German and UK cities in typeahead.js</li>
+                <li>Corrected various typos in about.html</li>
+                <li>Mentioned the use of typeahead.js in about.html</li>
+                <li>Removed useless import of csv module</li>
+                <li>Enriched .gitignore</li>
+            </ul>
+            <h4>1.2.0</h4>
+            <ul>
+                <li>Added UV index from OpenWeatherMap API</li> 
+                <li>Added air quality index from AirVisual API</li>
+            </ul>
+            <h4>1.1.0</h4>
+            <ul>
+                <li>Implemented typeahead.js for user's input</li>
+            </ul>
+            <h4>1.0.0</h4>
+            <ul>
+                <li>Initial release</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}

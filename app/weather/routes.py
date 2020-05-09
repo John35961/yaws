@@ -33,9 +33,9 @@ def home():
                                    location_lon)
         
         apis_data = store_data_from(apis_responses["opwm_cel_api"],
-                                    apis_responses["opwm_far_api"],
+                                    apis_responses["opwm_fah_api"],
                                     apis_responses["opwm_cel_forecast_api"],
-                                    apis_responses["opwm_far_forecast_api"],
+                                    apis_responses["opwm_fah_forecast_api"],
                                     apis_responses["opwm_uv_index_api"],
                                     apis_responses["timezonedb_api"],
                                     apis_responses["air_quality_api"])
@@ -62,9 +62,9 @@ def home():
                                    location_lon)
         
         apis_data = store_data_from(apis_responses["opwm_cel_api"],
-                                    apis_responses["opwm_far_api"],
+                                    apis_responses["opwm_fah_api"],
                                     apis_responses["opwm_cel_forecast_api"],
-                                    apis_responses["opwm_far_forecast_api"],
+                                    apis_responses["opwm_fah_forecast_api"],
                                     apis_responses["opwm_uv_index_api"],
                                     apis_responses["timezonedb_api"],
                                     apis_responses["air_quality_api"])

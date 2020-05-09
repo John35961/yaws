@@ -9,7 +9,7 @@ def call_apis(location_lat,
                        f"?lat={location_lat}&lon={location_lon}"
                        f"&appid={application.config['OPWM_API_KEY']}&units=metric").json()
     
-    opwm_far_api = get(f"https://api.openweathermap.org/data/2.5/weather"
+    opwm_fah_api = get(f"https://api.openweathermap.org/data/2.5/weather"
                        f"?lat={location_lat}&lon={location_lon}"
                        f"&appid={application.config['OPWM_API_KEY']}&units=imperial").json()
 
@@ -17,7 +17,7 @@ def call_apis(location_lat,
                                 f"?lat={location_lat}&lon={location_lon}"
                                 f"&appid={application.config['OPWM_API_KEY']}&units=metric").json()
 
-    opwm_far_forecast_api = get(f"https://api.openweathermap.org/data/2.5/forecast"
+    opwm_fah_forecast_api = get(f"https://api.openweathermap.org/data/2.5/forecast"
                                 f"?lat={location_lat}&lon={location_lon}"
                                 f"&appid={application.config['OPWM_API_KEY']}&units=imperial").json()
 
@@ -38,9 +38,9 @@ def call_apis(location_lat,
     # by the store_data_from function
     apis_responses = {
         "opwm_cel_api": opwm_cel_api,
-        "opwm_far_api": opwm_far_api,
+        "opwm_fah_api": opwm_fah_api,
         "opwm_cel_forecast_api": opwm_cel_forecast_api,
-        "opwm_far_forecast_api": opwm_far_forecast_api,
+        "opwm_fah_forecast_api": opwm_fah_forecast_api,
         "opwm_uv_index_api": opwm_uv_index_api,
         "timezonedb_api": timezonedb_api,
         "air_quality_api": air_quality_api
@@ -52,9 +52,9 @@ def call_apis(location_lat,
 # Function to alter and store values from retrieved JSON responses,
 # so that they be used in corresponding templates
 def store_data_from(opwm_cel_api,
-                    opwm_far_api,
+                    opwm_fah_api,
                     opwm_cel_forecast_api,
-                    opwm_far_forecast_api,
+                    opwm_fah_forecast_api,
                     opwm_uv_index_api,
                     timezonedb_api,
                     air_quality_api):
@@ -84,7 +84,7 @@ def store_data_from(opwm_cel_api,
                                                     .strptime(time_calc["dt_txt"], 
                                                     "%Y-%m-%d %H:%M:%S")
                                                     for time_calc 
-                                                    in opwm_cel_forecast_api["list"][::5]])
+                                                    in opwm_cel_forecast_api["list"]])
     apis_data["weather_description"] = (opwm_cel_api["weather"][0]["description"]
                                         .capitalize())
     apis_data["weather_pressure"] = opwm_cel_api["main"]["pressure"]
@@ -94,19 +94,43 @@ def store_data_from(opwm_cel_api,
                                        .flagize(f":{opwm_cel_api['sys']['country']}:"))
     apis_data["weather_uv_index"] = round(opwm_uv_index_api["value"])
     apis_data["weather_cel_temp_current"] = round(opwm_cel_api["main"]["temp"], 1)
+    apis_data["weather_cel_temp_forecast"] = [round(temp["main"]["temp"], 1) 
+                                              for temp 
+                                              in opwm_cel_forecast_api["list"]]
+    apis_data["weather_cel_feels_like"] = round(opwm_cel_api["main"]["feels_like"], 1)
+    apis_data["weather_cel_feels_like_forecast"] = [round(temp["main"]["feels_like"], 1)
+                                                    for temp 
+                                                    in opwm_cel_forecast_api["list"]]
     apis_data["weather_cel_temp_min"] = round(opwm_cel_api["main"]["temp_min"], 1)
     apis_data["weather_cel_temp_max"] = round(opwm_cel_api["main"]["temp_max"], 1)
     apis_data["weather_cel_wind_speed"] = round(opwm_cel_api["wind"]["speed"], 1)
-    apis_data["weather_far_temp_current"] = round(opwm_far_api["main"]["temp"], 1)
-    apis_data["weather_far_temp_min"] = round(opwm_far_api["main"]["temp_min"], 1)
-    apis_data["weather_far_temp_max"] = round(opwm_far_api["main"]["temp_max"], 1)
-    apis_data["weather_far_wind_speed"] = round(opwm_far_api["wind"]["speed"], 1)
-    apis_data["weather_cel_temp_forecast"] = [temp["main"]["temp"] 
+    apis_data["weather_fah_temp_current"] = round(opwm_fah_api["main"]["temp"], 1)
+    apis_data["weather_fah_temp_forecast"] = [round(temp["main"]["temp"], 1)
                                               for temp 
-                                              in opwm_cel_forecast_api["list"][::5]]
-    apis_data["weather_far_temp_forecast"] = [temp["main"]["temp"] 
-                                              for temp 
-                                              in opwm_far_forecast_api["list"][::5]]
+                                              in opwm_fah_forecast_api["list"]]
+    apis_data["weather_fah_feels_like"] = round(opwm_fah_api["main"]["feels_like"], 1)
+    apis_data["weather_fah_feels_like_forecast"] = [round(temp["main"]["feels_like"], 1)
+                                                    for temp 
+                                                    in opwm_fah_forecast_api["list"]]
+    apis_data["weather_fah_temp_min"] = round(opwm_fah_api["main"]["temp_min"], 1)
+    apis_data["weather_fah_temp_max"] = round(opwm_fah_api["main"]["temp_max"], 1)
+    apis_data["weather_fah_wind_speed"] = round(opwm_fah_api["wind"]["speed"], 1)
+    apis_data["table_forecast"] = {"table_weather_description" : [descr["weather"][0]["description"].capitalize()
+                                                                  for descr
+                                                                  in opwm_cel_forecast_api["list"][::3]],
+                                    "table_weather_icon" : [ico['weather'][0]['icon']
+                                                            for ico 
+                                                            in opwm_cel_forecast_api["list"][::3]],
+                                   "table_weather_humidity" : [level["main"]["humidity"] 
+                                                               for level
+                                                               in opwm_cel_forecast_api["list"][::3]],
+                                   "table_weather_cel_wind_speed": [round(speed["wind"]["speed"], 1)
+                                                                    for speed
+                                                                    in opwm_cel_forecast_api["list"][::3]],
+                                   "table_weather_fah_wind_speed": [round(speed["wind"]["speed"], 1)
+                                                                    for speed
+                                                                    in opwm_fah_forecast_api["list"][::3]]}      
+
 
     # Handling the situation when the JSON response
     # lacks the ["wind"]["deg"] key    
