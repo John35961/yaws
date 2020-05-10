@@ -7,8 +7,7 @@ adaptSearchBarTheme = function() {
                               'color': 'var(--broken-white)'});
         $('.form-control').css({'border': '1px solid var(--dark-background-variant)',
                                 'transition-duration': '0.01s'});
-        }
-    else {
+    } else {
         $('.search-bar').css({'background-color': 'white',
                               'color': 'black'});
         $('.form-control').css({'border': '1px solid var(--grey-variant-4)'});
