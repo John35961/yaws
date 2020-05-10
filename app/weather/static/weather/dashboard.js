@@ -41,7 +41,8 @@ let weather_temp_forecast_chart = new Chart(ctx, {
         tooltips: {
             titleFontFamily: "'Krub', sans-serif",
             bodyFontFamily: "'Krub', sans-serif",
-        }
+        },
+        maintainAspectRatio: false
     }
 });
 
