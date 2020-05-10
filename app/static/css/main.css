@@ -152,8 +152,13 @@ body {
     .main-section {
         width: 100%!important;
     }
+
     .no-display-on-resize {
         display: none;
+    }
+    
+    th {
+        font-size: 0.80em;
     }
 }
 
