@@ -23,6 +23,9 @@ let weather_temp_forecast_chart = new Chart(ctx, {
                 ticks: {
                     fontFamily: "'Krub', sans-serif", 
                     fontColor: "'rgb(131, 149, 167)'"
+                },
+                gridLines: {
+                    color:'rgba(0, 0, 0, 0.1)'
                 }
             }],
             yAxes: [{
@@ -30,6 +33,9 @@ let weather_temp_forecast_chart = new Chart(ctx, {
                     fontFamily: "'Krub', sans-serif",
                     fontColor: "'rgb(131, 149, 167)'",
                     beginAtZero: true
+                },
+                gridLines: {
+                    color: 'rgba(0, 0, 0, 0.1)'
                 }
             }]
         }, 
@@ -61,6 +67,8 @@ adaptChartTheme = function() {
         weather_temp_forecast_chart.options.legend.labels.fontColor = 'rgb(172, 170, 158)';
         weather_temp_forecast_chart.options.scales.xAxes[0].ticks.fontColor = 'rgb(172, 170, 158)';
         weather_temp_forecast_chart.options.scales.yAxes[0].ticks.fontColor = 'rgb(172, 170, 158)';
+        weather_temp_forecast_chart.options.scales.yAxes[0].gridLines.color = 'rgba(72, 71, 67, 0.5)';
+        weather_temp_forecast_chart.options.scales.xAxes[0].gridLines.color = 'rgba(72, 71, 67, 0.5)';
         weather_temp_forecast_chart.options.tooltips.titleFontColor = 'rgb(246, 244, 230)';
         weather_temp_forecast_chart.options.tooltips.bodyFontColor = 'rgb(246, 244, 230)';
         weather_temp_forecast_chart.options.tooltips.backgroundColor = 'rgba(0, 0, 0, 0.85)';
@@ -74,6 +82,8 @@ adaptChartTheme = function() {
         weather_temp_forecast_chart.options.legend.labels.fontColor = 'rgb(131, 149, 167)';
         weather_temp_forecast_chart.options.scales.xAxes[0].ticks.fontColor = 'rgb(131, 149, 167)';
         weather_temp_forecast_chart.options.scales.yAxes[0].ticks.fontColor = 'rgb(131, 149, 167)';
+        weather_temp_forecast_chart.options.scales.yAxes[0].gridLines.color = 'rgba(0, 0, 0, 0.1)';
+        weather_temp_forecast_chart.options.scales.xAxes[0].gridLines.color = 'rgba(0, 0, 0, 0.1)';
         weather_temp_forecast_chart.options.tooltips.titleFontColor = 'rgb(255, 255, 255)';
         weather_temp_forecast_chart.options.tooltips.bodyFontColor = 'rgb(255, 255, 255)';
         weather_temp_forecast_chart.options.tooltips.backgroundColor = 'rgba(131, 149, 167, 0.85)';
