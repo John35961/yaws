@@ -156,6 +156,9 @@ function toCelsius() {
     $('.weather_temp_feels_like').html(weatherCelTempFeelsLike);
     $('.weather_temp_min').html(weatherCelTempMin);
     $('.weather_temp_max').html(weatherCelTempMax);
+    $('.weather_temp_forecast_mean').html(WeatherCelTempForecastMean);
+    $('.weather_temp_forecast_min').html(WeatherCelTempForecastMin);
+    $('.weather_temp_forecast_max').html(WeatherCelTempForecastMax);
     $('.weather_wind_speed').html(weatherCelWindSpeed);
     $('.weather_cel_wind_speed_forecast').css('display', 'block');
     $('.weather_fah_wind_speed_forecast').css('display', 'none');
@@ -173,6 +176,9 @@ function toFahrenheit() {
     $('.weather_temp_feels_like').html(weatherFahTempFeelsLike);
     $('.weather_temp_min').html(weatherFahTempMin);
     $('.weather_temp_max').html(weatherFahTempMax);
+    $('.weather_temp_forecast_mean').html(WeatherFahTempForecastMean);
+    $('.weather_temp_forecast_min').html(WeatherFahTempForecastMin);
+    $('.weather_temp_forecast_max').html(WeatherFahTempForecastMax);
     $('.weather_wind_speed').html(weatherFahWindSpeed);
     $('.weather_cel_wind_speed_forecast').css('display', 'none');
     $('.weather_fah_wind_speed_forecast').css('display', 'block');

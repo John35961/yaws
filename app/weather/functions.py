@@ -63,6 +63,7 @@ def store_data_from(opwm_cel_api,
     from app.weather.routes import cache
     import flag
     import portolan
+    from statistics import mean
 
     # In a dictionnary, storing raw values.
     # Some others are altered before being store
@@ -97,6 +98,9 @@ def store_data_from(opwm_cel_api,
     apis_data["weather_cel_temp_forecast"] = [round(temp["main"]["temp"], 1) 
                                               for temp 
                                               in opwm_cel_forecast_api["list"]]
+    apis_data["weather_cel_temp_forecast_mean"] = round(mean(apis_data["weather_cel_temp_forecast"]), 1)
+    apis_data["weather_cel_temp_forecast_min"] = round(min(apis_data["weather_cel_temp_forecast"]), 1)
+    apis_data["weather_cel_temp_forecast_max"] = round(max(apis_data["weather_cel_temp_forecast"]), 1)
     apis_data["weather_cel_feels_like"] = round(opwm_cel_api["main"]["feels_like"], 1)
     apis_data["weather_cel_feels_like_forecast"] = [round(temp["main"]["feels_like"], 1)
                                                     for temp 
@@ -108,6 +112,9 @@ def store_data_from(opwm_cel_api,
     apis_data["weather_fah_temp_forecast"] = [round(temp["main"]["temp"], 1)
                                               for temp 
                                               in opwm_fah_forecast_api["list"]]
+    apis_data["weather_fah_temp_forecast_mean"] = round(mean(apis_data["weather_fah_temp_forecast"]), 1)
+    apis_data["weather_fah_temp_forecast_min"] = round(min(apis_data["weather_fah_temp_forecast"]), 1)
+    apis_data["weather_fah_temp_forecast_max"] = round(max(apis_data["weather_fah_temp_forecast"]), 1)
     apis_data["weather_fah_feels_like"] = round(opwm_fah_api["main"]["feels_like"], 1)
     apis_data["weather_fah_feels_like_forecast"] = [round(temp["main"]["feels_like"], 1)
                                                     for temp 
