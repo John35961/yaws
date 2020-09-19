@@ -50,6 +50,12 @@ body {
     background-color: var(--light-background-variant);
 }
 
+.footer-fixed {
+    position: fixed; 
+    bottom: 0; 
+    width: 100%;
+}
+
 .text-secondary {
     color: var(--grey)!important;
 }
