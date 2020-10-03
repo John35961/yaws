@@ -84,6 +84,11 @@ body {
     cursor: pointer;
 }
 
+.blank-space {
+    display: none;
+    height: 150px;
+}
+
 
 /* Search bar styling */
 
@@ -173,6 +178,15 @@ body {
 
     .no-display-on-resize {
         display: none;
+    }
+
+    .blank-space {
+        display: block;
+    }
+
+    .footer-fixed {
+        position: absolute;
+        bottom: 0;
     }
     
     th {
