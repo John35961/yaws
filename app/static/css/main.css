@@ -183,11 +183,6 @@ body {
     .blank-space {
         display: block;
     }
-
-    .footer-fixed {
-        position: absolute;
-        bottom: 0;
-    }
     
     th {
         font-size: 0.80em;
