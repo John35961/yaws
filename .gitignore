@@ -5,6 +5,3 @@ __pycache__
 .idea
 .vscode
 *.sh
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
