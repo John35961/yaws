@@ -10,7 +10,7 @@ map_blueprint = Blueprint('map_blueprint',
                           static_folder='static/map',
                           template_folder='templates')
 
-from application import application
+from run import application
 
 limiter = Limiter(application,
                   key_func=get_remote_address)
