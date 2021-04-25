@@ -31,7 +31,7 @@ def map_click():
     opwm_cel_json = get(f"https://api.openweathermap.org/data/2.5/weather"
                         f"?lat={location_lat}"
                         f"&lon={location_lon}"
-                        f"&appid={run.application.config['OPWM_API_KEY']}"
+                        f"&appid={build.application.config['OPWM_API_KEY']}"
                         f"&units=metric")\
                             .json()
     
