@@ -4,14 +4,14 @@ from flask_limiter.util import get_remote_address
 from requests import get
 from app.forms import CityForm
 
-map_blueprint = Blueprint('map_blueprint', 
+map_blueprint = Blueprint('map_blueprint',
                           __name__,
                           static_folder='static/map',
                           template_folder='templates')
 
-import build
+from build import appli
 
-limiter = Limiter(build.application,
+limiter = Limiter(appli,
                    key_func=get_remote_address)
 
 
@@ -31,8 +31,8 @@ def map_click():
     opwm_cel_json = get(f"https://api.openweathermap.org/data/2.5/weather"
                         f"?lat={location_lat}"
                         f"&lon={location_lon}"
-                        f"&appid={build.application.config['OPWM_API_KEY']}"
+                        f"&appid={appli.config['OPWM_API_KEY']}"
                         f"&units=metric")\
                             .json()
-    
+
     return opwm_cel_json
