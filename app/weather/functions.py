@@ -3,7 +3,6 @@ def call_apis(location_lat,
               location_lon):
     from requests import get
     from run import application
-    import os
 
     opwm_cel_api = get(f"https://api.openweathermap.org/data/2.5/weather"
                        f"?lat={location_lat}&lon={location_lon}"
