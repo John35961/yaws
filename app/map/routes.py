@@ -9,9 +9,9 @@ map_blueprint = Blueprint('map_blueprint',
                           static_folder='static/map',
                           template_folder='templates')
 
-from run import application
+from run import app
 
-limiter = Limiter(application,
+limiter = Limiter(app,
                    key_func=get_remote_address)
 
 
@@ -31,7 +31,7 @@ def map_click():
     opwm_cel_json = get(f"https://api.openweathermap.org/data/2.5/weather"
                         f"?lat={location_lat}"
                         f"&lon={location_lon}"
-                        f"&appid={application.config['OPWM_API_KEY']}"
+                        f"&appid={app.config['OPWM_API_KEY']}"
                         f"&units=metric")\
                             .json()
     
