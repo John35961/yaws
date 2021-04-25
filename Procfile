@@ -1,1 +1,1 @@
-web: gunicorn build:appli 
+web: gunicorn build:application 
