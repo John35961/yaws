@@ -4,12 +4,13 @@ from flask_limiter.util import get_remote_address
 from requests import get
 from app.forms import CityForm
 
+
 map_blueprint = Blueprint('map_blueprint',
                           __name__,
                           static_folder='static/map',
                           template_folder='templates')
 
-from build import initialize
+from build import *
 
 limiter = Limiter(initialize,
                    key_func=get_remote_address)
