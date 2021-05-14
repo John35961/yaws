@@ -1,6 +1,6 @@
-from app import create_app
+import app
 
-initialize = create_app()
+initialize = app.create_app()
 
 if __name__ == "__main__":
     initialize.run()
