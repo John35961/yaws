@@ -2,6 +2,12 @@ from flask import Flask
 
 
 def create_app():
+
+    from app.weather.routes import weather_blueprint
+    from app.map.routes import map_blueprint
+    from app.about.routes import about_blueprint
+    from app.errors.routes import errors_blueprint
+
     application = Flask(__name__,
                         static_url_path="",
                         static_folder="static")
@@ -11,11 +17,6 @@ def create_app():
 
     application.config.from_object(f"config.{ENV}Config")
     application.config['VERSION'] = "1.6.0"
-
-    from app.weather.routes import weather_blueprint
-    from app.map.routes import map_blueprint
-    from app.about.routes import about_blueprint
-    from app.errors.routes import errors_blueprint
 
     application.register_blueprint(weather_blueprint)
     application.register_blueprint(map_blueprint, url_prefix="/map")
