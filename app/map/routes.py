@@ -9,9 +9,6 @@ map_blueprint = Blueprint('map_blueprint',
                           static_folder='static/map',
                           template_folder='templates')
 
-#from application import application
-
-
 #limiter = Limiter(application,
 #                   key_func=get_remote_address)
 
@@ -29,6 +26,8 @@ def map():
 def map_click():
     location_lat = request.args.get("lat")
     location_lon = request.args.get("lon")
+
+    from application import application
     opwm_cel_json = get(f"https://api.openweathermap.org/data/2.5/weather"
                         f"?lat={location_lat}"
                         f"&lon={location_lon}"
