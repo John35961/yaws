@@ -23,4 +23,6 @@ def create_app():
     application.register_blueprint(about_blueprint, url_prefix="/about")
     application.register_blueprint(errors_blueprint)
 
+    from app.map import routes
+
     return application
