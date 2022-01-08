@@ -1,5 +1,4 @@
-# [Yet Another Weather Service](http://yaws.me)
-**Offline for maintenance as of 01/11/2020**
+# [Yet Another Weather Service](http://weatherapp-dev.eba-ab5zsart.ca-central-1.elasticbeanstalk.com/)
 
 Minimalist weather application made with Python, Flask and AWS Elastic Beanstalk.
 
