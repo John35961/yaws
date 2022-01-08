@@ -1,6 +1,4 @@
 from flask import Blueprint, render_template, request
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
 from requests import get
 from app.forms import CityForm
 
@@ -8,9 +6,6 @@ map_blueprint = Blueprint('map_blueprint',
                           __name__,
                           static_folder='static/map',
                           template_folder='templates')
-
-#limiter = Limiter(application,
-#                   key_func=get_remote_address)
 
 
 @map_blueprint.route("/")
@@ -22,7 +17,6 @@ def map():
 
 
 @map_blueprint.route("/click")
-#@limiter.limit("60/minute")
 def map_click():
     location_lat = request.args.get("lat")
     location_lon = request.args.get("lon")
