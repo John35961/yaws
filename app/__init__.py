@@ -8,7 +8,7 @@ def create_app():
                         static_folder="static")
 
     # Available environments are Production and Development
-    ENV = "Production"
+    ENV = "Development"
 
     application.config.from_object(f"config.{ENV}Config")
     application.config['VERSION'] = "1.6.0"
@@ -22,7 +22,5 @@ def create_app():
     application.register_blueprint(map_blueprint, url_prefix="/map")
     application.register_blueprint(about_blueprint, url_prefix="/about")
     application.register_blueprint(errors_blueprint)
-
-    from app.map import routes
 
     return application
