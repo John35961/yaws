@@ -10,7 +10,7 @@ def create_app():
     ENV = "Production"
 
     application.config.from_object(f"config.{ENV}Config")
-    application.config['VERSION'] = "1.6.0"
+    application.config['VERSION'] = "1.6.1"
 
     from app.weather.routes import weather_blueprint
     from app.map.routes import map_blueprint
