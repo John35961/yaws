@@ -7,7 +7,7 @@ def create_app():
                         static_folder="static")
 
     # Available environments are Production and Development
-    ENV = "Production"
+    ENV = "Development"
 
     application.config.from_object(f"config.{ENV}Config")
     application.config['VERSION'] = "1.6.0"

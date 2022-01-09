@@ -16,7 +16,11 @@ def map():
                            city_form=city_form)
 
 
+from application import limiter
+
+
 @map_blueprint.route("/click")
+@limiter.limit("60/minute")
 def map_click():
     location_lat = request.args.get("lat")
     location_lon = request.args.get("lon")
