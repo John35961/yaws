@@ -8,4 +8,4 @@ Minimalist weather application made with Python, Flask and AWS Elastic Beanstalk
 - OpenWeatherMap API
 - AirVisual API
 
-#### [See changelog](http://www.yaws.me/about/changelog)
+#### [See changelog](http://weatherapp-dev.eba-ab5zsart.ca-central-1.elasticbeanstalk.com/about/changelog)
