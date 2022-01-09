@@ -43,6 +43,8 @@ def home():
         city_form.location.data = ""
 
         return render_template("dashboard.html",
+                                location_lat=location_lat,
+                                location_lon=location_lon,
                                 apis_data=apis_data,
                                 cache=cache, 
                                 city_form=city_form)
@@ -72,6 +74,8 @@ def home():
         city_form.location.data = ""
 
         return render_template("dashboard.html",
+                                location_lat=location_lat,
+                                location_lon=location_lon,
                                 apis_data=apis_data,
                                 cache=cache, 
                                 city_form=city_form)

@@ -89,6 +89,11 @@ body {
     height: 150px;
 }
 
+#weather_current_highlight {
+    position: relative; 
+    margin-bottom: -305px;
+}
+
 
 /* Search bar styling */
 
@@ -136,6 +141,14 @@ body {
 
 #weather_current_map {
     height: 500px;
+    border-radius: 10px;
+}
+
+#location_map {
+    height: 300px;
+    opacity: 50%;
+    border-radius: 10px;
+    z-index: -1;
 }
 
 .leaflet-popup {

@@ -1,4 +1,39 @@
-// Instanciating new canvas and new chart
+// Instanciating new map and new chart
+
+let locationMap = new L.map('location_map').setView([locationLat,locationLon], 10);
+
+locationMap.removeControl(locationMap.zoomControl);
+
+// Adapting map tiles to selected CSS theme,
+// when DOM is ready, or checkbox is clicked
+
+adaptMapTheme = function() {
+    if ($('#darkSwitch').is(':checked')) {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 17,
+        minZoom: 3
+        }).addTo(locationMap);
+    }
+    else {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 17,
+        minZoom: 3
+        }).addTo(locationMap);
+    }
+};
+
+$(document).ready(function() {
+    adaptMapTheme();
+});
+
+$('#darkSwitch').click(function() {
+    adaptMapTheme();
+});
+
 
 let ctx = document.getElementById('weatherTempForecastChart').getContext('2d');
 let weatherTempForecastChart = new Chart(ctx, {
@@ -52,7 +87,6 @@ let weatherTempForecastChart = new Chart(ctx, {
         maintainAspectRatio: false
     }
 });
-let 
 
 
 // For chart and tooltip, adapting font, background and border colors to selected CSS theme,
