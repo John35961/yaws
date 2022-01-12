@@ -1,11 +1,9 @@
-// Instanciating new map and new chart
+// Instanciating hero location map, 
+// shown underneath weather current highlight
 
 let locationMap = new L.map('location_map').setView([locationLat,locationLon], 10);
 
 locationMap.removeControl(locationMap.zoomControl);
-
-// Adapting map tiles to selected CSS theme,
-// when DOM is ready, or checkbox is clicked
 
 adaptMapTheme = function() {
     if ($('#darkSwitch').is(':checked')) {
@@ -26,14 +24,8 @@ adaptMapTheme = function() {
     }
 };
 
-$(document).ready(function() {
-    adaptMapTheme();
-});
 
-$('#darkSwitch').click(function() {
-    adaptMapTheme();
-});
-
+// Instanciating weather forecast chart
 
 let ctx = document.getElementById('weatherTempForecastChart').getContext('2d');
 let weatherTempForecastChart = new Chart(ctx, {
@@ -88,10 +80,6 @@ let weatherTempForecastChart = new Chart(ctx, {
     }
 });
 
-
-// For chart and tooltip, adapting font, background and border colors to selected CSS theme,
-// when DOM is ready, or checkbox is clicked
-
 adaptChartTheme = function() {
     if ($('#darkSwitch').is(':checked')) {
         weatherTempForecastChart.data.datasets[0].backgroundColor = 'rgba(222, 113, 25, 0.3)';
@@ -140,11 +128,13 @@ adaptIconsTheme = function() {
 
 
 $(document).ready(function(){
+    adaptMapTheme();
     adaptChartTheme();
     adaptIconsTheme();
 });
 
 $('#darkSwitch').click(function() {
+    adaptMapTheme();
     adaptChartTheme();
     adaptIconsTheme();
 });
