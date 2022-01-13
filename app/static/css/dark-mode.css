@@ -108,6 +108,19 @@
   text-shadow: none;
 }
 
+/* Card styling */
+
+[data-theme="dark"] .card {
+  background-color: var(--dark-background-variant);
+}
+
+
+/* Icons styling */
+
+[data-theme="dark"] .icon-box {
+  background-color: var(--black-alpha-variant);
+}
+
 
 /* Table styling */
 [data-theme="dark"] td {

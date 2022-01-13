@@ -72,8 +72,6 @@ def store_data_from(opwm_cel_api,
                                       .name)
     apis_data["country_code"] = opwm_cel_api["sys"]["country"]
     apis_data["location_station_name"] = opwm_cel_api["name"]
-    apis_data["location_more_link"] = (f"https://www.google.com/search?"
-                                       f"q={cache.get('user_query_location')}")
     apis_data["location_local_time"] = (datetime
                                         .strptime(timezonedb_api["formatted"], 
                                         "%Y-%m-%d %H:%M:%S"))
@@ -121,6 +119,8 @@ def store_data_from(opwm_cel_api,
     apis_data["weather_fah_temp_min"] = round(opwm_fah_api["main"]["temp_min"], 1)
     apis_data["weather_fah_temp_max"] = round(opwm_fah_api["main"]["temp_max"], 1)
     apis_data["weather_fah_wind_speed"] = round(opwm_fah_api["wind"]["speed"], 1)
+    apis_data["weather_cel_icon_current"] = opwm_cel_api["weather"][0]["icon"]
+    apis_data["weather_fah_icon_current"] = opwm_fah_api["weather"][0]["icon"]
     apis_data["table_forecast"] = {"table_weather_description" : [descr["weather"][0]["description"].capitalize()
                                                                   for descr
                                                                   in opwm_cel_forecast_api["list"][::3]],

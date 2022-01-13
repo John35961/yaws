@@ -164,13 +164,6 @@ body {
     background-color: var(--light-background-variant);
 }
 
-.icon-box {
-    background-color: var(--blue-alpha);
-    width:40px!important;
-    height:40px!important;
-    border-radius: 5px;
-}
-
 
 /* Chart styling */
 
@@ -180,6 +173,30 @@ body {
     height: 45vh;
     width: 100%;
   }
+
+
+  /* Card styling */
+
+.card {
+    transform: scale(1);
+    transition: transform 0.3s;
+    width: 15rem;
+    background-color: var(--light-background-variant);
+  }
+
+.card:hover {
+    transform: scale(1.03);
+    transition: transform 0.3s;
+}
+
+
+/* Icons styling */
+.icon-box {
+    background-color: var(--blue-alpha);
+    width:40px!important;
+    height:40px!important;
+    border-radius: 5px;
+}
 
 
 /* Media queries */

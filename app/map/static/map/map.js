@@ -65,7 +65,7 @@ weatherCurrentMap.addEventListener('click', function(ev) {
             var countryCode = `(${data.sys.country})`;
             var weatherCelTempCurrent = `<h5>${data.main.temp.toFixed(1)}</h5>
                                          <h6>°C</h6>`;
-            var moreBtn = `<a href="/?location=${locationStationName}" target="_blank">
+            var moreBtn = `<a href="/?location=${locationStationName}">
                                 <button class="btn btn-outline-primary mb-2">More<i class="fas fa-chevron-right pl-2"></i></button>
                            </a>`;
 
