@@ -125,7 +125,9 @@ def top_searches():
     from collections import Counter, OrderedDict
     top_searches = Counter(locations_counter)
     ordered_top_searches = OrderedDict(top_searches.most_common())
+    total_searches = sum(top_searches.values())
 
     return render_template("top-searches.html",
                             city_form=city_form,
-                            ordered_top_searches=ordered_top_searches)
+                            ordered_top_searches=ordered_top_searches,
+                            total_searches=total_searches)
