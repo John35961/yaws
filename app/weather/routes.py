@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 from requests import get
-from werkzeug.contrib.cache import SimpleCache
+from cachelib import SimpleCache
 from app.forms import CityForm
 
 cache = SimpleCache()
